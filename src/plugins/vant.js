@@ -27,7 +27,11 @@ import {
   Step,
   Overlay,
   Steps,
-  Picker
+  Picker,
+  Swipe,
+  SwipeItem,
+  Col,
+  Row
 } from 'vant'
 Vue.use(Button)
 Vue.use(Overlay)
@@ -51,4 +55,8 @@ Vue.use(Search)
 Vue.use(Toast)
 Vue.use(Tab)
 Vue.use(Tabs)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(Col)
+Vue.use(Row)
 Vue.use(DatetimePicker).use(Dialog).use(Calendar).use(Picker).use(PullRefresh).use(Icon)
