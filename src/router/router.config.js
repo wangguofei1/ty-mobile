@@ -36,14 +36,6 @@ export const constantRouterMap = [{
     keepAlive: false
   }
 }, {
-  path: '/filterCriteria',
-  name: 'filterCriteria',
-  component: () => import('@/views/filter-criteria/index'),
-  meta: {
-    title: '筛选条件',
-    keepAlive: false
-  }
-}, {
   path: '/salesFlow',
   name: 'salesFlow',
   component: () => import('@/views/sales-flow/index'),
