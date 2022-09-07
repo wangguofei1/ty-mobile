@@ -29,10 +29,10 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/annual-sales',
-  name: 'Annual-sales',
+  name: 'Annualsales',
   component: () => import('@/views/annual-sales/index'),
   meta: {
-    title: '数据统计',
+    title: '年度销售',
     keepAlive: false
   }
 }, {
@@ -64,7 +64,7 @@ export const constantRouterMap = [{
   name: 'SalesmanSales',
   component: () => import('@/views/salesman-sales/index'),
   meta: {
-    title: '指标达成率',
+    title: '业务员销售情况',
     keepAlive: false
   }
 }, {
@@ -72,7 +72,7 @@ export const constantRouterMap = [{
   name: 'StoreSales',
   component: () => import('@/views/store-sales/index'),
   meta: {
-    title: '指标达成率',
+    title: '门店销售情况',
     keepAlive: false
   }
 }, {
