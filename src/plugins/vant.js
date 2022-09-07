@@ -31,7 +31,8 @@ import {
   Swipe,
   SwipeItem,
   Col,
-  Row
+  Row,
+  Cascader
 } from 'vant'
 Vue.use(Button)
 Vue.use(Overlay)
@@ -60,3 +61,4 @@ Vue.use(SwipeItem)
 Vue.use(Col)
 Vue.use(Row)
 Vue.use(DatetimePicker).use(Dialog).use(Calendar).use(Picker).use(PullRefresh).use(Icon)
+Vue.use(Cascader)
