@@ -2,7 +2,7 @@
   <div class="sjfxBox">
     <div class="title">销售统计</div>
     <div class="xsBox">
-      <div class="xsItem" v-for="item in xsItemList1" :key="item.xsText">
+      <div class="xsItem" v-for="item in xsItemList1" @click="goDetail(item.url)" :key="item.xsText">
         <img class="xsImg" :src="item.xsImg" />
         <div class="xsText">{{ item.xsText }}</div>
       </div>
@@ -30,43 +30,51 @@ export default {
       tabActive: 1,
       xsItemList1: [
         {
-          xsImg:  require('@/assets/images/xsImg1.png'),
+          xsImg: require('@/assets/images/xsImg1.png'),
           xsText: '年度销售',
           url: 'Annualsales'
         },
         {
-          xsImg:  require('@/assets/images/xsImg2.png'),
-          xsText: '销售流向'
+          xsImg: require('@/assets/images/xsImg2.png'),
+          xsText: '销售流向',
+          url: 'SalesFlow'
         },
         {
-          xsImg:  require('@/assets/images/xsImg3.png'),
-          xsText: '指标达成率'
+          xsImg: require('@/assets/images/xsImg3.png'),
+          xsText: '指标达成率',
+          url: 'IndexAchievementRate'
         },
         {
-          xsImg:  require('@/assets/images/xsImg4.png'),
-          xsText: '业务员销售'
+          xsImg: require('@/assets/images/xsImg4.png'),
+          xsText: '业务员销售',
+          url: 'SalesmanSales'
         },
         {
-          xsImg:  require('@/assets/images/xsImg5.png'),
-          xsText: '门店销售情况'
+          xsImg: require('@/assets/images/xsImg5.png'),
+          xsText: '门店销售情况',
+          url: 'StoreSales'
         }
       ],
       xsItemList2: [
         {
-          xsImg:  require('@/assets/images/xsImg6.png'),
-          xsText: '患者信息'
+          xsImg: require('@/assets/images/xsImg6.png'),
+          xsText: '患者信息',
+          url: 'PatientInfo'
         },
         {
-          xsImg:  require('@/assets/images/xsImg7.png'),
-          xsText: '新老患者分析'
+          xsImg: require('@/assets/images/xsImg7.png'),
+          xsText: '新老患者分析',
+          url: 'PatientAnalysis'
         },
         {
-          xsImg:  require('@/assets/images/xsImg8.png'),
-          xsText: '患者结构分析'
+          xsImg: require('@/assets/images/xsImg8.png'),
+          xsText: '患者结构分析',
+          url: 'PatientStructure'
         },
         {
-          xsImg:  require('@/assets/images/xsImg9.png'),
-          xsText: '门店服务情况'
+          xsImg: require('@/assets/images/xsImg9.png'),
+          xsText: '门店服务情况',
+          url: 'StoreDetails'
         }
       ]
     }
@@ -77,6 +85,11 @@ export default {
   mounted() {},
 
   methods: {
+    goDetail(url) {
+      this.$router.push({
+        name: url
+      })
+    },
     toUrl(e) {
       if (e == 0) {
         this.$router.push({
