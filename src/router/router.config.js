@@ -115,4 +115,12 @@ export const constantRouterMap = [{
     title: '个人中心',
     keepAlive: false
   }
+},{
+  path: '/salesYearly',
+  name: 'salesYearly',
+  component: () => import('@/views/sales-yearly/index'),
+  meta: {
+    title: '年度销售',
+    keepAlive: false
+  }
 }]

@@ -54,7 +54,7 @@ module.exports = {
     proxy: {
       // 配置跨域
       '/api': {
-        target: 'http://172.16.1.11:9192/dtp-web',
+        target: 'http://172.16.2.120:8080',
         // ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -68,7 +68,7 @@ module.exports = {
         pathRewrite: {
           '^/upload': ''
         }
-      }
+      },
     }
   },
   css: {
