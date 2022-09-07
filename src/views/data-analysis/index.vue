@@ -23,7 +23,6 @@ export default {
 
   methods: {
     toUrl(e) {
-        console.log(e)
       if (e == 0) {
         this.$router.push({
           name: 'Home'

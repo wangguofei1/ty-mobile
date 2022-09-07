@@ -53,7 +53,9 @@ export default {
       }
     }
   },
-  mounted() {},
+  mounted() {
+    this.actives = this.active
+  },
   beforeDestroy() {},
   methods: {
     goUrl(tab, event) {
