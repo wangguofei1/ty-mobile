@@ -21,7 +21,7 @@ export const constantRouterMap = [{
   }]
 }, {
   path: '/dataAnalysis',
-  name: 'dataAnalysis',
+  name: 'DataAnalysis',
   component: () => import('@/views/data-analysis/index'),
   meta: {
     title: '数据分析',
@@ -29,7 +29,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/annual-sales',
-  name: 'annual-sales',
+  name: 'Annual-sales',
   component: () => import('@/views/annual-sales/index'),
   meta: {
     title: '数据统计',
@@ -37,7 +37,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/salesFlow',
-  name: 'salesFlow',
+  name: 'SalesFlow',
   component: () => import('@/views/sales-flow/index'),
   meta: {
     title: '销售流向',
@@ -45,7 +45,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/hospitalDataFlow',
-  name: 'hospitalDataFlow',
+  name: 'HospitalDataFlow',
   component: () => import('@/views/hospital-data-flow/index'),
   meta: {
     title: '医院数据流向',
@@ -53,7 +53,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/indexAchievementRate',
-  name: 'indexAchievementRate',
+  name: 'IndexAchievementRate',
   component: () => import('@/views/index-achievement-rate/index'),
   meta: {
     title: '指标达成率',
@@ -61,7 +61,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/salesmanSales',
-  name: 'salesmanSales',
+  name: 'SalesmanSales',
   component: () => import('@/views/salesman-sales/index'),
   meta: {
     title: '指标达成率',
@@ -69,7 +69,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/storeSales',
-  name: 'storeSales',
+  name: 'StoreSales',
   component: () => import('@/views/store-sales/index'),
   meta: {
     title: '指标达成率',
@@ -77,7 +77,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/patientInfo',
-  name: 'patientInfo',
+  name: 'PatientInfo',
   component: () => import('@/views/patient-info/index'),
   meta: {
     title: '患者信息',
@@ -85,7 +85,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/patientAnalysis',
-  name: 'patientAnalysis',
+  name: 'PatientAnalysis',
   component: () => import('@/views/patient-analysis/index'),
   meta: {
     title: '新老患者分析',
@@ -93,7 +93,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/patientStructure',
-  name: 'patientStructure',
+  name: 'PatientStructure',
   component: () => import('@/views/patient-structure/index'),
   meta: {
     title: '患者结构分析',
@@ -101,7 +101,7 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/storeDetails',
-  name: 'storeDetails',
+  name: 'StoreDetails',
   component: () => import('@/views/store-details/index'),
   meta: {
     title: '门店详情',
@@ -109,10 +109,10 @@ export const constantRouterMap = [{
   }
 }, {
   path: '/personalCenter',
-  name: 'personalCenter',
+  name: 'PersonalCenter',
   component: () => import('@/views/personal-center/index'),
   meta: {
-    title: '门店详情',
+    title: '个人中心',
     keepAlive: false
   }
 }]

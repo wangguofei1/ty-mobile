@@ -41,3 +41,19 @@ export function querySalesInfo(query) {
     params: query
   })
 }
+// 每月销售柱状图
+export function queryMonthSalesPrice(query) {
+    return request({
+        url: '/api/index/queryMonthSalesPrice',
+        method: 'post',
+        params: query
+    })
+}
+// 销售排行榜
+export function queryShopSale(query) {
+    return request({
+        url: '/api/index/queryShopSale',
+        method: 'post',
+        params: query
+    })
+}
