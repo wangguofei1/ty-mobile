@@ -1,18 +1,10 @@
 import api from './index'
 import request from '@/utils/request'
 
-export function getCommodityList(data) {
-  return request({
-    url: api.getCommodityList,
-    method: 'post',
-    data,
-    hideloading: true
-  })
-}
 // 年度DOT
 export function queryDot(query) {
   return request({
-    url: '/api/index/queryDot',
+    url: api.queryDot,
     method: 'post',
     params: query
   })
@@ -20,7 +12,7 @@ export function queryDot(query) {
 // 销售额
 export function querySalesPrice(query) {
   return request({
-    url: '/api/index/querySalesPrice',
+    url: api.querySalesPrice,
     method: 'post',
     params: query
   })
@@ -28,7 +20,7 @@ export function querySalesPrice(query) {
 // 销售数量
 export function querySalesNum(query) {
   return request({
-    url: '/api/index/querySalesNum',
+    url: api.querySalesNum,
     method: 'post',
     params: query
   })
@@ -36,24 +28,24 @@ export function querySalesNum(query) {
 // 患者数量
 export function querySalesInfo(query) {
   return request({
-    url: '/api/index/querySalesInfo',
+    url: api.querySalesInfo,
     method: 'post',
     params: query
   })
 }
 // 每月销售柱状图
 export function queryMonthSalesPrice(query) {
-    return request({
-        url: '/api/index/queryMonthSalesPrice',
-        method: 'post',
-        params: query
-    })
+  return request({
+    url: api.queryMonthSalesPrice,
+    method: 'post',
+    params: query
+  })
 }
 // 销售排行榜
 export function queryShopSale(query) {
-    return request({
-        url: '/api/index/queryShopSale',
-        method: 'post',
-        params: query
-    })
+  return request({
+    url: api.queryShopSale,
+    method: 'post',
+    params: query
+  })
 }
