@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="formBox">
     <!-- <div class="flex1 title1" style="background:#2b92f9">
             <div style="width:50%">
                 <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
@@ -281,6 +281,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .formBox {
+        position: fixed;
+        width: 100%;
+        z-index: 999999;
+    }
 .flex1 {
   display: flex;
   flex-flow: row nowrap;
