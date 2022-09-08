@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="popup1">
-            <van-popup v-model="isShow" round position="top" :duration="2" transition="fade">
+            <van-popup v-model="isShow" round position="top" :duration="0.5" transition="fade">
             <saleForm  :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
         </van-popup>
         </div>
@@ -122,16 +122,16 @@ export default {
         }
     }
 }
-.fade-enter, .fade-leave-to{
-  opacity: 0;
-}
-//中间过渡效果
-.fade-enter-active,.fade-leave-active{
-  transition: opacity .5s linear;
-}
-.fade-enter-to, .fade-leave{
-  opacity: 1;
-}
+// .fade-enter, .fade-leave-to{
+//   opacity: 0;
+// }
+// //中间过渡效果
+// .fade-enter-active,.fade-leave-active{
+//   transition: opacity .5s linear;
+// }
+// .fade-enter-to, .fade-leave{
+//   opacity: 1;
+// }
 </style>
 <style lang="scss">
 .title1 {
