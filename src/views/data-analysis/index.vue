@@ -9,7 +9,7 @@
     </div>
     <div class="title">患者统计</div>
     <div class="xsBox">
-      <div class="xsItem" v-for="item in xsItemList2" :key="item.xsText">
+      <div class="xsItem" v-for="item in xsItemList2" @click="goDetail(item.url)" :key="item.xsText">
         <img class="xsImg" :src="item.xsImg" />
         <div class="xsText">{{ item.xsText }}</div>
       </div>
@@ -71,11 +71,11 @@ export default {
           xsText: '患者结构分析',
           url: 'PatientStructure'
         },
-        {
-          xsImg: require('@/assets/images/xsImg9.png'),
-          xsText: '门店服务情况',
-          url: 'StoreDetails'
-        }
+        // {
+        //   xsImg: require('@/assets/images/xsImg9.png'),
+        //   xsText: '门店服务情况',
+        //   url: 'StoreDetails'
+        // }
       ]
     }
   },

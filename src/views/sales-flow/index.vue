@@ -62,7 +62,7 @@ import { queryHospitalSales } from '@/api/salesFlow'
 import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
 export default {
-  name: '',
+  name: 'SalesFlow',
   components: { saleForm },
   data() {
     return {
@@ -124,7 +124,7 @@ export default {
         this.loading = false;
 
         // 数据全部加载完成
-        if (this.list.length >= that.count) {
+        if (this.saleList.length >= this.count) {
           this.finished = true;
         }
       }, 1000);

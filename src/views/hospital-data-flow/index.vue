@@ -4,7 +4,7 @@
       <div class="xsItem1">
         <div class="xsTitle1">
           <img class="xsImg1" src="@/assets/images/hospitalImg.png" />
-          <div class="xsText1">{{hospitalInfo.hospitalName}}</div>
+          <div class="xsText1">{{hospitalInfo.hosptailName}}</div>
         </div>
         <div class="xsContent1">
           <div class="xsNumBox1">
@@ -54,7 +54,7 @@
 import { queryHospitalOfficeSales } from '@/api/salesFlow'
 import saleForm from '../../components/saleForm/index.vue'
 export default {
-  name: '',
+  name: 'HospitalDataFlow',
   components: { saleForm },
   data() {
     return {
@@ -70,6 +70,7 @@ export default {
     queryHospitalOfficeSales() {
         let params = JSON.parse(this.$route.query.hospital);
         this.hospitalInfo = params
+        console.log(this.hospitalInfo)
       queryHospitalOfficeSales({ hospitalId: params.hospitalId }).then(res => {
         if (res.code == 0) {
           this.hospitalOfficeSales = res.data.hospitalOfficeSales
