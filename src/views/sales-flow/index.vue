@@ -31,7 +31,7 @@
           <div class="xsTitle">
             <img class="xsImg" :src="hosImg" />
             <div class="xsText">{{ item.hosptailName }}</div>
-            <div @click="xsGoDetail" class="xsGoDetail">数据流向<van-icon style="margin-left: 5px" name="arrow" /></div>
+            <div @click="xsGoDetail(item)" class="xsGoDetail">数据流向<van-icon style="margin-left: 5px" name="arrow" /></div>
           </div>
           <div class="xsContent">
             <div class="xsNumBox">
@@ -79,7 +79,7 @@ export default {
       },
       isShow: false,
       page: 1,
-      pageNum: 5,
+      pageNum: 10,
       loading: false,
       saleList: [],
       finished: false,
@@ -102,10 +102,10 @@ export default {
       })
     },
     // 跳到详情页
-    xsGoDetail() {
+    xsGoDetail(item) {
       this.$router.push({
         name: 'HospitalDataFlow',
-        query: { hospitalId: 1 }
+        query: { hospital: JSON.stringify(item) }
       })
     },
     changeForm(form) {
@@ -139,12 +139,12 @@ export default {
   box-sizing: border-box;
   .xsItem {
     width: 100%;
-    height: 155px;
     background-color: #fff;
     padding-top: 10px;
     box-sizing: border-box;
     border-radius: 6px;
     overflow: hidden;
+    margin-bottom: 15px;
     .xsTitle {
       display: flex;
       width: calc(100%-30px);
@@ -159,10 +159,12 @@ export default {
         font-weight: 700;
         color: rgba(25, 28, 47, 1);
         margin-left: 10px;
+        max-width: 190px;
       }
       .xsGoDetail {
         margin-left: auto;
         line-height: 30px;
+        width: 78px;
         color: rgba(58, 160, 255, 1);
         font-size: 14px;
       }

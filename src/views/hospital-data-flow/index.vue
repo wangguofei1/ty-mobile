@@ -4,67 +4,45 @@
       <div class="xsItem1">
         <div class="xsTitle1">
           <img class="xsImg1" src="@/assets/images/hospitalImg.png" />
-          <div class="xsText1">江苏省人民医院</div>
+          <div class="xsText1">{{hospitalInfo.hospitalName}}</div>
         </div>
         <div class="xsContent1">
           <div class="xsNumBox1">
             <div>销售数量（盒）</div>
-            <div class="yeFont1">128</div>
+            <div class="yeFont1">{{hospitalInfo.currSaleNum}}</div>
           </div>
           <div class="xsNumBox11">
             <div>销售金额（元）</div>
-            <div class="yeFont1">128</div>
+            <div class="yeFont1">{{hospitalInfo.currSalePrice}}</div>
           </div>
         </div>
         <div class="xsFoot1">
-          <div class="xsFootBox1"><span>同比： </span><span>67.66%</span></div>
-          <div class="xsFootBox11"><span>环比： </span><span>15.89%</span></div>
+          <div class="xsFootBox1"><span>同比： </span><span>{{ hospitalInfo.yearGrowthRate }} %</span></div>
+          <div class="xsFootBox11"><span>环比： </span><span>{{ hospitalInfo.monthGrowthRate }} %</span></div>
         </div>
       </div>
     </div>
     <div class="bgff">
       <div class="lxTitle">流向数据</div>
       <div class="xsBox">
-        <div class="xsItem">
+        <div class="xsItem" v-for="(item, index) in hospitalOfficeSales" :key="index">
           <div class="xsTitle">
             <img class="xsImg" src="@/assets/images/hospitalImg.png" />
-            <div class="xsText">江苏省人民医院</div>
+            <div class="xsText">{{item.officeName}}</div>
           </div>
           <div class="xsContent">
             <div class="xsNumBox">
               <div>销售数量（盒）</div>
-              <div class="yeFont">128</div>
+              <div class="yeFont">{{item.currSaleNum}}</div>
             </div>
             <div class="xsNumBox1">
               <div>销售金额（元）</div>
-              <div class="yeFont">128</div>
+              <div class="yeFont">{{item.currSalePrice}}</div>
             </div>
           </div>
           <div class="xsFoot">
-            <div class="xsFootBox"><span>同比： </span><span class="blkFont">67.66%</span></div>
-            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">15.89%</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="xsBox">
-        <div class="xsItem">
-          <div class="xsTitle">
-            <img class="xsImg" src="@/assets/images/hospitalImg.png" />
-            <div class="xsText">江苏省人民医院</div>
-          </div>
-          <div class="xsContent">
-            <div class="xsNumBox">
-              <div>销售数量（盒）</div>
-              <div class="yeFont">128</div>
-            </div>
-            <div class="xsNumBox1">
-              <div>销售金额（元）</div>
-              <div class="yeFont">128</div>
-            </div>
-          </div>
-          <div class="xsFoot">
-            <div class="xsFootBox"><span>同比： </span><span class="blkFont">67.66%</span></div>
-            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">15.89%</span></div>
+            <div class="xsFootBox"><span>同比： </span><span class="blkFont">{{item.yearGrowthRate}} %</span></div>
+            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">{{item.monthGrowthRate}} %</span></div>
           </div>
         </div>
       </div>
@@ -79,17 +57,22 @@ export default {
   name: '',
   components: { saleForm },
   data() {
-    return {}
+    return {
+        hospitalOfficeSales: [],
+        hospitalInfo: ''
+    }
   },
   created() {
-    this.queryHospitalOfficeSales({ hospitalId: 1 })
+    this.queryHospitalOfficeSales()
   },
   methods: {
     // 医院流向数据
-    queryHospitalOfficeSales(form) {
-      queryHospitalOfficeSales(form).then(res => {
+    queryHospitalOfficeSales() {
+        let params = JSON.parse(this.$route.query.hospital);
+        this.hospitalInfo = params
+      queryHospitalOfficeSales({ hospitalId: params.hospitalId }).then(res => {
         if (res.code == 0) {
-          this.hospitalSales = res.data.hospitalSales
+          this.hospitalOfficeSales = res.data.hospitalOfficeSales
         }
       })
     }
