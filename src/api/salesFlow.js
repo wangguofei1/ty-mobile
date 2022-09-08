@@ -17,3 +17,11 @@ export function queryHospitalOfficeSales(data) {
     hideloading: true
   })
 }
+export function queryShopInfo(data) {
+  return request({
+    url: api.queryShopInfo,
+    method: 'get',
+    params: data,
+    hideloading: true
+  })
+}
