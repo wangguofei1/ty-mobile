@@ -42,6 +42,9 @@
                 </div>
             </div>
         </div>
+        <div class="headBox">
+
+        </div>
     </div>
 </template>
 
@@ -153,7 +156,6 @@ export default {
 }
 .title1 {
     height: 0.733rem;
-    margin-bottom: 0.233rem;
 
     .content1 {
         box-sizing: border-box;

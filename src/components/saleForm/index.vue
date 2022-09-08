@@ -1,27 +1,26 @@
 <template>
-    <div>
-        <van-form>
-            <div class="content3">
-
-                <div @click="isYearShow=isYearShow?false:true">
-                    <van-row type="flex" justify="center">
-                        <van-col :span="20">
-                            <div class="flex1 content2">
-                                <div>年份</div>
-                                <div>
-                                    <span style="color:#ccc" v-if="!ruleForm.year">请选择年</span>
-                                    <span v-else style="color:#000">{{ruleForm.year}}年</span>
-                                    <van-icon color="rgba(128, 128, 128, 1)" size="14px" name="arrow" />
-                                </div>
-                            </div>
-                            <!-- <van-field v-model="ruleForm.year" is-link readonly label="地区" placeholder="请选择所在地区"
+  <div class="formBox">
+    <van-form>
+      <div class="content3">
+        <div @click="isYearShow = isYearShow ? false : true">
+          <van-row type="flex" justify="center">
+            <van-col :span="22">
+              <div class="flex1 content2">
+                <div>年份</div>
+                <div>
+                    <span v-if="!ruleForm.year" style="color:#ccc">请选择年</span>
+                  <span v-if="ruleForm.year" style="color: #000">{{ ruleForm.year }}年</span>
+                  <van-icon color="rgba(128, 128, 128, 1)" size="14px" name="arrow" />
+                </div>
+              </div>
+              <!-- <van-field v-model="ruleForm.year" is-link readonly label="地区" placeholder="请选择所在地区"
                                 @click="show = true" /> -->
                         </van-col>
                     </van-row>
                 </div>
                 <div @click="isMonthShow=isMonthShow?false:true">
                     <van-row type="flex" justify="center">
-                        <van-col :span="20">
+                        <van-col :span="22">
                             <div class="flex1 content2">
                                 <div>时间区间</div>
                                 <div>
@@ -35,7 +34,7 @@
                 </div>
                 <div>
                     <van-row type="flex" justify="center">
-                        <van-col :span="20">
+                        <van-col :span="22">
                             <div class="flex1 content2">
                                 <div>商品</div>
                                 <div>
@@ -48,7 +47,7 @@
                 </div>
                 <div @click="show=show?false:true">
                     <van-row type="flex" justify="center">
-                        <van-col :span="20">
+                        <van-col :span="22">
                             <div class="flex1 content2">
                                 <div>区域</div>
                                 <div>
@@ -63,7 +62,7 @@
                 </div>
                 <div @click="isShopShow =isShopShow ?false:true">
                     <van-row type="flex" justify="center">
-                        <van-col :span="20">
+                        <van-col :span="22">
                             <div class="flex1 content2">
                                 <div>门店</div>
                                 <div>
@@ -265,17 +264,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .formBox {
+        overflow: hidden;
+        padding-top: 10px;
+        position: fixed;
+        width: 100%;
+        z-index: 999999;
+        background-color: #fff;
+    }
 .flex1 {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
 }
 .content3 {
-    background-color: #fff;
+   
 
     >div {
-        margin-bottom: 0.233rem;
-        line-height: 1.233rem;
+        margin-bottom: 0.333rem;
+        line-height: 0.933rem;
 
         .content2 {
             background-color: #f2f3f5;

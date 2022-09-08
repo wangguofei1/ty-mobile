@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0;">
+    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
         <van-tabs
           v-model="ruleForm.queryType"
@@ -25,6 +25,29 @@
       </div>
     </div>
     <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+    <div class="xsBox">
+      <div class="xsItem">
+        <div class="xsTitle">
+          <img class="xsImg" src="@/assets/images/hospitalImg.png" />
+          <div class="xsText">江苏省人民医院</div>
+          <div class="xsGoDetail">数据流向<van-icon style="margin-left:5px;" name="arrow" /></div>
+        </div>
+        <div class="xsContent">
+            <div>
+                <div>销售数量（盒）</div>
+                <div>128</div>
+            </div>
+            <div></div>
+        </div>
+      </div>
+      <div class="xsItem">
+        <div class="xsTitle">
+          <img class="xsImg" src="@/assets/images/hospitalImg.png" />
+          <div class="xsText">江苏省人民医院</div>
+          <div class="xsGoDetail">数据流向<van-icon style="margin-left:5px;" name="arrow" /></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,7 +74,6 @@ export default {
   },
   methods: {
     changeForm(form) {
-      debugger
       console.log(form)
     }
   }
@@ -59,6 +81,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.xsBox {
+  padding: 15px;
+  box-sizing: border-box;
+  .xsItem {
+    width: 100%;
+    height: 155px;
+    background-color: #fff;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    .xsTitle {
+      display: flex;
+      .xsImg {
+        width: 36px;
+        height: 36px;
+      }
+      .xsText {
+        line-height: 30px;
+        font-size: 15px;
+        font-weight: 700;
+        color: rgba(25, 28, 47, 1);
+        margin-left: 10px;
+      }
+      .xsGoDetail {
+        margin-left: auto;
+        line-height: 30px;
+        color: rgba(58, 160, 255, 1);
+        font-size: 14px;
+      }
+    }
+    .xsContent {
+        display: flex;
+        div {
+            width: calc(50% - 3px)
+
+        };
+        >div:first-child {
+            border-right: 1px solid #000;
+        }
+    }
+  }
+}
 .flex1 {
   display: flex;
   flex-flow: row nowrap;
@@ -90,6 +153,6 @@ export default {
   }
 }
 .title1 .van-tabs__line {
-    width: 15px;
+  width: 15px;
 }
 </style>
