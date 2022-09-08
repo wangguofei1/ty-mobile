@@ -89,31 +89,31 @@
         <div class="content4">
             <div>
                 <van-popup v-model="isYearShow" round position="bottom">
-                    <van-datetime-picker v-model="ruleForm.year" type="year-month" title="选择年份" :filter="filter"
-                        :formatter="formatter" @confirm="confirmTime" />
+                    <van-datetime-picker v-model="year" type="year-month" title="选择年份" 
+                        :formatter="formatter" @confirm="confirmTime"   @cancel="isYearShow=false"/>
                 </van-popup>
             </div>
             <div>
-                <van-popup v-model="isMonthShow" round position="bottom">
-                    <van-datetime-picker v-model="ruleForm.startMonth" type="month-day" title="开始月份" :filter="filter1"
-                        :formatter="formatter" @confirm="confirmTime1" />
+                <van-popup v-model="isMonthShow" round position="bottom" >
+                    <van-datetime-picker v-model="startMonth" type="month-day" title="开始月份"
+                        :formatter="formatter" @confirm="confirmTime1"  @cancel="isMonthShow=false" />
                 </van-popup>
             </div>
             <div>
                 <van-popup v-model="isMonthShow2" round position="bottom">
-                    <van-datetime-picker v-model="ruleForm.endMonth" type="month-day" title="截止月份" :filter="filter2"
-                        :formatter="formatter" @confirm="confirmTime2" />
+                    <van-datetime-picker v-model="endMonth" type="month-day" title="截止月份" :filter="filter2" 
+                        :formatter="formatter" @confirm="confirmTime2"  @cancel="isMonthShow2=false"/>
                 </van-popup>
             </div>
             <div>
-                <van-popup v-model="show" round position="bottom">
+                <van-popup v-model="show" round position="bottom" >
                     <van-cascader v-model="cascaderValue" title="请选择所在地区" :options="options" :field-names="fieldNames"
-                        @finish="finfishSelect" />
+                        @finish="finfishSelect"  @close="show=false"/>
                 </van-popup>
             </div>
             <div>
                 <van-popup v-model="isShopShow" round position="bottom">
-                    <van-picker title="选择门店" show-toolbar :columns="columns" @confirm="confirmShop" />
+                    <van-picker title="选择门店" show-toolbar :columns="columns" @confirm="confirmShop"  @cancel="isShopShow=false"/>
                 </van-popup>
             </div>
         </div>
@@ -126,6 +126,9 @@ export default {
     name: "saleForm",
     data() {
         return {
+            year:'',
+            startMonth:'',
+            endMonth:'',
             show: false,
             isYearShow: false,
             isMonthShow: false,
@@ -217,28 +220,12 @@ export default {
             this.ruleForm.year = date.getFullYear();
             this.isYearShow = false;
         },
-        filter(type, options) {
-            if (type === 'month') {
-                return options.filter((option) => option == "");
-            }
-            if (type === 'year') {
-                return options.filter((option) => option);
-            }
-        },
-        filter1(type, options) {
-            if (type === 'month') {
-                return options.filter((option) => option);
-            }
-            if (type === 'day') {
-                return options.filter((option) => option === "");
-            }
-        },
         filter2(type, options) {
             if (type === 'month') {
                 return options.filter((option) => option > this.ruleForm.startMonth);
             }
             if (type === 'day') {
-                return options.filter((option) => option === "");
+                return options;
             }
         },
         formatter(type, val) {
@@ -278,8 +265,6 @@ export default {
     justify-content: space-between;
 }
 .content3 {
-   
-
     >div {
         margin-bottom: 0.333rem;
         line-height: 0.933rem;

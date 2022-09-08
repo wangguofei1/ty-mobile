@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="flex1 title1" style="background:#2b92f9">
+        <div class="flex1 title1" style="background:#2b92f9;z-index:2005;">
             <div style="width:50%">
                 <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff" @change="">
+                    title-active-color="#fff">
                     <van-tab title="本年" name="1"></van-tab>
                     <van-tab title="本季度" name="2"></van-tab>
                     <van-tab title="本月" name="3"></van-tab>
@@ -17,9 +17,15 @@
                         src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
             </div>
         </div>
-        <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+        <div class="popup1">
+            <van-popup v-model="isShow" round position="top" :duration="0.5" transition="fade">
+            <saleForm  :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+        </van-popup>
+        </div>
         <div class="headBox">
-           
+            <div class="inBox">
+
+            </div>
         </div>
     </div>
 </template>
@@ -28,7 +34,7 @@
 import saleForm from "../../components/saleForm/index.vue"
 export default {
     name: "",
-    components: { saleForm},
+    components: { saleForm },
     data() {
         return {
             ruleForm: {
@@ -92,6 +98,12 @@ export default {
     width: 100%;
     box-sizing: border-box;
     padding: 0 15px;
+
+    .inBox {
+        width: 343px;
+        height: 283px;
+        // background:;
+    }
 }
 
 .title1 {
@@ -109,6 +121,16 @@ export default {
         }
     }
 }
+// .fade-enter, .fade-leave-to{
+//   opacity: 0;
+// }
+// //中间过渡效果
+// .fade-enter-active,.fade-leave-active{
+//   transition: opacity .5s linear;
+// }
+// .fade-enter-to, .fade-leave{
+//   opacity: 1;
+// }
 </style>
 <style lang="scss">
 .title1 {
@@ -116,6 +138,15 @@ export default {
         .van-tabs__wrap {
             height: 0.733rem !important;
         }
+    }
+}
+.popup1{
+    .van-overlay{
+        top:30px;
+        height: 90%;
+    }
+    .formBox[data-v-2184f27e]{
+        margin-top: 30px;
     }
 }
 </style>
