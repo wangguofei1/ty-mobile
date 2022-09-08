@@ -28,9 +28,9 @@ export const constantRouterMap = [{
     keepAlive: false
   }
 }, {
-  path: '/annual-sales',
-  name: 'Annualsales',
-  component: () => import('@/views/annual-sales/index'),
+  path: '/salesYearly',
+  name: 'salesYearly',
+  component: () => import('@/views/sales-yearly/index'),
   meta: {
     title: '年度销售',
     keepAlive: false
@@ -113,14 +113,6 @@ export const constantRouterMap = [{
   component: () => import('@/views/personal-center/index'),
   meta: {
     title: '个人中心',
-    keepAlive: false
-  }
-},{
-  path: '/salesYearly',
-  name: 'salesYearly',
-  component: () => import('@/views/sales-yearly/index'),
-  meta: {
-    title: '年度销售',
     keepAlive: false
   }
 }]

@@ -23,7 +23,7 @@
 import saleForm from "../../components/saleForm/index.vue"
 export default {
     name: "",
-    components: { saleForm },
+    components: { saleForm, },
     data() {
         return {
             ruleForm: {
