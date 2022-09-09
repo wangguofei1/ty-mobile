@@ -25,3 +25,10 @@ export function queryShopInfo(data) {
     hideloading: true
   })
 }
+export function getPatientStructure(data) {
+  return request({
+    url: api.queryPatientStructure,
+    method: 'get',
+    params: data
+  })
+}
