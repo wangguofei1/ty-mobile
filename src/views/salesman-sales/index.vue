@@ -3,7 +3,7 @@
         <div class="flex1 title1" style="background:#2b92f9;z-index:2005;">
             <div style="width:50%">
                 <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff" @change="">
+                    title-active-color="#fff">
                     <van-tab title="本年" name="1"></van-tab>
                     <van-tab title="本季度" name="2"></van-tab>
                     <van-tab title="本月" name="3"></van-tab>
@@ -122,7 +122,6 @@
 </template>
 
 <script>
-import "animate.css"
 import saleForm from "../../components/saleForm/index.vue"
 import barChart from "./components/BarChart.vue"
 export default {

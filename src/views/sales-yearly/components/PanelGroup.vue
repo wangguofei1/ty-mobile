@@ -11,8 +11,8 @@
               </div>
               <div class="tabSta">
                 <div @click="handleClick1(0)" :class="activeName1 == 0 ? 'active' : ''">全部</div>
-                <div @click="handleClick1(160)" :class="activeName1 == 160 ? 'active' : ''">规格一</div>
-                <div @click="handleClick1(357)" :class="activeName1 == 357 ? 'active' : ''">规格二</div>
+                <div @click="handleClick1(160)" :class="activeName1 == 160 ? 'active' : ''">20mg</div>
+                <div @click="handleClick1(357)" :class="activeName1 == 357 ? 'active' : ''">80mg</div>
               </div>
             </div>
             <div class="salesBox">
@@ -51,8 +51,8 @@
               </div>
               <div class="tabSta">
                 <div @click="handleClick2(0)" :class="activeName2 == 0 ? 'active' : ''">全部</div>
-                <div @click="handleClick2(160)" :class="activeName2 == 160 ? 'active' : ''">规格一</div>
-                <div @click="handleClick2(357)" :class="activeName2 == 357 ? 'active' : ''">规格二</div>
+                <div @click="handleClick2(160)" :class="activeName2 == 160 ? 'active' : ''">20mg</div>
+                <div @click="handleClick2(357)" :class="activeName2 == 357 ? 'active' : ''">80mg</div>
               </div>
             </div>
             <div class="salesBox" style="color: rgba(42, 130, 228, 1);">
@@ -90,8 +90,8 @@
               </div>
               <div class="tabSta">
                 <div @click="handleClick3(0)" :class="activeName3 == 0 ? 'active' : ''">全部</div>
-                <div @click="handleClick3(160)" :class="activeName3 == 160 ? 'active' : ''">规格一</div>
-                <div @click="handleClick3(357)" :class="activeName3 == 357 ? 'active' : ''">规格二</div>
+                <div @click="handleClick3(160)" :class="activeName3 == 160 ? 'active' : ''">20mg</div>
+                <div @click="handleClick3(357)" :class="activeName3 == 357 ? 'active' : ''">80mg</div>
               </div>
             </div>
             <div class="salesBox" style="color: rgba(0, 186, 173, 1);">
@@ -129,8 +129,8 @@
               </div>
               <div class="tabSta">
                 <div @click="handleClick4(0)" :class="activeName4 == 0 ? 'active' : ''">全部</div>
-                <div @click="handleClick4(160)" :class="activeName4 == 160 ? 'active' : ''">规格一</div>
-                <div @click="handleClick4(357)" :class="activeName4 == 357 ? 'active' : ''">规格二</div>
+                <div @click="handleClick4(160)" :class="activeName4 == 160 ? 'active' : ''">20mg</div>
+                <div @click="handleClick4(357)" :class="activeName4 == 357 ? 'active' : ''">80mg</div>
               </div>
             </div>
             <div class="salesBox" style="color: rgba(240, 96, 96, 1);">

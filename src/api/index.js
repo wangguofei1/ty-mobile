@@ -8,7 +8,8 @@ const api = {
   queryHospitalSales: '/api/SalesFlow/queryHospitalSales',
   queryHospitalOfficeSales: '/api/SalesFlow/queryHospitalOfficeSales',
   queryShopInfo: '/api/patient/shop/serve/queryShopInfo',
-  queryPatientStructure: '/api/patient/analysis/queryPatientStructure'
+  queryPatientStructure: '/api/patient/analysis/queryPatientStructure',
+  queryShopSaleAnalysis: '/api/patient/analysis/queryShopSaleAnalysis'
 }
 
 export default api

@@ -32,3 +32,10 @@ export function getPatientStructure(data) {
     params: data
   })
 }
+export function queryShopSaleAnalysis(data) {
+  return request({
+      url: api.queryShopSaleAnalysis,
+      method: 'get',
+      params:data,
+  })
+}
