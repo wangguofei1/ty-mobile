@@ -1,6 +1,7 @@
 import api from './index'
 import request from '@/utils/request'
 
+// 医院流向数据
 export function queryHospitalSales(data) {
   return request({
     url: api.queryHospitalSales,

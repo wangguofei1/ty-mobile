@@ -45,10 +45,10 @@
           </div>
           <div class="xsFoot">
             <div class="xsFootBox">
-              <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }} %</span>
+              <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }}</span>
             </div>
             <div class="xsFootBox1">
-              <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }} %</span>
+              <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }}</span>
             </div>
           </div>
         </div>

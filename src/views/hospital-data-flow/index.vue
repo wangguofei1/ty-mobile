@@ -17,8 +17,8 @@
           </div>
         </div>
         <div class="xsFoot1">
-          <div class="xsFootBox1"><span>同比： </span><span>{{ hospitalInfo.yearGrowthRate }} %</span></div>
-          <div class="xsFootBox11"><span>环比： </span><span>{{ hospitalInfo.monthGrowthRate }} %</span></div>
+          <div class="xsFootBox1"><span>同比： </span><span>{{ hospitalInfo.yearGrowthRate }}</span></div>
+          <div class="xsFootBox11"><span>环比： </span><span>{{ hospitalInfo.monthGrowthRate }}</span></div>
         </div>
       </div>
     </div>
@@ -41,8 +41,8 @@
             </div>
           </div>
           <div class="xsFoot">
-            <div class="xsFootBox"><span>同比： </span><span class="blkFont">{{item.yearGrowthRate}} %</span></div>
-            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">{{item.monthGrowthRate}} %</span></div>
+            <div class="xsFootBox"><span>同比： </span><span class="blkFont">{{item.yearGrowthRate}}</span></div>
+            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">{{item.monthGrowthRate}}</span></div>
           </div>
         </div>
       </div>

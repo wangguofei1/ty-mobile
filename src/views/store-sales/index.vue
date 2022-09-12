@@ -25,56 +25,54 @@
       </div>
     </div>
     <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div class="xsBox">
-        <div class="xsItem" v-for="(item, index) in saleList" :key="index" @click="goDetail(item)">
-          <div class="xsTitle">
-            <div>
-              <div class="xsText">{{ item.hosptailName }}</div>
-              <div class="areaBox">省区/片区/大区</div>
-            </div>
-            <div class="xsGoDetail">
-              <img
-                class="phImg"
-                v-if="index < 3"
-                :src="
-                  index == 0
-                    ? require('@/assets/images/guanjun.png')
-                    : index == 1
-                    ? require('@/assets/images/yajun.png')
-                    : index == 2
-                    ? require('@/assets/images/jijun.png')
-                    : ''
-                "
-              />
-            </div>
+    <div class="xsBox">
+      <div class="xsItem" v-for="(item, index) in saleList" :key="index" @click="goDetail(item)">
+        <div class="xsTitle">
+          <div>
+            <div class="xsText">{{ item.name }}</div>
+            <div class="areaBox">{{ item.provinceName }}/{{ item.regionName }}/{{ item.sectionName }}</div>
           </div>
-          <div class="xsContent">
-            <div class="xsNumBox">
-              <div>销售数量（盒）</div>
-              <div class="yeFont">{{ item.currSaleNum }}</div>
-            </div>
-            <div class="xsNumBox1">
-              <div>销售金额（元）</div>
-              <div class="yeFont">{{ item.currSalePrice }}</div>
-            </div>
+          <div class="xsGoDetail">
+            <img
+              class="phImg"
+              v-if="index < 3"
+              :src="
+                index == 0
+                  ? require('@/assets/images/guanjun.png')
+                  : index == 1
+                  ? require('@/assets/images/yajun.png')
+                  : index == 2
+                  ? require('@/assets/images/jijun.png')
+                  : ''
+              "
+            />
           </div>
-          <div class="xsFoot">
-            <div class="xsFootBox">
-              <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }} %</span>
-            </div>
-            <div class="xsFootBox1">
-              <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }} %</span>
-            </div>
+        </div>
+        <div class="xsContent">
+          <div class="xsNumBox">
+            <div>销售数量（盒）</div>
+            <div class="yeFont">{{ item.num }}</div>
+          </div>
+          <div class="xsNumBox1">
+            <div>销售金额（元）</div>
+            <div class="yeFont">{{ item.total }}</div>
+          </div>
+        </div>
+        <div class="xsFoot">
+          <div class="xsFootBox">
+            <span>同比： </span><span class="blkFont">{{ item.yoy }}</span>
+          </div>
+          <div class="xsFootBox1">
+            <span>环比： </span><span class="blkFont">{{ item.mom }}</span>
           </div>
         </div>
       </div>
-    </van-list>
+    </div>
   </div>
 </template>
       
       <script>
-import { queryHospitalSales } from '@/api/salesFlow'
+import { queryShopSaleAnalysis } from '@/api/salesFlow'
 import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
 export default {
@@ -84,7 +82,7 @@ export default {
     return {
       ruleForm: {
         queryType: '1',
-        year: '',
+        year: '2022',
         startMonth: '',
         endMonth: '',
         productId: 127,
@@ -94,8 +92,8 @@ export default {
         shopId: ''
       },
       isShow: false,
-      page: 1,
-      pageNum: 10,
+      //   page: 1,
+      //   pageNum: 10,
       loading: false,
       saleList: [],
       finished: false,
@@ -104,16 +102,15 @@ export default {
     }
   },
   created() {
-    this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
+    this.queryShopSaleAnalysis(this.ruleForm)
   },
   methods: {
     // 医院流向数据
-    queryHospitalSales(form) {
+    queryShopSaleAnalysis(form) {
       var that = this
-      queryHospitalSales(form).then(res => {
+      queryShopSaleAnalysis(form).then(res => {
         if (res.code == 0) {
-          that.count = res.data.count
-          that.saleList = that.saleList.concat(res.data.data)
+          that.saleList = res.data
         }
       })
     },
@@ -125,25 +122,24 @@ export default {
     },
     changeForm(form) {
       this.saleList = []
-      console.log(form)
-      form.queryType = this.ruleForm.queryType
+      //   form.queryType = this.ruleForm.queryType
       form.page = this.page
       form.pageNum = this.pageNum
-      this.queryHospitalSales(form)
-    },
-    onLoad() {
-      setTimeout(() => {
-        this.page++
-        this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
-        // 加载状态结束
-        this.loading = false
-
-        // 数据全部加载完成
-        if (this.saleList.length >= this.count) {
-          this.finished = true
-        }
-      }, 1000)
+      this.queryShopSaleAnalysis(form)
     }
+    // onLoad() {
+    //   setTimeout(() => {
+    //     this.page++
+    //     this.queryShopSaleAnalysis({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
+    //     // 加载状态结束
+    //     this.loading = false
+
+    //     // 数据全部加载完成
+    //     if (this.saleList.length >= this.count) {
+    //       this.finished = true
+    //     }
+    //   }, 1000)
+    // }
   }
 }
 </script>
