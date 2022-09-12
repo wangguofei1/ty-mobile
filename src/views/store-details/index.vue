@@ -6,15 +6,15 @@
       <div class="xsItem1">
         <div class="xsTitle1">
           <div>
-            <div class="xsText1">{{ hospitalInfo.hosptailName }}</div>
+            <div class="xsText1">{{ hospitalOfficeSales.name }}</div>
             <div class="tagBox">
               <div class="tag1">特药定点</div>
               <div class="tag2">医保定点</div>
             </div>
-            <div class="sqMedicine">授权药品：多吉美</div>
-            <div class="sqMedicine">开办时间：2014-12-12</div>
-            <div class="sqMedicine">电话：13232323232</div>
-            <div class="sqMedicine">所属：江苏的漩塘</div>
+            <div class="sqMedicine">授权药品：拓益</div>
+            <div class="sqMedicine">开办时间：{{ hospitalOfficeSales.createTime }}</div>
+            <div class="sqMedicine">电话：{{ hospitalOfficeSales.phone }}</div>
+            <div class="sqMedicine">所属：{{ hospitalOfficeSales.address }}</div>
           </div>
           <img class="xsImg1" src="@/assets/images/unpj.png" />
         </div>
@@ -25,9 +25,20 @@
           <div class="yyLevel" v-for="(item, index) in yyList" :key="index">
             <img class="yyImg" :src="item.yyImg" />
             <div class="yyInfo">
-              <div class="yybfb" :class="'yybfb' + (index + 1)">98%</div>
+              <div class="yybfb" :class="'yybfb' + (index + 1)">{{ item.yybfb }}</div>
               <div class="yyText">{{ item.yyText }}</div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="chartBox">
+        <div class="dotBox">
+          <div class="dotTitle">
+            <img class="dotImg" :src="require('@/assets/images/fenbuImg.png')" />
+            <div class="dotText">月度销售统计</div>
+          </div>
+          <div class="mapBox">
+            <div id="chartBox" ref="chartBox" style="height: 366px; width: 100%" />
           </div>
         </div>
       </div>
@@ -37,6 +48,8 @@
     
     <script>
 import { queryShopInfo } from '@/api/salesFlow'
+import * as echarts from 'echarts'
+import _ from 'lodash'
 export default {
   name: 'StoreDetails',
   data() {
@@ -46,50 +59,140 @@ export default {
       yyList: [
         {
           yyImg: require('@/assets/images/yyImg1.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '信息完善度'
         },
         {
           yyImg: require('@/assets/images/yyImg2.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '回访及时率'
         },
         {
           yyImg: require('@/assets/images/yyImg3.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '平均配送时效'
         },
         {
           yyImg: require('@/assets/images/yyImg4.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '服务满意度'
         },
         {
           yyImg: require('@/assets/images/yyImg5.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '患者平均用药'
         },
         {
           yyImg: require('@/assets/images/yyImg6.png'),
-          yybfb: '98%',
+          yybfb: '',
           yyText: '平均患教次数'
         }
-      ]
+      ],
+      monthSales: []
     }
   },
   created() {
     this.queryShopInfo()
   },
   methods: {
-    // 医院流向数据
     queryShopInfo() {
-        console.log(this.$route.query.hospital)
-    //   let params = JSON.parse(this.$route.query.hospital)
-    //   queryShopInfo({ hospitalId: params.hospitalId }).then(res => {
-    //     if (res.code == 0) {
-    //       this.hospitalOfficeSales = res.data.hospitalOfficeSales
-    //     }
-    //   })
+      let params = JSON.parse(this.$route.query.hospital)
+      queryShopInfo({ shopId: params.id, queryType: 1 }).then(res => {
+        if (res.code == 0) {
+          this.hospitalOfficeSales = res.data
+          this.yyList[0].yybfb = res.data.infoRate
+          this.yyList[1].yybfb = res.data.returnRatio
+          this.yyList[2].yybfb = res.data.timeDiffAvg
+          this.yyList[3].yybfb = res.data.satisfaction
+          this.yyList[4].yybfb = res.data.usageNumAvg
+          this.yyList[5].yybfb = res.data.eduTimesAvg
+          this.monthSales = res.data.monthSales
+        }
+      })
+    },
+    initCharts() {
+      console.log(this.monthSales)
+      const charts1 = echarts.init(this.$refs['chartBox'])
+      charts1.setOption({
+        color: ['#6382e7'],
+        grid: {
+          left: 80
+        },
+        xAxis: {
+          type: 'category',
+          data: _.map(this.monthSales, function (v) {
+            return v.name
+          }),
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#f2f2f2'
+            }
+          },
+          axisLabel: {
+            show: true,
+            color: '#000'
+          }
+        },
+        tooltip: {
+          trigger: 'axis',
+          formatter: function (params) {
+            let str = ''
+            params.forEach((item, index) => {
+              str +=
+                '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;left:5px;background-color:' +
+                item.color +
+                '"></span>' +
+                item.name +
+                '销售额' +
+                ' : ' +
+                item.data +
+                '元' +
+                '<br />'
+            })
+            return str
+          }
+        },
+        yAxis: {
+          type: 'value',
+          value: '元',
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#f2f2f2'
+            }
+          },
+          axisLabel: {
+            show: true,
+            color: '#000'
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed'
+            }
+          }
+        },
+        series: [
+          {
+            data: _.map(this.monthSales, function (v) {
+              return v.value
+            }),
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+              opacity: 0
+            }
+          }
+        ]
+      })
+    }
+  },
+  watch: {
+    monthSales() {
+      this.initCharts()
     }
   }
 }
@@ -264,6 +367,57 @@ export default {
             font-size: 13px;
             color: rgba(128, 128, 128, 1);
           }
+        }
+      }
+    }
+  }
+  .chartBox {
+    .dotBox {
+      background: #fff;
+      border-radius: 6px;
+      .dotTitle {
+        display: flex;
+        width: calc(100%-30px);
+        height: 50px;
+        box-sizing: border-box;
+        padding: 13px 15px;
+        border-bottom: 1px solid rgba(216, 220, 229, 1);
+        .dotImg {
+          width: 26.84px;
+          height: 20px;
+          position: relative;
+          top: 2px;
+        }
+        .dotText {
+          margin-left: 10px;
+          height: 22px;
+          font-size: 15px;
+          font-weight: 700;
+          color: rgba(25, 28, 47, 1);
+        }
+      }
+      .fxTitle {
+        width: 100%;
+        height: 88px;
+        background: linear-gradient(180deg, rgba(233, 241, 253, 1) 0%, rgba(255, 255, 255, 0) 100%);
+        text-align: center;
+        padding-top: 12px;
+        box-sizing: border-box;
+        .fxText {
+          font-size: 16px;
+          font-weight: 700;
+          margin-bottom: 5px;
+          color: rgba(25, 28, 47, 1);
+          vertical-align: top;
+        }
+      }
+      .mapBox {
+        height: 373px;
+        width: 100%;
+        box-sizing: border-box;
+        .smallBox {
+          width: 325px;
+          height: 360px;
         }
       }
     }
