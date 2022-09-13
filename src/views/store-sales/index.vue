@@ -3,7 +3,7 @@
     <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
         <van-tabs
-          v-model="ruleForm.queryType"
+          v-model="queryType"
           background="#2b92f9"
           color="#fff"
           title-inactive-color="#fff"
@@ -83,8 +83,8 @@ export default {
   components: { saleForm },
   data() {
     return {
+      queryType: '1',
       ruleForm: {
-        queryType: '1',
         year: '2022',
         startMonth: '',
         endMonth: '',
@@ -92,7 +92,7 @@ export default {
         regionId: '',
         sectionId: '',
         provinceId: '',
-        shopId: '',
+        shopId: ''
         // page: 1,
         // pageNum: 10,
       },
@@ -111,9 +111,9 @@ export default {
     // 年度季度筛选
     getQueryType() {
       this.saleList = []
-    //   this.ruleForm.page = 1
-    //   this.ruleForm.pageNum = 10
-      this.queryShopSaleAnalysis(this.ruleForm)
+      //   this.ruleForm.page = 1
+      //   this.ruleForm.pageNum = 10
+      this.queryShopSaleAnalysis({queryType: this.queryType})
     },
     // 医院流向数据
     queryShopSaleAnalysis(form) {
@@ -132,15 +132,15 @@ export default {
     },
     changeForm(form) {
       this.saleList = []
-    //   this.ruleForm.page = 1
-    //   this.ruleForm.pageNum = 10
+      //   this.ruleForm.page = 1
+      //   this.ruleForm.pageNum = 10
       for (let keys in this.ruleForm) {
         if (form[keys]) {
           this.ruleForm[keys] = form[keys]
         }
       }
       this.queryShopSaleAnalysis(this.ruleForm)
-    },
+    }
     // onLoad() {
     //   setTimeout(() => {
     //     this.page++

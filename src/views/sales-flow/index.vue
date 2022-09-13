@@ -3,7 +3,7 @@
     <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
         <van-tabs
-          v-model="ruleForm.queryType"
+          v-model="queryType"
           background="#2b92f9"
           color="#fff"
           title-inactive-color="#fff"
@@ -28,7 +28,7 @@
     <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="xsBox">
-        <div class="xsItem" v-for="item in saleList" :key="item.hospitalId">
+        <div class="xsItem" v-for="(item, index) in saleList" :key="index">
           <div class="xsTitle">
             <img class="xsImg" :src="hosImg" />
             <div class="xsText">{{ item.hosptailName }}</div>
@@ -69,8 +69,8 @@ export default {
   components: { saleForm },
   data() {
     return {
+      queryType: '1',
       ruleForm: {
-        queryType: '1',
         year: '',
         startMonth: '',
         endMonth: '',
@@ -119,17 +119,17 @@ export default {
       this.saleList = []
       this.ruleForm.page = 1
       this.ruleForm.pageNum = 10
-      this.queryHospitalSales(this.ruleForm)
+      this.queryHospitalSales({ queryType: this.queryType, page: this.ruleForm.page, pageNum: this.ruleForm.pageNum })
     },
     changeForm(form) {
       this.saleList = []
-      this.ruleForm.page = 1
-      this.ruleForm.pageNum = 10
       for (let keys in this.ruleForm) {
         if (form[keys]) {
           this.ruleForm[keys] = form[keys]
         }
       }
+      this.ruleForm.page = 1
+      this.ruleForm.pageNum = 10
       this.queryHospitalSales(this.ruleForm)
     },
     onLoad() {

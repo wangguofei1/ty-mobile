@@ -3,7 +3,7 @@
     <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
         <van-tabs
-          v-model="ruleForm.queryType"
+          v-model="queryType"
           background="#2b92f9"
           color="#fff"
           title-inactive-color="#fff"
@@ -87,8 +87,8 @@ export default {
   data() {
     return {
       active: 1,
+      queryType: '1',
       ruleForm: {
-        queryType: '1',
         year: '',
         startMonth: '',
         endMonth: '',
@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     getQueryType() {
-      this.getPatientStructure(this.ruleForm)
+      this.getPatientStructure({ queryType: this.queryType })
     },
     changeForm(form) {
       for (let keys in this.ruleForm) {
@@ -628,14 +628,14 @@ export default {
       }
     }
     .mapBox {
-        height: 373px;
-        width: 100%;
-        padding: 15px;
-        box-sizing: border-box;
-        .smallBox {
-            width: 325px;
-            height: 360px;
-        }
+      height: 373px;
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      .smallBox {
+        width: 325px;
+        height: 360px;
+      }
     }
   }
 }

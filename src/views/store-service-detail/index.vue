@@ -2,7 +2,7 @@
   <div>
     <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
-        <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
+        <van-tabs v-model="queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
           @click="getQueryType"
           title-active-color="#fff">
           <van-tab title="本年" name="1"></van-tab>
@@ -38,8 +38,8 @@
       </van-tabs>
     </div>
     <div class="xstitle">门店列表</div>
-    <div class="xsBox">
-      <div class="xsItem" v-if="shopList.length>0" v-for="(item, index) in shopList" :key="index">
+    <div class="xsBox" v-if="shopList.length>0">
+      <div class="xsItem" v-for="(item, index) in shopList" :key="index">
         <div class="xsTitle">
           <div>
             <div class="shopName">{{ item.name }} <span class="sectionName">{{item.sectionName}}</span>
@@ -81,10 +81,11 @@ import returnRatioChart from './component/returnRatioChart.vue'
 import timeDiffAvgChart from './component/timeDiffAvgChart.vue'
 import eduTimesAvgChart from './component/eduTimesAvgChart.vue'
 export default {
-  name: 'StoreSales',
+  name: 'storeServiceDetail',
   components: { saleForm, infoRateChart, returnRatioChart, timeDiffAvgChart, eduTimesAvgChart },
   data() {
     return {
+      queryType: '1',
       ruleForm: {
         time: "year",
         year: "",
@@ -125,9 +126,17 @@ export default {
       this.timeDiffAvg = timeDiffAvg
       this.shopList = shopList
     },
-    getQueryType() {
+    async getQueryType() {
       this.saleList = []
-      this.getData()
+      const res = await shopServiceCharts({queryType: this.queryType})
+      const result = await shopServiceList({queryType: this.queryType})
+      let { data: shopList } = result.data
+      let { returnRatio, infoRate, eduTimesAvg, timeDiffAvg } = res.data;
+      this.returnRatio = returnRatio
+      this.infoRate = infoRate
+      this.eduTimesAvg = eduTimesAvg
+      this.timeDiffAvg = timeDiffAvg
+      this.shopList = shopList
     },
     changeForm(form) {
       this.saleList = []
