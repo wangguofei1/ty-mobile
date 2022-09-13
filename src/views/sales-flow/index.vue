@@ -92,7 +92,7 @@ export default {
   },
   created() {
     this.queryHospitalSales({
-      queryType: this.ruleForm.queryType,
+      queryType: this.queryType,
       page: this.ruleForm.page,
       pageNum: this.ruleForm.pageNum
     })

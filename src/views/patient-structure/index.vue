@@ -109,7 +109,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.getPatientStructure(this.ruleForm)
+    this.getPatientStructure({ queryType: this.queryType })
   },
   methods: {
     getQueryType() {
