@@ -8,6 +8,7 @@
           color="#fff"
           title-inactive-color="#fff"
           title-active-color="#fff"
+          @click="getQueryType"
         >
           <van-tab title="本年" name="1"></van-tab>
           <van-tab title="本季度" name="2"></van-tab>
@@ -31,7 +32,9 @@
           <div class="xsTitle">
             <img class="xsImg" :src="hosImg" />
             <div class="xsText">{{ item.hosptailName }}</div>
-            <div @click="xsGoDetail(item)" class="xsGoDetail">数据流向<van-icon style="margin-left: 5px" name="arrow" /></div>
+            <div @click="xsGoDetail(item)" class="xsGoDetail">
+              数据流向<van-icon style="margin-left: 5px" name="arrow" />
+            </div>
           </div>
           <div class="xsContent">
             <div class="xsNumBox">
@@ -75,11 +78,11 @@ export default {
         regionId: '',
         sectionId: '',
         provinceId: '',
-        shopId: ''
+        shopId: '',
+        page: 1,
+        pageNum: 10
       },
       isShow: false,
-      page: 1,
-      pageNum: 10,
       loading: false,
       saleList: [],
       finished: false,
@@ -88,7 +91,11 @@ export default {
     }
   },
   created() {
-    this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
+    this.queryHospitalSales({
+      queryType: this.ruleForm.queryType,
+      page: this.ruleForm.page,
+      pageNum: this.ruleForm.pageNum
+    })
   },
   methods: {
     // 医院流向数据
@@ -108,27 +115,36 @@ export default {
         query: { hospital: JSON.stringify(item) }
       })
     },
+    getQueryType() {
+      this.saleList = []
+      this.ruleForm.page = 1
+      this.ruleForm.pageNum = 10
+      this.queryHospitalSales(this.ruleForm)
+    },
     changeForm(form) {
       this.saleList = []
-      console.log(form)
-      form.queryType = this.ruleForm.queryType
-      form.page = this.page
-      form.pageNum = this.pageNum
-      this.queryHospitalSales(form)
+      this.ruleForm.page = 1
+      this.ruleForm.pageNum = 10
+      for (let keys in this.ruleForm) {
+        if (form[keys]) {
+          this.ruleForm[keys] = form[keys]
+        }
+      }
+      this.queryHospitalSales(this.ruleForm)
     },
     onLoad() {
       setTimeout(() => {
-        this.page++
-        this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
+        this.ruleForm.page++
+        this.queryHospitalSales(this.ruleForm)
         // 加载状态结束
-        this.loading = false;
+        this.loading = false
 
         // 数据全部加载完成
         if (this.saleList.length >= this.count) {
-          this.finished = true;
+          this.finished = true
         }
-      }, 1000);
-    },
+      }, 1000)
+    }
   }
 }
 </script>

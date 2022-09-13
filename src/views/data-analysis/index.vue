@@ -32,7 +32,7 @@ export default {
         {
           xsImg: require('@/assets/images/xsImg1.png'),
           xsText: '年度销售',
-          url: 'Annualsales'
+          url: 'salesYearly'
         },
         {
           xsImg: require('@/assets/images/xsImg2.png'),

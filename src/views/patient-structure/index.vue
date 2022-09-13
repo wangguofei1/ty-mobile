@@ -8,6 +8,7 @@
           color="#fff"
           title-inactive-color="#fff"
           title-active-color="#fff"
+          @click="getQueryType"
         >
           <van-tab title="本年" name="1"></van-tab>
           <van-tab title="本季度" name="2"></van-tab>
@@ -111,8 +112,16 @@ export default {
     this.getPatientStructure(this.ruleForm)
   },
   methods: {
+    getQueryType() {
+      this.getPatientStructure(this.ruleForm)
+    },
     changeForm(form) {
-      this.getPatientStructure(form)
+      for (let keys in this.ruleForm) {
+        if (form[keys]) {
+          this.ruleForm[keys] = form[keys]
+        }
+      }
+      this.getPatientStructure(this.ruleForm)
     },
     // 医院流向数据
     getPatientStructure(form) {
