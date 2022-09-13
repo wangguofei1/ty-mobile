@@ -175,10 +175,10 @@ export default {
             const res = await queryPatientComparison(this.ruleForm)
             this.newInfo = res.data.new
             this.oldInfo = res.data.old
-            // console.log(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1);
-            // console.log(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1);
             this.chartData=[{name:'',value:res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1},{name:'',value:100-(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1)}]
-            this.chartData2=[{name:'',value:res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1},{name:'',value:100-(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1)}]
+            this.chartData2=[
+            {name:'',value:100-(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1)},
+                {name:'',value:res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1}]
             this.chartData3=[{name:'',value:res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1},{name:'',value:100-(res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1)}]
             this.chartData4=[{name:'',value:res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1},{name:'',value:100-(res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1)}]
 

@@ -21,7 +21,7 @@ export default {
         },
         color:{
             type: Array,
-            default: () => ["#c89479","#f0f2f5"]
+            default: () => []
         }
     },
     methods: {
