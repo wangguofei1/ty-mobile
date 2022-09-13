@@ -1,29 +1,6 @@
 <template>
   <div>
-    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
-      <div style="width: 50%">
-        <van-tabs
-          v-model="ruleForm.queryType"
-          background="#2b92f9"
-          color="#fff"
-          title-inactive-color="#fff"
-          title-active-color="#fff"
-        >
-          <van-tab title="本年" name="1"></van-tab>
-          <van-tab title="本季度" name="2"></van-tab>
-          <van-tab title="本月" name="3"></van-tab>
-        </van-tabs>
-      </div>
-      <div class="flex1 content1" @click="isShow = isShow ? false : true">
-        <span style="color: #fff">筛选</span>
-        <span v-show="!isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 1@3x.png"
-        /></span>
-        <span v-show="isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 2@3x.png"
-        /></span>
-      </div>
-    </div>
+    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab=""></topNav>
     <!-- 信息卡 -->
     <div class="customer-info">
       <div class="info-card" style="background-color: #2d8effff">
@@ -128,13 +105,13 @@
 </template>
   
   <script>
+import topNav from "../../components/topNav.vue"
 import { queryHospitalSales } from '@/api/salesFlow'
-import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
 import barChart from './components/BarChart.vue'
 export default {
   name: 'SalesFlow',
-  components: { saleForm, barChart },
+  components: { topNav, barChart },
   data() {
     return {
       ruleForm: {

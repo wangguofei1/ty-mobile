@@ -1,31 +1,6 @@
 <template>
   <div>
-    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
-      <div style="width: 50%">
-        <van-tabs
-          v-model="queryType"
-          background="#2b92f9"
-          color="#fff"
-          title-inactive-color="#fff"
-          title-active-color="#fff"
-          @click="getQueryType"
-        >
-          <van-tab title="本年" name="1"></van-tab>
-          <van-tab title="本季度" name="2"></van-tab>
-          <van-tab title="本月" name="3"></van-tab>
-        </van-tabs>
-      </div>
-      <div class="flex1 content1" @click="isShow = isShow ? false : true">
-        <span style="color: #fff">筛选</span>
-        <span v-show="!isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 1@3x.png"
-        /></span>
-        <span v-show="isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 2@3x.png"
-        /></span>
-      </div>
-    </div>
-    <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="getQueryType"></topNav>
     <!-- <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad"> -->
     <div class="xsBox">
       <div class="xsItem" v-for="(item, index) in saleList" :key="index" @click="goDetail(item)">
@@ -74,13 +49,13 @@
   </div>
 </template>
       
-      <script>
+<script>
+   import topNav from "../../components/topNav.vue"
 import { queryShopSaleAnalysis } from '@/api/salesFlow'
-import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
 export default {
   name: 'StoreSales',
-  components: { saleForm },
+  components: { topNav},
   data() {
     return {
       queryType: '1',
