@@ -64,7 +64,7 @@ export default {
           itemWidth: 14,
           itemHeight: 5,
           itemGap: 13,
-          data: ["规格1", "规格2"],
+          data: ["20mg", "80mg"],
           right: '4%',
           textStyle: {
             fontSize: 12,
@@ -98,7 +98,7 @@ export default {
         ],
         series: [
           {
-            name: "规格1",
+            name: "20mg",
             type: "bar",
             data: this.medicine1Data,
             itemStyle: {
@@ -106,7 +106,7 @@ export default {
             },
           },
           {
-            name: "规格2",
+            name: "80mg",
             type: "bar",
             data: this.medicine2Data,
             itemStyle: {
