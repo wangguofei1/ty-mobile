@@ -3,7 +3,7 @@
         <div class="flex1 title1" style="background:#2b92f9">
             <div style="width:50%">
                 <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff" @change="">
+                    title-active-color="#fff" @change="changeTab1">
                     <van-tab title="本年" name="1"></van-tab>
                     <van-tab title="本季度" name="2"></van-tab>
                     <van-tab title="本月" name="3"></van-tab>
@@ -112,6 +112,11 @@ export default {
         }
     },
     methods: {
+        changeTab1(){
+            this.queryProvinceSalePrice(form);
+            this.query1(form);
+            this.query2(form);
+        },
         changeTab() {
             this.queryMonthSalesPrice();
         },

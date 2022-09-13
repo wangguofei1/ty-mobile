@@ -3,7 +3,7 @@
         <div class="flex1 title1" style="background:#2b92f9">
             <div style="width:50%">
                 <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff">
+                    title-active-color="#fff" @change="changeTab1">
                     <van-tab title="本年" name="1"></van-tab>
                     <van-tab title="本季度" name="2"></van-tab>
                     <van-tab title="本月" name="3"></van-tab>
@@ -11,19 +11,145 @@
             </div>
             <div class="flex1 content1" @click="isShow=isShow?false:true">
                 <span style="color:#fff">筛选</span>
-                <span v-show="!isShow" style="margin-left:10px"><img src="../../assets/images/saleImages/三角形 1@3x.png" /></span>
-                <span v-show="isShow" style="margin-left:10px"><img src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
+                <span v-show="!isShow" style="margin-left:10px"><img
+                        src="../../assets/images/saleImages/三角形 1@3x.png" /></span>
+                <span v-show="isShow" style="margin-left:10px"><img
+                        src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
             </div>
         </div>
-        <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+        <div class="popup1">
+            <van-popup v-model="isShow" round position="top" :duration="0.5" transition="fade">
+                <saleForm :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+            </van-popup>
+        </div>
+        <div class="headBox">
+            <div class="inBox">
+                <div class="topBox flex1">
+                    <div>
+                        <span>
+                            <img src="../../assets/images/saleImages/person.png" />
+                        </span>
+                        <span style="padding-left:5px;vertical-align:baseline" class="text">
+                            新患者
+                        </span>
+                    </div>
+                    <div>
+                        新发现购买行为的患者
+                    </div>
+                </div>
+                <div class="bigBox">
+                    <div class="dataBox1 flex1">
+                        <div>
+                            <span>患者人数</span>
+                            <div>{{newInfo.num}}</div>
+                        </div>
+                        <div style="padding:20px 10px 0 0">
+                            <pieCharts :chartData="chartData"></pieCharts>
+                        </div>
+                    </div>
+                    <div class="dataBox1 flex1">
+                        <div>
+                            <span>销售额</span>
+                            <div style="font-size:14px">{{newInfo.sales}}</div>
+                        </div>
+                        <div style="padding:20px 10px 0 0">
+                            <pieCharts :chartData="chartData"></pieCharts>
+                        </div>
+                    </div>
+                    <div class="dataBox">
+                        <span>DOT</span>
+                        <div class="text1">{{newInfo.dot}}</div>
+                    </div>
+                    <div class="dataBox">
+                        <span>平均购买次数</span>
+                        <div>{{newInfo.buyTimesAvg}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="headBox">
+            <div class="inBox inBox2">
+                <div class="topBox flex1">
+                    <div>
+                        <span>
+                            <img src="../../assets/images/saleImages/person.png" />
+                        </span>
+                        <span style="padding-left:5px;vertical-align:baseline" class="text">
+                            老患者
+                        </span>
+                    </div>
+                    <div>
+                        发生复购行为的患者
+                    </div>
+                </div>
+                <div class="bigBox">
+                    <div class="dataBox1 flex1">
+                        <div>
+                            <span>患者人数</span>
+                            <div>{{oldInfo.num}}</div>
+                        </div>
+                        <div style="padding:20px 10px 0 0">
+                            <pieCharts :chartData="chartData" :color="['#4a95e8','#f0f2f5']"></pieCharts>
+                        </div>
+                    </div>
+                    <div class="dataBox1 flex1">
+                        <div>
+                            <span>销售额</span>
+                            <div style="font-size:14px">{{oldInfo.sales}}</div>
+                        </div>
+                        <div style="padding:20px 10px 0 0">
+                            <pieCharts :chartData="chartData" :color="['#4a95e8','#f0f2f5']"></pieCharts>
+                        </div>
+                    </div>
+                    <div class="dataBox">
+                        <span>DOT</span>
+                        <div class="text1">{{oldInfo.dot}}</div>
+                    </div>
+                    <div class="dataBox">
+                        <span>平均购买次数</span>
+                        <div>{{oldInfo.buyTimesAvg}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chartBox">
+            <div class="barChart">
+                <div class="indexRow flex1" style="justify-content:space-between">
+                    <div class="flex1">
+                        <img class="indexMg" src="@/assets/images/xsImg.png" />
+                        <div class="headTitle">患者数据统计</div>
+                    </div>
+                </div>
+                <div style="padding: 5px">
+                    <barChart :chartData="dataList"></barChart>
+                </div>
+            </div>
+        </div>
+        <div class="chartBox">
+            <div class="barChart">
+                <div class="indexRow flex1" style="justify-content:space-between">
+                    <div class="flex1">
+                        <img class="indexMg" src="@/assets/images/xsImg.png" />
+                        <div class="headTitle">脱落原因统计</div>
+                    </div>
+                </div>
+                <div style="padding: 5px">
+                    <pieChart2 :chartData="chartData"></pieChart2>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import saleForm from "../../components/saleForm/index.vue"
+import pieCharts from "./components/pieCharts.vue"
+import barChart from "./components/barChart.vue"
+import pieChart2 from "./components/pieChart2.vue"
+import { queryPatientComparison, queryPatientCountByMonth, queryPatientStopReasonRange } from '@/api/system'
 export default {
     name: "",
-    components: { saleForm, },
+    components: { saleForm, pieCharts, barChart, pieChart2 },
     data() {
         return {
             ruleForm: {
@@ -37,14 +163,47 @@ export default {
                 provinceId: '',
                 shopId: '',
             },
-            isShow:false,
+            isShow: false,
+            chartData: [
+                { value: 88, name: '' },
+                { value: 12, name: '' }
+            ],
+            dataList: [],
+            newInfo: [],
+            oldInfo: [],
+            // chartData:[],
         }
     },
     methods: {
+        changeTab1(){
+            this.getPatientList();
+            this.queryPatientComparison();
+            this.queryPatientStopReasonRange();
+        },  
         changeForm(form) {
-            debugger;
-            console.log(form);
-        }
+            this.getPatientList();
+            this.queryPatientComparison();
+            this.queryPatientStopReasonRange();
+        },
+        async getPatientList() {
+            const res = await queryPatientCountByMonth(this.ruleForm)
+            this.dataList = res.data
+        },
+        async queryPatientComparison() {
+            const res = await queryPatientComparison(this.ruleForm)
+            this.newInfo = res.data.new
+            this.oldInfo = res.data.old
+            // console.log(this.newInfo,this.oldInfo);
+        },
+        async queryPatientStopReasonRange() {
+            const res = await queryPatientStopReasonRange(this.ruleForm)
+            this.chartData = res.data.map(ele => { return { name: ele.name, value: ele.value } })
+        },
+    },
+    mounted() {
+        this.getPatientList();
+        this.queryPatientComparison();
+        this.queryPatientStopReasonRange();
     }
 }
 </script>
@@ -78,6 +237,201 @@ export default {
     .van-tabs--line {
         .van-tabs__wrap {
             height: 0.733rem !important;
+        }
+    }
+}
+
+.popup1 {
+    .van-overlay {
+        top: 30px;
+        height: 90%;
+    }
+
+    .formBox[data-v-2184f27e] {
+        margin-top: 30px;
+    }
+}
+
+.headBox {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+
+    .inBox {
+        box-sizing: border-box;
+        margin-top: 10px;
+        width: 343px;
+        height: 238px;
+        background: url("../../assets/images/saleImages/back1.png") no-repeat;
+        background-size: cover;
+        padding: 0 15px;
+
+        .topBox {
+            line-height: 53px;
+            overflow: hidden;
+            align-content: center;
+
+            .text {
+                font-size: 18px;
+                font-weight: 700;
+                color: rgba(95, 61, 36, 1);
+                vertical-align: top;
+            }
+
+            >div:nth-child(2) {
+                font-size: 12px;
+                font-weight: 400;
+                color: rgba(95, 61, 36, 1);
+            }
+
+            >div {
+                >span:nth-child(1) {
+                    position: relative;
+                    top: 5px;
+                }
+            }
+        }
+
+        .bigBox {
+            margin: 0px 15px 0 0px;
+            width: 314px;
+            height: 166px;
+            opacity: 1;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 1);
+            display: flex;
+            flex-flow: row wrap;
+
+            .dataBox {
+                box-sizing: border-box;
+                width: 50%;
+                height: 83px;
+                border: 0.5px solid #E9E9E9FF;
+                padding: 21px 0 0 16px;
+
+                span {
+                    font-size: 16px;
+                    font-weight: 400;
+                    letter-spacing: 0px;
+                    line-height: 14px;
+                    color: rgba(144, 147, 153, 1);
+                    text-align: left;
+                    vertical-align: top;
+                }
+
+                >div {
+                    margin-top: 20px;
+                    font-size: 18px;
+                    font-weight: 500;
+                    letter-spacing: 0px;
+                    line-height: 0px;
+                    color: rgba(0, 0, 0, 1);
+                    text-align: left;
+                    vertical-align: top;
+                }
+
+                .text1 {
+                    font-size: 18px;
+                    font-weight: 500;
+                    letter-spacing: 0px;
+                    line-height: 0px;
+                    color: rgba(255, 87, 51, 1);
+                    text-align: left;
+                    vertical-align: top;
+                }
+            }
+
+            .dataBox1 {
+                box-sizing: border-box;
+                width: 50%;
+                height: 83px;
+                border: 0.5px solid #E9E9E9FF;
+
+                span {
+                    font-size: 16px;
+                    font-weight: 400;
+                    letter-spacing: 0px;
+                    line-height: 14px;
+                    color: rgba(144, 147, 153, 1);
+                    text-align: left;
+                    vertical-align: top;
+                }
+
+                >div:nth-child(1) {
+                    padding: 21px 10px 10px 16px;
+
+                    >div {
+                        margin-top: 20px;
+                        font-size: 18px;
+                        font-weight: 500;
+                        letter-spacing: 0px;
+                        line-height: 0px;
+                        color: rgba(0, 0, 0, 1);
+                        text-align: left;
+                        vertical-align: top;
+                    }
+
+                }
+
+                .text1 {
+                    font-size: 18px;
+                    font-weight: 500;
+                    letter-spacing: 0px;
+                    line-height: 0px;
+                    color: rgba(255, 87, 51, 1);
+                    text-align: left;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    .inBox2 {
+        background: url("../../assets/images/saleImages/back2.png") no-repeat !important;
+        background-size: cover !important;
+    }
+}
+
+.chartBox {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+
+    .barChart {
+        margin: 0 15px;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 1);
+        height: 268px;
+        width: calc(100%-30px);
+        border-radius: 8px;
+    }
+
+    .indexRow {
+        position: relative;
+        display: flex;
+        width: 347px;
+        line-height: 42px;
+        font-size: 15px;
+        border-bottom: 1px solid rgba(216, 220, 229, 1);
+        border-bottom: 1px solid rgba(216, 220, 229, 1);
+
+        .indexMg {
+            height: 25px;
+            margin-right: 10px;
+            position: relative;
+            top: 7px;
+            left: 11px;
+        }
+
+        .headTitle {
+            margin-left: 10px;
+            color: #000;
+        }
+
+        .showAll {
+            color: rgba(24, 144, 255, 1);
+            margin-left: auto;
+            margin-right: 20px;
         }
     }
 }
