@@ -1,27 +1,6 @@
 <template>
     <div>
-        <div class="flex1 title1" style="background:#2b92f9">
-            <div style="width:50%">
-                <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff" @change="changeTab1">
-                    <van-tab title="本年" name="1"></van-tab>
-                    <van-tab title="本季度" name="2"></van-tab>
-                    <van-tab title="本月" name="3"></van-tab>
-                </van-tabs>
-            </div>
-            <div class="flex1 content1" @click="isShow=isShow?false:true">
-                <span style="color:#fff">筛选</span>
-                <span v-show="!isShow" style="margin-left:10px"><img
-                        src="../../assets/images/saleImages/三角形 1@3x.png" /></span>
-                <span v-show="isShow" style="margin-left:10px"><img
-                        src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
-            </div>
-        </div>
-        <div class="popup1">
-            <van-popup v-model="isShow" round position="top" :duration="0.5" transition="fade">
-                <saleForm :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
-            </van-popup>
-        </div>
+        <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="changeTab1"></topNav>
         <div class="headBox">
             <div class="inBox">
                 <div class="topBox flex1">
@@ -142,14 +121,14 @@
 </template>
 
 <script>
-import saleForm from "../../components/saleForm/index.vue"
+import topNav from "../../components/topNav.vue"
 import pieCharts from "./components/pieCharts.vue"
 import barChart from "./components/barChart.vue"
 import pieChart2 from "./components/pieChart2.vue"
 import { queryPatientComparison, queryPatientCountByMonth, queryPatientStopReasonRange } from '@/api/system'
 export default {
     name: "",
-    components: { saleForm, pieCharts, barChart, pieChart2 },
+    components: { topNav, pieCharts, barChart, pieChart2 },
     data() {
         return {
             ruleForm: {
@@ -196,9 +175,8 @@ export default {
             const res = await queryPatientComparison(this.ruleForm)
             this.newInfo = res.data.new
             this.oldInfo = res.data.old
-            // console.log(this.newInfo,this.oldInfo);
-            console.log(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1);
-            console.log(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1);
+            // console.log(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1);
+            // console.log(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1);
             this.chartData=[{name:'',value:res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1},{name:'',value:100-(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1)}]
             this.chartData2=[{name:'',value:res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1},{name:'',value:100-(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1)}]
             this.chartData3=[{name:'',value:res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1},{name:'',value:100-(res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1)}]
@@ -254,7 +232,7 @@ export default {
 .popup1 {
     .van-overlay {
         top: 30px;
-        height: 90%;
+        height: 100%;
     }
 
     .formBox[data-v-2184f27e] {

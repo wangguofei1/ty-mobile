@@ -1,23 +1,6 @@
 <template>
     <div>
-        <div class="flex1 title1" style="background:#2b92f9">
-            <div style="width:50%">
-                <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-                    title-active-color="#fff" @change="changeTab1">
-                    <van-tab title="本年" name="1"></van-tab>
-                    <van-tab title="本季度" name="2"></van-tab>
-                    <van-tab title="本月" name="3"></van-tab>
-                </van-tabs>
-            </div>
-            <div class="flex1 content1" @click="isShow=isShow?false:true">
-                <span style="color:#fff">筛选</span>
-                <span v-show="!isShow" style="margin-left:10px"><img
-                        src="../../assets/images/saleImages/三角形 1@3x.png" /></span>
-                <span v-show="isShow" style="margin-left:10px"><img
-                        src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
-            </div>
-        </div>
-        <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+        <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="changeTab1"></topNav>
         <div class="headBox">
             <panel-group :dotInfo="dotInfo" :salesNumInfo="salesNumInfo" :salesPriceInfo="salesPriceInfo"
                 :salesInfo="salesInfo" @handleClick1="queryTop" />
@@ -68,8 +51,9 @@
 
 <script>
 import saleForm from "../../components/saleForm/index.vue"
+import topNav from "../../components/topNav.vue"
 import PanelGroup from "./components/PanelGroup.vue"
-import { submitTop, queryProvinceSalePriceRate,queryRegionSale,querySectionSale } from "../../api/sales"
+import { submitTop, queryProvinceSalePriceRate, queryRegionSale, querySectionSale } from "../../api/sales"
 import barChart from "./components/BarChart.vue"
 import parCharts from "./components/parCharts.vue"
 import {
@@ -77,7 +61,7 @@ import {
 } from '@/api/home'
 export default {
     name: "",
-    components: { saleForm, PanelGroup, barChart, parCharts },
+    components: { saleForm, PanelGroup, barChart, parCharts,topNav },
     data() {
         return {
             ruleForm: {
@@ -109,11 +93,11 @@ export default {
             chartsData1: [],
             chartsData2: [],
             chartsData3: [],
-            index1:"",
+            index1: "",
         }
     },
     methods: {
-        changeTab1(){
+        changeTab1() {
             this.queryProvinceSalePrice(this.ruleForm);
             this.query1(this.ruleForm);
             this.query2(this.ruleForm);
@@ -131,7 +115,7 @@ export default {
             this.queryMonthSalesPrice();
         },
         async queryTop(id) {
-            this.index1=id;
+            this.index1 = id;
             let res = await submitTop({ ...this.ruleForm, medicineId: id });
             if (res.code == 0) {
                 this.salesInfo = res.data.customerSalesNum[0];
@@ -234,22 +218,6 @@ export default {
     padding: 0 15px;
 }
 
-.title1 {
-    height: 0.733rem;
-
-    .content1 {
-        box-sizing: border-box;
-        width: 50%;
-        justify-content: flex-end;
-        align-items: center;
-
-        img {
-            width: 50%;
-            height: 50%;
-        }
-    }
-}
-
 .chartBox {
     width: 100%;
     box-sizing: border-box;
@@ -295,13 +263,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.title1 {
-    .van-tabs--line {
-        .van-tabs__wrap {
-            height: 0.733rem !important;
-        }
-    }
-}
+
 
 .indexRow {
     .van-tabs__nav--card .van-tab.van-tab--active {

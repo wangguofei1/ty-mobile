@@ -1,31 +1,6 @@
 <template>
   <div>
-    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
-      <div style="width: 50%">
-        <van-tabs
-          v-model="queryType"
-          background="#2b92f9"
-          color="#fff"
-          title-inactive-color="#fff"
-          title-active-color="#fff"
-          @click="getQueryType"
-        >
-          <van-tab title="本年" name="1"></van-tab>
-          <van-tab title="本季度" name="2"></van-tab>
-          <van-tab title="本月" name="3"></van-tab>
-        </van-tabs>
-      </div>
-      <div class="flex1 content1" @click="isShow = isShow ? false : true">
-        <span style="color: #fff">筛选</span>
-        <span v-show="!isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 1@3x.png"
-        /></span>
-        <span v-show="isShow" style="margin-left: 10px"
-          ><img src="../../assets/images/saleImages/三角形 2@3x.png"
-        /></span>
-      </div>
-    </div>
-    <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="getQueryType"></topNav>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="xsBox">
@@ -63,13 +38,14 @@
 </template>
 
 <script>
+import topNav from '../../components/topNav.vue'
 import { queryHospitalSales } from '@/api/salesFlow'
 import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
 import { truncate } from 'fs'
 export default {
   name: 'SalesFlow',
-  components: { saleForm },
+  components: { saleForm, topNav },
   data() {
     return {
       queryType: '1',
@@ -123,7 +99,8 @@ export default {
         query: { hospital: JSON.stringify(item) }
       })
     },
-    getQueryType() {
+    getQueryType(form) {
+      this.queryType = form
       this.saleList = []
       this.ruleForm.page = 1
       this.ruleForm.pageNum = 10
@@ -131,6 +108,7 @@ export default {
     },
     changeForm(form) {
       this.saleList = []
+      console.log(form)
       for (let keys in this.ruleForm) {
         if (form[keys]) {
           this.ruleForm[keys] = form[keys]

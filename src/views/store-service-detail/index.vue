@@ -1,23 +1,6 @@
 <template>
   <div>
-    <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
-      <div style="width: 50%">
-        <van-tabs v-model="queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
-          @click="getQueryType"
-          title-active-color="#fff">
-          <van-tab title="本年" name="1"></van-tab>
-          <van-tab title="本季度" name="2"></van-tab>
-          <van-tab title="本月" name="3"></van-tab>
-        </van-tabs>
-      </div>
-      <div class="flex1 content1" @click="isShow = isShow ? false : true">
-        <span style="color: #fff">筛选</span>
-        <span v-show="!isShow" style="margin-left: 10px"><img
-            src="../../assets/images/saleImages/三角形 1@3x.png" /></span>
-        <span v-show="isShow" style="margin-left: 10px"><img src="../../assets/images/saleImages/三角形 2@3x.png" /></span>
-      </div>
-    </div>
-    <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="getQueryType"></topNav>
     <div class="storeServiceTitle">
       门店服务情况总览
     </div>
@@ -75,14 +58,14 @@
       
 <script>
 import { shopServiceList, shopServiceCharts } from '@/api/home'
-import saleForm from '../../components/saleForm/index.vue'
+import topNav from "../../components/topNav.vue"
 import infoRateChart from './component/infoRateChart.vue'
 import returnRatioChart from './component/returnRatioChart.vue'
 import timeDiffAvgChart from './component/timeDiffAvgChart.vue'
 import eduTimesAvgChart from './component/eduTimesAvgChart.vue'
 export default {
   name: 'storeServiceDetail',
-  components: { saleForm, infoRateChart, returnRatioChart, timeDiffAvgChart, eduTimesAvgChart },
+  components: { topNav, infoRateChart, returnRatioChart, timeDiffAvgChart, eduTimesAvgChart },
   data() {
     return {
       queryType: '1',
