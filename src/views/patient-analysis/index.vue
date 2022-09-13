@@ -44,7 +44,7 @@
                             <div>{{newInfo.num}}</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
-                            <pieCharts :chartData="chartData"></pieCharts>
+                            <pieCharts :chartData="chartData" :color="['#c89479','#f0f2f5']"></pieCharts>
                         </div>
                     </div>
                     <div class="dataBox1 flex1">
@@ -53,7 +53,7 @@
                             <div style="font-size:14px">{{newInfo.sales}}</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
-                            <pieCharts :chartData="chartData"></pieCharts>
+                            <pieCharts :chartData="chartData2" :color="['#c89479','#f0f2f5']"></pieCharts>
                         </div>
                     </div>
                     <div class="dataBox">
@@ -89,7 +89,7 @@
                             <div>{{oldInfo.num}}</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
-                            <pieCharts :chartData="chartData" :color="['#4a95e8','#f0f2f5']"></pieCharts>
+                            <pieCharts :chartData="chartData3" :color="['#4a95e8','#f0f2f5']"></pieCharts>
                         </div>
                     </div>
                     <div class="dataBox1 flex1">
@@ -98,7 +98,7 @@
                             <div style="font-size:14px">{{oldInfo.sales}}</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
-                            <pieCharts :chartData="chartData" :color="['#4a95e8','#f0f2f5']"></pieCharts>
+                            <pieCharts :chartData="chartData4" :color="['#4a95e8','#f0f2f5']"></pieCharts>
                         </div>
                     </div>
                     <div class="dataBox">
@@ -165,13 +165,16 @@ export default {
             },
             isShow: false,
             chartData: [
-                { value: 88, name: '' },
-                { value: 12, name: '' }
+            ],
+            chartData2: [
+            ],
+            chartData3: [
+            ],
+            chartData4: [
             ],
             dataList: [],
             newInfo: [],
             oldInfo: [],
-            // chartData:[],
         }
     },
     methods: {
@@ -194,6 +197,13 @@ export default {
             this.newInfo = res.data.new
             this.oldInfo = res.data.old
             // console.log(this.newInfo,this.oldInfo);
+            console.log(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1);
+            console.log(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1);
+            this.chartData=[{name:'',value:res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1},{name:'',value:100-(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1)}]
+            this.chartData2=[{name:'',value:res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1},{name:'',value:100-(res.data.new.salesRate.substr(0,res.data.new.salesRate.length - 1)*1)}]
+            this.chartData3=[{name:'',value:res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1},{name:'',value:100-(res.data.old.numRate.substr(0,res.data.old.numRate.length - 1)*1)}]
+            this.chartData4=[{name:'',value:res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1},{name:'',value:100-(res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1)}]
+
         },
         async queryPatientStopReasonRange() {
             const res = await queryPatientStopReasonRange(this.ruleForm)

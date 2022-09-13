@@ -195,7 +195,7 @@ export default {
             this.regionName=selectedOptions[0].name;
             this.sectionName=selectedOptions[1].name;
             this.provinceName=selectedOptions[2].name;
-            queryShop({ regionId: this.ruleForm.regionId * 1, page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId * 1, provinceId: this.ruleForm.provinceId }).then((res) => {
+            queryShop({ regionId: this.ruleForm.regionId, page: 1, pageSize: 100, sectionId: this.ruleForm.sectionId, provinceId: this.ruleForm.provinceId}).then((res) => {
                 if (res.code == 0) {
                     this.shopList = res.data.data;
                     this.columns = res.data.data.map(item => item.name);
