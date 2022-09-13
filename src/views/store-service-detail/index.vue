@@ -109,10 +109,11 @@ export default {
       this.timeDiffAvg = timeDiffAvg
       this.shopList = shopList
     },
-    async getQueryType() {
+    async getQueryType(form) {
+      this.queryType = form
       this.saleList = []
-      const res = await shopServiceCharts({queryType: this.queryType})
-      const result = await shopServiceList({queryType: this.queryType})
+      const res = await shopServiceCharts({queryType: this.queryType, page: 1, pageSize: 5})
+      const result = await shopServiceList({queryType: this.queryType, page: 1, pageSize: 5})
       let { data: shopList } = result.data
       let { returnRatio, infoRate, eduTimesAvg, timeDiffAvg } = res.data;
       this.returnRatio = returnRatio

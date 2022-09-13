@@ -1,5 +1,5 @@
 <template>
-    <div id="chartBox1" ref="chartBox1" style="height: 360px; width: 100%" />
+    <div id="chartBox1" ref="chartBox1" style="height: 360px; width: 360px" />
 </template>
   
 <script>
@@ -21,6 +21,11 @@ export default {
     mounted() {
         this.initChart();
     },
+    watch: {
+        chartData: function () {
+            this.initChart()
+        }
+    },
     beforeDestroy() {
         if (!this.chart) {
             return;
@@ -31,6 +36,7 @@ export default {
     methods: {
         initChart() {
             const charts1 = echarts.init(document.getElementById('chartBox1'), 'macarons')
+            charts1.clear();
             let halfIndex = parseInt(this.chartData.length / 2) + 1
             let arr1 = this.chartData.slice(0, halfIndex)
             let arr2 = this.chartData.slice(halfIndex, this.chartData.length)

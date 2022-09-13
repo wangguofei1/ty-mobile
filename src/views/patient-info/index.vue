@@ -164,8 +164,6 @@ export default {
       })
     },
     changeForm(form) {
-      console.log(form)
-      form.queryType = this.ruleForm.queryType
       form.page = this.page
       form.pageNum = this.pageNum
       this.queryHospitalSales(form)

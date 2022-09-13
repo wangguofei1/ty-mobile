@@ -205,19 +205,6 @@ export default {
             queryType: this.queryType,
         })
     },
-    watch: {
-        'ruleForm.queryType': function (value) {
-            this.queryProvinceSalePrice({
-                queryType: value * 1,
-            });
-            this.query1({
-                queryType: value * 1,
-            });
-            this.query2({
-                queryType: value * 1,
-            })
-        }
-    }
 }
 </script>
 

@@ -51,9 +51,8 @@
 </template>
   
   <script>
-import { getPatientStructure } from '@/api/salesFlow'
 import topNav from "../../components/topNav.vue"
-import saleForm from '../../components/saleForm/index.vue'
+import { getPatientStructure } from '@/api/salesFlow'
 import * as echarts from 'echarts'
 import _ from 'lodash'
 require('echarts/theme/macarons') // echarts theme
@@ -65,7 +64,7 @@ export default {
       active: 1,
       queryType: '1',
       ruleForm: {
-        year: '',
+        year: '2022',
         startMonth: '',
         endMonth: '',
         productId: 127,
@@ -88,7 +87,8 @@ export default {
     this.getPatientStructure({ queryType: this.queryType })
   },
   methods: {
-    getQueryType() {
+    getQueryType(form) {
+      this.queryType = form
       this.getPatientStructure({ queryType: this.queryType })
     },
     changeForm(form) {
@@ -96,6 +96,9 @@ export default {
         if (form[keys]) {
           this.ruleForm[keys] = form[keys]
         }
+      }
+      if (this.ruleForm.queryType) {
+        delete this.ruleForm.queryType
       }
       this.getPatientStructure(this.ruleForm)
     },

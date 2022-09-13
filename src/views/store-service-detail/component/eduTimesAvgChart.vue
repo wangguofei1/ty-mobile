@@ -1,5 +1,5 @@
 <template>
-    <div id="chartBox4" ref="chartBox4" style="height: 360px; width: 100%" />
+    <div id="chartBox4" ref="chartBox4" style="height: 360px; width: 360px" />
 </template>
   
 <script>
@@ -21,6 +21,11 @@ export default {
     mounted() {
         this.initChart();
     },
+    watch: {
+        chartData: function () {
+            this.initChart()
+        }
+    },
     beforeDestroy() {
         if (!this.chart) {
             return;
@@ -31,6 +36,7 @@ export default {
     methods: {
         initChart() {
             const charts4 = echarts.init(document.getElementById("chartBox4"), "macarons")
+            charts4.clear();
             const option = {
                 tooltip: {
                     trigger: "item"

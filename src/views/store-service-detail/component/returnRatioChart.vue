@@ -1,5 +1,5 @@
 <template>
-    <div id="chartBox2" ref="chartBox2" style="height: 360px; width: 100%" />
+    <div id="chartBox2" ref="chartBox2" style="height: 360px; width: 360px" />
 </template>
   
 <script>
@@ -17,6 +17,11 @@ export default {
         return {
             chart: null,
         };
+    },
+    watch: {
+        chartData: function () {
+            this.initCharts2()
+        }
     },
     mounted() {
         this.initCharts2();
@@ -121,6 +126,7 @@ export default {
                 series: series
             }
             const charts2 = echarts.init(document.getElementById("chartBox2"), "macarons")
+            charts2.clear();
             charts2.setOption(option)
         },
     },

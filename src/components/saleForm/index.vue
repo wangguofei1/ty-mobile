@@ -150,10 +150,7 @@ export default {
     },
     props: {
         ruleForm: {
-            type: Object,
-            default: {
-                queryType: 1
-            }
+            type: Object
         },
         utilsShow: {
             default: ''
