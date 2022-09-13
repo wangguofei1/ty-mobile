@@ -39,16 +39,16 @@ export default {
           xsText: '销售流向',
           url: 'SalesFlow'
         },
-        {
-          xsImg: require('@/assets/images/xsImg3.png'),
-          xsText: '指标达成率',
-          url: 'IndexAchievementRate'
-        },
-        {
-          xsImg: require('@/assets/images/xsImg4.png'),
-          xsText: '业务员销售',
-          url: 'SalesmanSales'
-        },
+        // {
+        //   xsImg: require('@/assets/images/xsImg3.png'),
+        //   xsText: '指标达成率',
+        //   url: 'IndexAchievementRate'
+        // },
+        // {
+        //   xsImg: require('@/assets/images/xsImg4.png'),
+        //   xsText: '业务员销售',
+        //   url: 'SalesmanSales'
+        // },
         {
           xsImg: require('@/assets/images/xsImg5.png'),
           xsText: '门店销售情况',
@@ -71,11 +71,11 @@ export default {
           xsText: '患者结构分析',
           url: 'PatientStructure'
         },
-        // {
-        //   xsImg: require('@/assets/images/xsImg9.png'),
-        //   xsText: '门店服务情况',
-        //   url: 'StoreDetails'
-        // }
+        {
+          xsImg: require('@/assets/images/xsImg9.png'),
+          xsText: '门店服务情况',
+          url: 'StoreServiceDetail'
+        }
       ]
     }
   },

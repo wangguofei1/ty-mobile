@@ -3,11 +3,12 @@
     <div class="flex1 title1" style="background: #2b92f9; padding: 7px 0">
       <div style="width: 50%">
         <van-tabs
-          v-model="ruleForm.queryType"
+          v-model="queryType"
           background="#2b92f9"
           color="#fff"
           title-inactive-color="#fff"
           title-active-color="#fff"
+          @click="getQueryType"
         >
           <van-tab title="本年" name="1"></van-tab>
           <van-tab title="本季度" name="2"></van-tab>
@@ -25,6 +26,7 @@
       </div>
     </div>
     <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
+    <!-- <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad"> -->
     <div class="xsBox">
       <div class="xsItem" v-for="(item, index) in saleList" :key="index" @click="goDetail(item)">
         <div class="xsTitle">
@@ -68,6 +70,7 @@
         </div>
       </div>
     </div>
+    <!-- </van-list> -->
   </div>
 </template>
       
@@ -80,8 +83,8 @@ export default {
   components: { saleForm },
   data() {
     return {
+      queryType: '1',
       ruleForm: {
-        queryType: '1',
         year: '2022',
         startMonth: '',
         endMonth: '',
@@ -90,10 +93,10 @@ export default {
         sectionId: '',
         provinceId: '',
         shopId: ''
+        // page: 1,
+        // pageNum: 10,
       },
       isShow: false,
-      //   page: 1,
-      //   pageNum: 10,
       loading: false,
       saleList: [],
       finished: false,
@@ -105,12 +108,19 @@ export default {
     this.queryShopSaleAnalysis(this.ruleForm)
   },
   methods: {
+    // 年度季度筛选
+    getQueryType() {
+      this.saleList = []
+      //   this.ruleForm.page = 1
+      //   this.ruleForm.pageNum = 10
+      this.queryShopSaleAnalysis({queryType: this.queryType})
+    },
     // 医院流向数据
     queryShopSaleAnalysis(form) {
       var that = this
       queryShopSaleAnalysis(form).then(res => {
         if (res.code == 0) {
-          that.saleList = res.data
+          that.saleList = that.saleList.concat(res.data)
         }
       })
     },
@@ -122,19 +132,21 @@ export default {
     },
     changeForm(form) {
       this.saleList = []
-      //   form.queryType = this.ruleForm.queryType
-      form.page = this.page
-      form.pageNum = this.pageNum
-      this.queryShopSaleAnalysis(form)
+      //   this.ruleForm.page = 1
+      //   this.ruleForm.pageNum = 10
+      for (let keys in this.ruleForm) {
+        if (form[keys]) {
+          this.ruleForm[keys] = form[keys]
+        }
+      }
+      this.queryShopSaleAnalysis(this.ruleForm)
     }
     // onLoad() {
     //   setTimeout(() => {
     //     this.page++
-    //     this.queryShopSaleAnalysis({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
-    //     // 加载状态结束
+    //     this.queryShopSaleAnalysis(this.ruleForm)
     //     this.loading = false
 
-    //     // 数据全部加载完成
     //     if (this.saleList.length >= this.count) {
     //       this.finished = true
     //     }

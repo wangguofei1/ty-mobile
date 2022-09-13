@@ -76,6 +76,14 @@ export const constantRouterMap = [{
     keepAlive: false
   }
 }, {
+  path: '/storeServiceDetail ',
+  name: 'StoreServiceDetail',
+  component: () => import('@/views/store-service-detail/index'),
+  meta: {
+    title: '门店服务详情',
+    keepAlive: false
+  }
+}, {
   path: '/patientInfo',
   name: 'PatientInfo',
   component: () => import('@/views/patient-info/index'),
