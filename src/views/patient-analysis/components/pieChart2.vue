@@ -82,7 +82,8 @@ export default {
         this.initChart();
     },
     watch:{
-        chartData(){
+        chartData(value){
+            console.log(value);
             this.initChart();
         }
     }

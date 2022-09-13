@@ -109,13 +109,16 @@ export default {
             chartsData1: [],
             chartsData2: [],
             chartsData3: [],
+            index1:"",
         }
     },
     methods: {
         changeTab1(){
-            this.queryProvinceSalePrice(form);
-            this.query1(form);
-            this.query2(form);
+            this.queryProvinceSalePrice(this.ruleForm);
+            this.query1(this.ruleForm);
+            this.query2(this.ruleForm);
+            this.queryTop(this.index1);
+            this.queryMonthSalesPrice();
         },
         changeTab() {
             this.queryMonthSalesPrice();
@@ -124,19 +127,22 @@ export default {
             this.queryProvinceSalePrice(form);
             this.query1(form);
             this.query2(form);
+            this.queryTop(this.index1);
+            this.queryMonthSalesPrice();
         },
         async queryTop(id) {
-            let res = await submitTop({ queryType: this.ruleForm.queryType * 1, medicineId: id });
+            this.index1=id;
+            let res = await submitTop({ ...this.ruleForm, medicineId: id });
             if (res.code == 0) {
-                this.salesInfo = res.data.customerSalesPrice[0];
+                this.salesInfo = res.data.customerSalesNum[0];
                 this.salesNumInfo = res.data.salesNum[0];
                 this.salesPriceInfo = res.data.salesPrice[0];
-                this.dotInfo = res.data.oldCustomerSalesPrice[0];
+                this.dotInfo = res.data.oldCustomerSalesNum[0];
             }
         },
         queryMonthSalesPrice() {
             queryMonthSalesPrice({
-                queryType: this.ruleForm.queryType,
+                ...this.ruleForm,
                 type: this.tabIndex5
             }).then((res) => {
                 if (res.code == 0) {

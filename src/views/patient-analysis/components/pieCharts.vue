@@ -55,6 +55,11 @@ export default {
     },
     mounted(){
         this.initChart();
+    },
+    watch:{
+        chartData(value){
+            this.initChart();
+        }
     }
 }
 </script>
