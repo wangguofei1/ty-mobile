@@ -39,7 +39,8 @@
         methods:{
             changeForm(){
                 let form = JSON.parse(JSON.stringify(this.ruleForm));
-                this.$emit("changeForm",form)
+                this.$emit("changeForm",form);
+                this.isShow=false;
             },
             changeTab1(){
                 this.$emit('changeTab', this.queryType)
@@ -83,12 +84,12 @@
 
 .popup1 {
     .van-overlay {
-        top: 37px;
+        top: 43px;
         height: 100%;
     }
 
     .formBox[data-v-2184f27e] {
-        margin-top: 37px;
+        margin-top: 43px;
     }
 }
 

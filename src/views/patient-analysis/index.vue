@@ -231,17 +231,6 @@ export default {
     }
 }
 
-.popup1 {
-    .van-overlay {
-        top: 30px;
-        height: 100%;
-    }
-
-    .formBox[data-v-2184f27e] {
-        margin-top: 30px;
-    }
-}
-
 .headBox {
     width: 100%;
     box-sizing: border-box;

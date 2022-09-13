@@ -22,8 +22,8 @@
                 </div>
                 <div style="padding: 5px">
                     <bar-chart v-if="medicine1Data.length > 0||medicine3Data.length > 0"
-                        :medicine1Data="tabIndex5=='1'?medicine1Data:medicine3Data"
-                        :medicine2Data="tabIndex5=='1'?medicine2Data:medicine4Data" />
+                        :medicine1Data="tabIndex5=='2'?medicine1Data:medicine3Data"
+                        :medicine2Data="tabIndex5=='2'?medicine2Data:medicine4Data" />
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@ export default {
             medicine2Data: [],
             medicine3Data: [],
             medicine4Data: [],
-            tabIndex5: '',
+            tabIndex5: '1',
             chartsType: '1',
             chartsData1: [],
             chartsData2: [],
@@ -205,6 +205,19 @@ export default {
             queryType: this.queryType,
         })
     },
+    watch: {
+        'ruleForm.queryType': function (value) {
+            this.queryProvinceSalePrice({
+                queryType: value * 1,
+            });
+            this.query1({
+                queryType: value * 1,
+            });
+            this.query2({
+                queryType: value * 1,
+            })
+        }
+    }
 }
 </script>
 
@@ -266,8 +279,6 @@ export default {
 }
 </style>
 <style lang="scss">
-
-
 .indexRow {
     .van-tabs__nav--card .van-tab.van-tab--active {
         color: #3aa0ff;
