@@ -105,7 +105,7 @@ export default {
     }
   },
   created() {
-    this.queryShopSaleAnalysis(this.ruleForm)
+    this.queryShopSaleAnalysis({queryType: this.queryType})
   },
   methods: {
     // 年度季度筛选
