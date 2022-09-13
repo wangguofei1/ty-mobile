@@ -2,7 +2,7 @@
     <div>
         <div class="flex1 title1" style="background:#2b92f9; padding: 7px 0">
             <div style="width:50%">
-                <van-tabs v-model="ruleForm.queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
+                <van-tabs v-model="queryType" background="#2b92f9" color="#fff" title-inactive-color="#fff"
                     title-active-color="#fff" @change="changeTab1">
                     <van-tab title="本年" name="1"></van-tab>
                     <van-tab title="本季度" name="2"></van-tab>
@@ -33,14 +33,16 @@
         data(){
             return{
                 isShow:false,
+                queryType: 1
             }
         },  
         methods:{
-            changeForm(form){
+            changeForm(){
+                let form = JSON.parse(JSON.stringify(this.ruleForm));
                 this.$emit("changeForm",form)
             },
             changeTab1(){
-                this.$emit('changeTab')
+                this.$emit('changeTab', this.queryType)
             }
         },
         props:['ruleForm'],
