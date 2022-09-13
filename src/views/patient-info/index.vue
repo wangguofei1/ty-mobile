@@ -1,39 +1,39 @@
 <template>
   <div>
-    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab=""></topNav>
+    <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="getQueryType"></topNav>
     <!-- 信息卡 -->
     <div class="customer-info">
       <div class="info-card" style="background-color: #2d8effff">
         <p style="font-size: 14px; margin-top: 5px">患者总数</p>
-        <p style="font-size: 20px">123112</p>
+        <p style="font-size: 20px">{{ num.value }}人</p>
         <div style="background: linear-gradient(to left, #2eccfa, white, #2eccfa); height: 1px"></div>
-        <p style="font-size: 16px">同比：35.56%</p>
-        <p style="font-size: 16px">环比：35.56%</p>
+        <p style="font-size: 16px">同比：{{ num.yoy }}</p>
+        <p style="font-size: 16px">环比：{{ num.mom }}</p>
       </div>
       <div class="info-card" style="background-color: rgba(0, 186, 173, 1)">
-        <p style="font-size: 14px; margin-top: 5px">患者总数</p>
-        <p style="font-size: 20px">123112</p>
+        <p style="font-size: 14px; margin-top: 5px">患者DOT</p>
+        <p style="font-size: 20px">{{ dot.value }}月</p>
         <div
           style="background: linear-gradient(to left, rgba(0, 186, 173, 1), white, rgba(0, 186, 173, 1)); height: 1px"
         ></div>
-        <p style="font-size: 16px">同比：35.56%</p>
-        <p style="font-size: 16px">环比：35.56%</p>
+        <p style="font-size: 16px">同比：{{ dot.yoy }}</p>
+        <p style="font-size: 16px">环比：{{ dot.mom }}</p>
       </div>
       <div class="info-card" style="background-color: rgba(255, 141, 26, 1)">
-        <p style="font-size: 14px; margin-top: 5px">患者总数</p>
-        <p style="font-size: 20px">123112</p>
+        <p style="font-size: 14px; margin-top: 5px">新增患者数</p>
+        <p style="font-size: 20px">{{ newNum.value }}人</p>
         <div
           style="background: linear-gradient(to left, rgba(255, 141, 26, 1), white, rgba(255, 141, 26, 1)); height: 1px"
         ></div>
-        <p style="font-size: 16px">同比：35.56%</p>
-        <p style="font-size: 16px">环比：35.56%</p>
+        <p style="font-size: 16px">同比：{{ newNum.yoy }}</p>
+        <p style="font-size: 16px">环比：{{ newNum.mom }}</p>
       </div>
       <div class="info-card" style="background-color: #be81f7">
-        <p style="font-size: 14px; margin-top: 5px">患者总数</p>
-        <p style="font-size: 20px">123112</p>
+        <p style="font-size: 14px; margin-top: 5px">患者脱落数</p>
+        <p style="font-size: 20px">{{ stopNum.value }}人</p>
         <div style="background: linear-gradient(to left, #be81f7, white, #be81f7); height: 1px"></div>
-        <p style="font-size: 16px">同比：35.56%</p>
-        <p style="font-size: 16px">环比：35.56%</p>
+        <p style="font-size: 16px">同比：{{ stopNum.yoy }}</p>
+        <p style="font-size: 16px">环比：{{ stopNum.mom }}</p>
       </div>
     </div>
 
@@ -42,143 +42,333 @@
       <div class="chart-title">患者数据统计</div>
       <div style="font-size: 12px">
         <van-tabs v-model="activeChart" color="#2D8EFFFF">
-          <van-tab title="患者数量">
-            <div class="barChart">
-              <div class="indexRow flex1" style="justify-content: space-between">
-                <div class="flex1"></div>
-              </div>
-              <div style="padding: 5px">
-                <bar-chart
-                  v-if="medicine1Data.length > 0"
-                  :medicine1Data="medicine1Data"
-                  :medicine2Data="medicine2Data"
-                />
-              </div>
-            </div>
-          </van-tab>
-          <van-tab title="患者DOT">
-            <div class="barChart">
-              <div class="indexRow flex1" style="justify-content: space-between">
-                <div class="flex1"></div>
-              </div>
-              <div style="padding: 5px">
-                <bar-chart
-                  v-if="medicine1Data.length > 0"
-                  :medicine1Data="medicine1Data"
-                  :medicine2Data="medicine2Data"
-                />
-              </div>
-            </div>
-          </van-tab>
-          <van-tab title="新增患者">
-            <div class="barChart">
-              <div class="indexRow flex1" style="justify-content: space-between">
-                <div class="flex1"></div>
-              </div>
-              <div style="padding: 5px">
-                <bar-chart
-                  v-if="medicine1Data.length > 0"
-                  :medicine1Data="medicine1Data"
-                  :medicine2Data="medicine2Data"
-                />
-              </div>
-            </div>
-          </van-tab>
-          <van-tab title="患者脱落数量">
-            <div class="barChart">
-              <div class="indexRow flex1" style="justify-content: space-between">
-                <div class="flex1"></div>
-              </div>
-              <div style="padding: 5px">
-                <bar-chart
-                  v-if="medicine1Data.length > 0"
-                  :medicine1Data="medicine1Data"
-                  :medicine2Data="medicine2Data"
-                />
-              </div>
-            </div>
-          </van-tab>
+          <van-tab title="患者数量"> </van-tab>
+          <van-tab title="患者DOT"> </van-tab>
+          <van-tab title="新增患者"> </van-tab>
+          <van-tab title="患者脱落数量"> </van-tab>
         </van-tabs>
+        <div class="barChart" v-show="activeChart == 0">
+          <div class="indexRow flex1" style="justify-content: space-between">
+            <div class="flex1"></div>
+          </div>
+          <div style="padding: 5px">
+            <div id="chart1" style="width: 338px; height: 240px"></div>
+          </div>
+        </div>
+        <div class="barChart" v-show="activeChart == 1">
+          <div class="indexRow flex1" style="justify-content: space-between">
+            <div class="flex1"></div>
+          </div>
+          <div style="padding: 5px">
+            <div id="chart2" style="width: 338px; height: 240px"></div>
+          </div>
+        </div>
+        <div class="barChart" v-show="activeChart == 2">
+          <div class="indexRow flex1" style="justify-content: space-between">
+            <div class="flex1"></div>
+          </div>
+          <div style="padding: 5px">
+            <div id="chart4" style="width: 338px; height: 240px"></div>
+          </div>
+        </div>
+        <div class="barChart" v-show="activeChart == 3">
+          <div class="indexRow flex1" style="justify-content: space-between">
+            <div class="flex1"></div>
+          </div>
+          <div style="padding: 5px">
+            <div id="chart3" style="width: 338px; height: 240px"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
   
   <script>
-import topNav from "../../components/topNav.vue"
-import { queryHospitalSales } from '@/api/salesFlow'
+import topNav from '../../components/topNav.vue'
+import { queryPatientAnalysis } from '@/api/system'
 import hosImg from '@/assets/images/hospitalImg.png'
-import barChart from './components/BarChart.vue'
+import * as echarts from 'echarts'
+import _ from 'lodash'
 export default {
   name: 'SalesFlow',
-  components: { topNav, barChart },
+  components: { topNav },
   data() {
     return {
+      queryType: '1',
       ruleForm: {
-        queryType: '1',
         year: '',
         startMonth: '',
         endMonth: '',
-        productId: 127,
+        productId: '',
         regionId: '',
         sectionId: '',
         provinceId: '',
         shopId: ''
       },
-      isShow: false,
-      page: 1,
-      pageNum: 10,
-      loading: false,
       saleList: [],
-      finished: false,
-      count: 0,
-      hosImg: hosImg,
-      medicine1Data: [6, 5, 8, 6, 7, 9, 8, 5, 4, 3, 2, 1],
-      medicine2Data: [10, 9, 8, 7, 5, 4, 3, 4, 5, 5, 6, 7],
+      num: {},
+      newNum: {},
+      dot: {},
+      stopNum: {},
+      nameList: [],
+      numList: [],
+      dotList: [],
+      stopNumList: [],
+      newNumList: [],
       activeChart: 0
     }
   },
   created() {
-    this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
+    this.queryHospitalSales({ queryType: this.queryType, page: this.page, pageNum: this.pageNum })
+  },
+  watch: {
+    // activeChart: function () {
+    //   this.initChart2()
+    //   this.initChart3()
+    //   this.initChart4()
+    // }
   },
   methods: {
+    getQueryType(form) {
+      this.queryType = form
+      this.saleList = []
+      this.queryHospitalSales({ queryType: this.queryType })
+    },
     // 医院流向数据
     queryHospitalSales(form) {
       var that = this
-      queryHospitalSales(form).then(res => {
+      queryPatientAnalysis(form).then(res => {
         if (res.code == 0) {
-          that.count = res.data.count
-          that.saleList = that.saleList.concat(res.data.data)
+          this.num = res.data.num
+          this.newNum = res.data.newNum
+          this.dot = res.data.dot
+          this.stopNum = res.data.stopNum
+          this.nameList = []
+          this.numList = []
+          this.dotList = []
+          this.stopNumList = []
+          this.newNumList = []
+          res.data.list.forEach(item => {
+            this.nameList.push(item.name)
+            this.numList.push(item.num)
+            this.dotList.push(item.dot)
+            this.stopNumList.push(item.stopNum)
+            this.newNumList.push(item.newNum)
+          })
+          this.initChart1()
+          this.initChart2()
+          this.initChart3()
+          this.initChart4()
         }
       })
     },
-    // 跳到详情页
-    xsGoDetail(item) {
-      this.$router.push({
-        name: 'HospitalDataFlow',
-        query: { hospital: JSON.stringify(item) }
-      })
-    },
     changeForm(form) {
-      this.saleList = []
       console.log(form)
       form.queryType = this.ruleForm.queryType
       form.page = this.page
       form.pageNum = this.pageNum
       this.queryHospitalSales(form)
     },
-    onLoad() {
-      setTimeout(() => {
-        this.page++
-        this.queryHospitalSales({ queryType: this.ruleForm.queryType, page: this.page, pageNum: this.pageNum })
-        // 加载状态结束
-        this.loading = false
-
-        // 数据全部加载完成
-        if (this.saleList.length >= this.count) {
-          this.finished = true
-        }
-      }, 1000)
+    initChart1() {
+      this.chart = echarts.init(document.getElementById('chart1'), 'macarons')
+      this.chart.setOption({
+        title: {
+          top: 10,
+          text: '单位（人）',
+          textStyle: {
+            fontSize: 13,
+            color: 'rgba(166, 166, 166, 1)'
+          }
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          top: 10,
+          icon: 'rect',
+          itemWidth: 14,
+          itemHeight: 5,
+          itemGap: 13,
+          right: '4%',
+          textStyle: {
+            fontSize: 12,
+            color: 'rgba(96, 98, 102, 1)'
+          }
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            data: this.nameList
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '患者数量',
+            type: 'line',
+            data: this.numList,
+            itemStyle: {
+              color: 'rgba(58, 160, 255, 1)'
+            }
+          }
+        ]
+      })
+    },
+    initChart2() {
+      this.chart = echarts.init(document.getElementById('chart2'), 'macarons')
+      this.chart.setOption({
+        title: {
+          top: 10,
+          text: '单位（人）',
+          textStyle: {
+            fontSize: 13,
+            color: 'rgba(166, 166, 166, 1)'
+          }
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          top: 10,
+          icon: 'rect',
+          itemWidth: 14,
+          itemHeight: 5,
+          itemGap: 13,
+          right: '4%',
+          textStyle: {
+            fontSize: 12,
+            color: 'rgba(96, 98, 102, 1)'
+          }
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            data: this.nameList
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '患者DOT',
+            type: 'line',
+            data: this.dotList,
+            itemStyle: {
+              color: 'rgba(58, 160, 255, 1)'
+            }
+          }
+        ]
+      })
+    },
+    initChart3() {
+      this.chart = echarts.init(document.getElementById('chart3'), 'macarons')
+      this.chart.setOption({
+        title: {
+          top: 10,
+          text: '单位（人）',
+          textStyle: {
+            fontSize: 13,
+            color: 'rgba(166, 166, 166, 1)'
+          }
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          top: 10,
+          icon: 'rect',
+          itemWidth: 14,
+          itemHeight: 5,
+          itemGap: 13,
+          right: '4%',
+          textStyle: {
+            fontSize: 12,
+            color: 'rgba(96, 98, 102, 1)'
+          }
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            data: this.nameList
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '新增患者',
+            type: 'line',
+            data: this.newNumList,
+            itemStyle: {
+              color: 'rgba(58, 160, 255, 1)'
+            }
+          }
+        ]
+      })
+    },
+    initChart4() {
+      this.chart = echarts.init(document.getElementById('chart4'), 'macarons')
+      this.chart.setOption({
+        title: {
+          top: 10,
+          text: '单位（人）',
+          textStyle: {
+            fontSize: 13,
+            color: 'rgba(166, 166, 166, 1)'
+          }
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          top: 10,
+          icon: 'rect',
+          itemWidth: 14,
+          itemHeight: 5,
+          itemGap: 13,
+          right: '4%',
+          textStyle: {
+            fontSize: 12,
+            color: 'rgba(96, 98, 102, 1)'
+          }
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            data: this.nameList
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '患者脱落数量',
+            type: 'line',
+            data: this.stopNumList,
+            itemStyle: {
+              color: 'rgba(58, 160, 255, 1)'
+            }
+          }
+        ]
+      })
     }
   }
 }
@@ -307,7 +497,7 @@ export default {
   overflow-y: hidden;
   white-space: nowrap;
 
-  .info-card { 
+  .info-card {
     width: 140px;
     height: 165px;
     margin: 17px 10px 20px 10px;

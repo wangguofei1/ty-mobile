@@ -50,12 +50,12 @@
 </template>
       
 <script>
-   import topNav from "../../components/topNav.vue"
+import topNav from '../../components/topNav.vue'
 import { queryShopSaleAnalysis } from '@/api/salesFlow'
 import hosImg from '@/assets/images/hospitalImg.png'
 export default {
   name: 'StoreSales',
-  components: { topNav},
+  components: { topNav },
   data() {
     return {
       queryType: '1',
@@ -80,15 +80,16 @@ export default {
     }
   },
   created() {
-    this.queryShopSaleAnalysis({queryType: this.queryType})
+    this.queryShopSaleAnalysis({ queryType: this.queryType })
   },
   methods: {
     // 年度季度筛选
-    getQueryType() {
+    getQueryType(form) {
+      this.queryType = form
       this.saleList = []
       //   this.ruleForm.page = 1
       //   this.ruleForm.pageNum = 10
-      this.queryShopSaleAnalysis({queryType: this.queryType})
+      this.queryShopSaleAnalysis({ queryType: this.queryType })
     },
     // 医院流向数据
     queryShopSaleAnalysis(form) {
