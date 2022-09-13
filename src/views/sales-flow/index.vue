@@ -26,37 +26,39 @@
       </div>
     </div>
     <saleForm v-show="isShow" :ruleForm="ruleForm" @changeForm="changeForm"></saleForm>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div class="xsBox">
-        <div class="xsItem" v-for="(item, index) in saleList" :key="index">
-          <div class="xsTitle">
-            <img class="xsImg" :src="hosImg" />
-            <div class="xsText">{{ item.hosptailName }}</div>
-            <div @click="xsGoDetail(item)" class="xsGoDetail">
-              数据流向<van-icon style="margin-left: 5px" name="arrow" />
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <div class="xsBox">
+          <div class="xsItem" v-for="(item, index) in saleList" :key="index">
+            <div class="xsTitle">
+              <img class="xsImg" :src="hosImg" />
+              <div class="xsText">{{ item.hosptailName }}</div>
+              <div @click="xsGoDetail(item)" class="xsGoDetail">
+                数据流向<van-icon style="margin-left: 5px" name="arrow" />
+              </div>
             </div>
-          </div>
-          <div class="xsContent">
-            <div class="xsNumBox">
-              <div>销售数量（盒）</div>
-              <div class="yeFont">{{ item.currSaleNum }}</div>
+            <div class="xsContent">
+              <div class="xsNumBox">
+                <div>销售数量（盒）</div>
+                <div class="yeFont">{{ item.currSaleNum }}</div>
+              </div>
+              <div class="xsNumBox1">
+                <div>销售金额（元）</div>
+                <div class="yeFont">{{ item.currSalePrice }}</div>
+              </div>
             </div>
-            <div class="xsNumBox1">
-              <div>销售金额（元）</div>
-              <div class="yeFont">{{ item.currSalePrice }}</div>
-            </div>
-          </div>
-          <div class="xsFoot">
-            <div class="xsFootBox">
-              <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }}</span>
-            </div>
-            <div class="xsFootBox1">
-              <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }}</span>
+            <div class="xsFoot">
+              <div class="xsFootBox">
+                <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }}</span>
+              </div>
+              <div class="xsFootBox1">
+                <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </van-list>
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -64,6 +66,7 @@
 import { queryHospitalSales } from '@/api/salesFlow'
 import saleForm from '../../components/saleForm/index.vue'
 import hosImg from '@/assets/images/hospitalImg.png'
+import { truncate } from 'fs'
 export default {
   name: 'SalesFlow',
   components: { saleForm },
@@ -74,7 +77,7 @@ export default {
         year: '',
         startMonth: '',
         endMonth: '',
-        productId: 127,
+        productId: '',
         regionId: '',
         sectionId: '',
         provinceId: '',
@@ -86,26 +89,31 @@ export default {
       loading: false,
       saleList: [],
       finished: false,
-      count: 0,
-      hosImg: hosImg
+      hosImg: hosImg,
+      isLoad: false,
+      refreshing: false
     }
   },
   created() {
-    this.queryHospitalSales({
-      queryType: this.queryType,
-      page: this.ruleForm.page,
-      pageNum: this.ruleForm.pageNum
-    })
+    // this.queryHospitalSales({
+    //   queryType: this.queryType,
+    //   page: 1,
+    //   pageNum: 10
+    // })
   },
   methods: {
     // 医院流向数据
     queryHospitalSales(form) {
       var that = this
+      this.loading = true
       queryHospitalSales(form).then(res => {
-        if (res.code == 0) {
-          that.count = res.data.count
+        if (res.data.data.length > 0) {
+          that.ruleForm.page++
           that.saleList = that.saleList.concat(res.data.data)
+        } else {
+          this.finished = true
         }
+        this.loading = false
       })
     },
     // 跳到详情页
@@ -132,18 +140,23 @@ export default {
       this.ruleForm.pageNum = 10
       this.queryHospitalSales(this.ruleForm)
     },
+    onRefresh() {
+      this.saleList = []
+      this.ruleForm.page = 1
+      this.refreshing = false
+      this.onLoad()
+    },
     onLoad() {
-      setTimeout(() => {
-        this.ruleForm.page++
+      if (this.isLoad) {
         this.queryHospitalSales(this.ruleForm)
-        // 加载状态结束
-        this.loading = false
-
-        // 数据全部加载完成
-        if (this.saleList.length >= this.count) {
-          this.finished = true
-        }
-      }, 1000)
+      } else {
+        this.queryHospitalSales({
+          queryType: this.queryType,
+          page: 1,
+          pageNum: 10
+        })
+        this.isLoad = true
+      }
     }
   }
 }
@@ -152,7 +165,6 @@ export default {
 <style lang="scss" scoped>
 .xsBox {
   padding: 15px;
-  box-sizing: border-box;
   .xsItem {
     width: 100%;
     background-color: #fff;
