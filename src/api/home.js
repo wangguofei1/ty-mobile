@@ -49,3 +49,19 @@ export function queryShopSale(query) {
     params: query
   })
 }
+// 门店服务情况 charts
+export function shopServiceCharts(query) {
+  return request({
+    url: api.shopServiceCharts,
+    method: 'get',
+    params: query
+  })
+}
+// 门店服务情况 列表
+export function shopServiceList(query) {
+  return request({
+    url: api.shopServiceList,
+    method: 'get',
+    params: query
+  })
+}

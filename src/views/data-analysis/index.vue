@@ -71,11 +71,11 @@ export default {
           xsText: '患者结构分析',
           url: 'PatientStructure'
         },
-        // {
-        //   xsImg: require('@/assets/images/xsImg9.png'),
-        //   xsText: '门店服务情况',
-        //   url: 'StoreDetails'
-        // }
+        {
+          xsImg: require('@/assets/images/xsImg9.png'),
+          xsText: '门店服务情况',
+          url: 'StoreServiceDetail'
+        }
       ]
     }
   },
