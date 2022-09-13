@@ -131,8 +131,9 @@ export default {
     components: { topNav, pieCharts, barChart, pieChart2 },
     data() {
         return {
+            queryType: '1',
             ruleForm: {
-                queryType: '1',
+                
                 year: '',
                 startMonth: '',
                 endMonth: '',
@@ -157,22 +158,23 @@ export default {
         }
     },
     methods: {
-        changeTab1(){
-            this.getPatientList();
-            this.queryPatientComparison();
-            this.queryPatientStopReasonRange();
+        changeTab1(type){
+            this.queryType=type;
+            this.getPatientList({queryType:this.queryType});
+            this.queryPatientComparison({queryType:this.queryType});
+            this.queryPatientStopReasonRange({queryType:this.queryType});
         },  
         changeForm(form) {
-            this.getPatientList();
-            this.queryPatientComparison();
-            this.queryPatientStopReasonRange();
+            this.getPatientList(form);
+            this.queryPatientComparison(form);
+            this.queryPatientStopReasonRange(form);
         },
-        async getPatientList() {
-            const res = await queryPatientCountByMonth(this.ruleForm)
+        async getPatientList(data) {
+            const res = await queryPatientCountByMonth(data)
             this.dataList = res.data
         },
-        async queryPatientComparison() {
-            const res = await queryPatientComparison(this.ruleForm)
+        async queryPatientComparison(data) {
+            const res = await queryPatientComparison(data)
             this.newInfo = res.data.new
             this.oldInfo = res.data.old
             this.chartData=[{name:'',value:res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1},{name:'',value:100-(res.data.new.numRate.substr(0,res.data.new.numRate.length - 1)*1)}]
@@ -183,15 +185,15 @@ export default {
             this.chartData4=[{name:'',value:res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1},{name:'',value:100-(res.data.old.salesRate.substr(0,res.data.old.salesRate.length - 1)*1)}]
 
         },
-        async queryPatientStopReasonRange() {
-            const res = await queryPatientStopReasonRange(this.ruleForm)
+        async queryPatientStopReasonRange(data) {
+            const res = await queryPatientStopReasonRange(data)
             this.chartData = res.data.map(ele => { return { name: ele.name, value: ele.value } })
         },
     },
     mounted() {
-        this.getPatientList();
-        this.queryPatientComparison();
-        this.queryPatientStopReasonRange();
+        this.getPatientList({queryType:this.queryType});
+        this.queryPatientComparison({queryType:this.queryType});
+        this.queryPatientStopReasonRange({queryType:this.queryType});
     }
 }
 </script>

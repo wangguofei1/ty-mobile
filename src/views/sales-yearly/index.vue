@@ -1,9 +1,9 @@
 <template>
     <div>
-        <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="changeTab1"></topNav>
+        <topNav :ruleForm="ruleForm"  @changeForm="changeForm" @changeTab="changeTab1"></topNav>
         <div class="headBox">
             <panel-group :dotInfo="dotInfo" :salesNumInfo="salesNumInfo" :salesPriceInfo="salesPriceInfo"
-                :salesInfo="salesInfo" @handleClick1="queryTop" />
+                :salesInfo="salesInfo" @handleClick1="queryTop1" />
         </div>
         <div class="chartBox">
             <div class="barChart">
@@ -64,8 +64,8 @@ export default {
     components: { saleForm, PanelGroup, barChart, parCharts,topNav },
     data() {
         return {
+            queryType: '1',
             ruleForm: {
-                queryType: '1',
                 year: '',
                 startMonth: '',
                 endMonth: '',
@@ -97,26 +97,45 @@ export default {
         }
     },
     methods: {
-        changeTab1() {
-            this.queryProvinceSalePrice(this.ruleForm);
-            this.query1(this.ruleForm);
-            this.query2(this.ruleForm);
+        changeTab1(type) {
+            this.queryType=type;
+            this.queryProvinceSalePrice({queryType:this.queryType});
+            this.query1({queryType:this.queryType});
+            this.query2({queryType:this.queryType});
             this.queryTop(this.index1);
-            this.queryMonthSalesPrice();
+            this.queryMonthSalesPrice({
+                queryType:this.queryType,
+                type: this.tabIndex5
+            });
         },
         changeTab() {
-            this.queryMonthSalesPrice();
+            this.queryMonthSalesPrice({
+                queryType:this.queryType,
+                type: this.tabIndex5
+            });
         },
         changeForm(form) {
             this.queryProvinceSalePrice(form);
             this.query1(form);
             this.query2(form);
-            this.queryTop(this.index1);
-            this.queryMonthSalesPrice();
+            this.queryTop(form);
+            this.queryMonthSalesPrice({
+                ...form,
+                type: this.tabIndex5
+            });
+        },
+        queryTop1(id) {
+            this.queryTop(id);
         },
         async queryTop(id) {
-            this.index1 = id;
-            let res = await submitTop({ ...this.ruleForm, medicineId: id });
+            let data=null;
+            if(id instanceof Object==true){
+                data={ ...id, medicineId: this.index1 };
+            }else{
+                data={ queryType:this.queryType, medicineId: id }
+                this.index1 = id;
+            }
+            let res = await submitTop(data);
             if (res.code == 0) {
                 this.salesInfo = res.data.customerSalesNum[0];
                 this.salesNumInfo = res.data.salesNum[0];
@@ -124,11 +143,8 @@ export default {
                 this.dotInfo = res.data.oldCustomerSalesNum[0];
             }
         },
-        queryMonthSalesPrice() {
-            queryMonthSalesPrice({
-                ...this.ruleForm,
-                type: this.tabIndex5
-            }).then((res) => {
+        queryMonthSalesPrice(data) {
+            queryMonthSalesPrice(data).then((res) => {
                 if (res.code == 0) {
                     let arr1 = [];
                     let arr2 = [];
@@ -178,15 +194,15 @@ export default {
     },
     mounted() {
         this.queryTop('');
-        this.queryMonthSalesPrice();
+        this.queryMonthSalesPrice({queryType:this.queryType,type:this.tabIndex5});
         this.queryProvinceSalePrice({
-            queryType: this.ruleForm.queryType * 1,
+            queryType: this.queryType ,
         });
         this.query1({
-            queryType: this.ruleForm.queryType * 1,
+            queryType: this.queryType,
         });
         this.query2({
-            queryType: this.ruleForm.queryType * 1,
+            queryType: this.queryType,
         })
     },
     watch: {
