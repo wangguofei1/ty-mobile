@@ -4,21 +4,29 @@
  */
 export const constantRouterMap = [{
   path: '/',
-  component: () => import('@/views/home/index'),
-  redirect: '/home',
+  component: () => import('@/views/login/index'),
+  redirect: '/login',
   meta: {
-    title: '首页',
+    title: '登录',
     keepAlive: false
   },
   children: [{
-    path: '/home',
-    name: 'Home',
-    component: () => import('@/views/home/index'),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index'),
     meta: {
-      title: '首页',
+      title: '登录',
       keepAlive: false
     }
   }]
+},{
+  path: '/home',
+  name: 'Home',
+  component: () => import('@/views/home/index'),
+  meta: {
+    title: '首页',
+    keepAlive: false
+  }
 }, {
   path: '/dataAnalysis',
   name: 'DataAnalysis',

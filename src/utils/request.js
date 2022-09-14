@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import router from '@/router'
 import {
   Toast,
   Dialog
@@ -25,8 +26,18 @@ service.interceptors.request.use(
         forbidClick: true
       })
     }
-    if (store.getters.token) {
-      config.headers['token'] = store.getters.token
+    if (localStorage.getItem('id')) {
+      if(config.params) {
+        config.params.lander = localStorage.getItem('id')
+      }
+      if (config.data) {
+        config.data.lander = localStorage.getItem('id')
+      }
+      // config.headers['token'] = localStorage.getItem('id')
+    } else {
+      router.push({
+        path: 'login'
+      })
     }
     return config
   },

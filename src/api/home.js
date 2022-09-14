@@ -1,6 +1,14 @@
 import api from './index'
 import request from '@/utils/request'
 
+// 登录
+export function login(query) {
+  return request({
+    url: 'api/login',
+    method: 'post',
+    params: query
+  })
+}
 // 年度DOT
 export function queryDot(query) {
   return request({
