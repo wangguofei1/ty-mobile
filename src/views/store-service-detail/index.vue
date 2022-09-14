@@ -50,8 +50,8 @@
               </div>
             </div>
             <div class="shopVip">
-              <p>会员总数：<span>{{item.customerNum}}</span></p>
-              <p>新会员占比：<span>{{item.newCustomerRate}}</span></p>
+              <p>患者总数：<span>{{item.customerNum}}</span></p>
+              <p>新患者占比：<span>{{item.newCustomerRate}}</span></p>
             </div>
           </div>
         </div>
