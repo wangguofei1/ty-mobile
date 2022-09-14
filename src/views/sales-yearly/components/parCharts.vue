@@ -68,6 +68,9 @@ export default {
     },
     methods: {
         initChart() {
+            let arr1=this.chartsData1.map((item,index)=>{
+                
+            })
             let that = this;
             this.chart = echarts.init(this.$refs['charts1'], "macarons");
             this.chart.clear();
@@ -84,7 +87,7 @@ export default {
                         formatter: function (name) {
                             for (let index in that.chartsData1) {
                                 if (name == that.chartsData1[index].name) {
-                                    return `${name}   ${that.chartsData1[index].rate}%`
+                                    return `${name}   ${that.chartsData1[index].rate?that.chartsData1[index].rate:"0%"}`
                                 }
                             }
                         },
@@ -146,7 +149,7 @@ export default {
                         formatter: function (name) {
                             for (let index in that.chartsData2) {
                                 if (name == that.chartsData2[index].name) {
-                                    return `${name}   ${that.chartsData2[index].rate}%`
+                                    return `${name}   ${that.chartsData2[index].rate?that.chartsData2[index].rate:"0%"}`
                                 }
                             }
                         },
@@ -156,7 +159,7 @@ export default {
                         itemHeight: 10,
                         padding: [20, 30],
                         textStyle: {
-                            fontSize: '16px'
+                            fontSize: '13px'
                         },
                         itemWidth: 10,
                     },
@@ -221,7 +224,7 @@ export default {
                         formatter: function (name) {
                             for (let index in that.chartsData3) {
                                 if (name == that.chartsData3[index].name) {
-                                    return `${name}   ${that.chartsData3[index].rate}%`
+                                    return `${name}   ${that.chartsData3[index].rate?that.chartsData3[index].rate:"0%"}`
                                 }
                             }
                         },
@@ -230,7 +233,7 @@ export default {
                         itemHeight: 10,
                         padding: [20, 30],
                         textStyle: {
-                            fontSize: '16px'
+                            fontSize: '13px'
                         },
                         itemWidth: 10,
                     },

@@ -20,7 +20,7 @@
                     <div class="dataBox1 flex1">
                         <div>
                             <span>患者人数</span>
-                            <div>{{newInfo.num}}</div>
+                            <div>{{newInfo.num}}人</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
                             <pieCharts :chartData="chartData" :color="['#c89479','#f0f2f5']"></pieCharts>
@@ -37,11 +37,11 @@
                     </div>
                     <div class="dataBox">
                         <span>DOT</span>
-                        <div class="text1">{{newInfo.dot}}</div>
+                        <div class="text1">{{newInfo.dot}}月</div>
                     </div>
                     <div class="dataBox">
                         <span>平均购买次数</span>
-                        <div>{{newInfo.buyTimesAvg}}</div>
+                        <div>{{newInfo.buyTimesAvg}}次</div>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <div class="dataBox1 flex1">
                         <div>
                             <span>患者人数</span>
-                            <div>{{oldInfo.num}}</div>
+                            <div>{{oldInfo.num}}人</div>
                         </div>
                         <div style="padding:20px 10px 0 0">
                             <pieCharts :chartData="chartData3" :color="['#4a95e8','#f0f2f5']"></pieCharts>
@@ -82,11 +82,11 @@
                     </div>
                     <div class="dataBox">
                         <span>DOT</span>
-                        <div class="text1">{{oldInfo.dot}}</div>
+                        <div class="text1">{{oldInfo.dot}}月</div>
                     </div>
                     <div class="dataBox">
                         <span>平均购买次数</span>
-                        <div>{{oldInfo.buyTimesAvg}}</div>
+                        <div>{{oldInfo.buyTimesAvg}}次</div>
                     </div>
                 </div>
             </div>
