@@ -63,7 +63,6 @@ export default {
         year: '2022',
         startMonth: '',
         endMonth: '',
-        productId: 127,
         regionId: '',
         sectionId: '',
         provinceId: '',

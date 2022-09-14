@@ -136,7 +136,6 @@ export default {
                 year: '',
                 startMonth: '',
                 endMonth: '',
-                productId: 127,
                 regionId: '',
                 sectionId: '',
                 provinceId: '',
