@@ -1,5 +1,10 @@
 <template>
-    <div ref="chartBox" :style="{width:width,height:height}"></div>
+    <div>
+        <div ref='chartBox' v-if="id1==1" :style="{width:width,height:height}"></div>
+        <div ref='chartBox2' v-if="id1==2" :style="{width:width,height:height}"></div>
+        <div ref='chartBox3' v-if="id1==3" :style="{width:width,height:height}"></div>
+        <div ref='chartBox4' v-if="id1==4" :style="{width:width,height:height}"></div>
+    </div>
 </template>
 
 <script>
@@ -19,17 +24,20 @@ export default {
             type: Array,
             default: () => []
         },
-        color:{
+        color: {
             type: Array,
             default: () => []
+        },
+        id1: {
+            type: String,
+            default: "",
         }
     },
     methods: {
         initChart() {
-            const that=this;
-            const chart = echarts.init(this.$refs['chartBox'], 'macarons')
-            chart.setOption({
-                color:that.color,
+            const that = this;
+            const option = {
+                color: that.color,
                 tooltip: {
                     trigger: 'item'
                 },
@@ -41,8 +49,15 @@ export default {
                         label: {
                             show: true,
                             position: 'center',
-                            formatter:'{c}%',
-                            color:this.color[0]
+                            formatter: function (params) {
+                                console.log(params);
+                                if (params.dataIndex == 0) {
+                                    return `${params.percent}%`
+                                }else{
+                                    return `${100-params.percent}%`
+                                }
+                            },
+                            color: this.color[0]
                         },
                         labelLine: {
                             show: false
@@ -50,15 +65,36 @@ export default {
                         data: this.chartData
                     }
                 ]
-            })
+            }
+            if (this.id1 == 1) {
+                const chart = echarts.init(this.$refs[`chartBox`], 'macarons')
+                chart.setOption(option)
+            } else if(this.id1 == 2) {
+                const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
+                chart.setOption(option)
+            }else if(this.id1 == 3) {
+                const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
+                chart.setOption(option)
+            }
+                else if(this.id1 == 4) {
+                const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
+                chart.setOption(option)
+            }
+
         }
     },
-    mounted(){
-        this.initChart();
+    mounted() {
+        // window.setTimeout(()=>{
+        //     this.initChart();
+        // },0.5)
+
     },
-    watch:{
-        chartData(value){
-            this.initChart();
+    watch: {
+        chartData(value) {
+            if(value.length>0){
+                this.initChart();
+            }
+            
         }
     }
 }
