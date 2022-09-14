@@ -13,11 +13,15 @@
                         <div class="headTitle">销售统计</div>
                     </div>
                     <div>
-                        <van-tabs type="card" color="#afafaf" background="#f0f1f5" v-model="tabIndex5"
+                        <!-- <van-tabs type="card" color="#afafaf" background="#f0f1f5" v-model="tabIndex5"
                             @change="changeTab">
                             <van-tab title="数量" name="1"></van-tab>
                             <van-tab title="金额" name="2"></van-tab>
-                        </van-tabs>
+                        </van-tabs> -->
+                        <div class="tab1">
+                            <div  :class="tabIndex5==1?'active':''" @click="changeTab(1)">数量</div>
+                            <div :class="tabIndex5==2?'active':''" @click="changeTab(2)">金额</div>
+                        </div>
                     </div>
                 </div>
                 <div style="padding: 5px">
@@ -108,7 +112,8 @@ export default {
                 type: this.tabIndex5
             });
         },
-        changeTab() {
+        changeTab(lab) {
+            this.tabIndex5=lab;
             this.queryMonthSalesPrice({
                 queryType:this.queryType,
                 type: this.tabIndex5
@@ -275,6 +280,31 @@ export default {
             margin-left: auto;
             margin-right: 20px;
         }
+    }
+}
+.tab1{
+    margin:7px 10px  0 0;
+    background-color: #f0f1f5;
+    color: #a6a6a6;
+    width: 78px;
+    height: 26px;
+    // font-size: 12px;
+    border-radius: 4px;
+    display: flex;
+    >div{
+        margin-left:3px ;
+        margin-top: 3px;
+        font-size:12px;
+        line-height: 20px;
+        text-align: center;
+        width: 36px;
+        height: 20px;
+        // padding:-2px  0  0px 5px;
+    }
+    .active{
+        background-color: #fff;
+        border-radius: 3px;
+        color: #2a82e4;
     }
 }
 </style>

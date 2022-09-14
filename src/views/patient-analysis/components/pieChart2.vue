@@ -83,7 +83,6 @@ export default {
     },
     watch:{
         chartData(value){
-            console.log(value);
             this.initChart();
         }
     }
