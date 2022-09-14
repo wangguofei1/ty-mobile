@@ -8,15 +8,19 @@
       <van-tabs v-model="active" title-active-color="#389AFC" color="#389AFC">
         <van-tab title="信息完善度">
           <infoRateChart v-if="infoRate.length>0" :chartData="infoRate"></infoRateChart>
+          <div class="noData" v-if="!infoRate.length">暂无数据</div>
         </van-tab>
         <van-tab title="回访率">
           <returnRatioChart v-if="returnRatio.length>0" :chartData="returnRatio"></returnRatioChart>
+          <div class="noData" v-if="!returnRatio.length">暂无数据</div>
         </van-tab>
         <van-tab title="配送时效">
           <timeDiffAvgChart v-if="timeDiffAvg.length>0" :chartData="timeDiffAvg"></timeDiffAvgChart>
+          <div class="noData" v-if="!timeDiffAvg.length">暂无数据</div>
         </van-tab>
         <van-tab title="患教次数">
           <eduTimesAvgChart v-if="eduTimesAvg.length>0" :chartData="eduTimesAvg"></eduTimesAvgChart>
+          <div class="noData" v-if="!eduTimesAvg.length">暂无数据</div>
         </van-tab>
       </van-tabs>
     </div>
@@ -161,7 +165,13 @@ export default {
   left: 15px;
   top: 1px;
 }
-
+.noData {
+  height: 50px;
+  color: #666;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
 .xsBox {
   padding: 15px;
   box-sizing: border-box;

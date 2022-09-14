@@ -168,8 +168,7 @@ export default {
             },
             name: '按DOT分布',
             type: 'pie',
-            radius: [40, 120],
-            roseType: 'area',
+            radius: [0, 100],
             data: this.dotRange
           }
         ]
