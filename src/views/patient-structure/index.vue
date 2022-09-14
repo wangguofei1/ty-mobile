@@ -51,7 +51,7 @@
 </template>
   
   <script>
-import topNav from "../../components/topNav.vue"
+import topNav from '../../components/topNav.vue'
 import { getPatientStructure } from '@/api/salesFlow'
 import * as echarts from 'echarts'
 import _ from 'lodash'
@@ -158,8 +158,11 @@ export default {
           {
             top: -105,
             label: {
-              show: false,
-              position: 'center'
+              show: true,
+              position: 'inside',
+              formatter: function (arg) {
+                return arg.value
+              }
             },
             emphasis: {
               label: {
@@ -214,8 +217,11 @@ export default {
             top: -80,
             avoidLabelOverlap: false,
             label: {
-              show: false,
-              position: 'center'
+              show: true,
+              position: 'inside',
+              formatter: function (arg) {
+                return arg.value
+              }
             },
             emphasis: {
               label: {
@@ -263,13 +269,14 @@ export default {
             radius: ['30%', '50%'],
             avoidLabelOverlap: false,
             label: {
-              show: false,
-              position: 'center'
+              show: true,
+              position: 'inside',
+              formatter: function (arg) {
+                return arg.value
+              }
             },
             emphasis: {},
-            labelLine: {
-              show: false
-            },
+            labelLine: {},
             data: this.locationRange
           }
         ]
@@ -309,13 +316,14 @@ export default {
             radius: ['30%', '50%'],
             avoidLabelOverlap: false,
             label: {
-              show: false,
-              position: 'center'
+              show: true,
+              position: 'inside',
+              formatter: function (arg) {
+                return arg.value
+              }
             },
             emphasis: {},
-            labelLine: {
-              show: false
-            },
+            labelLine: {},
             data: this.ageRange
           }
         ]
@@ -342,7 +350,6 @@ export default {
         normal: {
           label: {
             show: false,
-            position: 'center'
           },
           labelLine: {
             show: false
@@ -395,13 +402,11 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false,
-                  position: 'outside'
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
@@ -431,12 +436,11 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
@@ -466,12 +470,11 @@ export default {
             itemStyle: {
               normal: {
                 label: {
-                  show: false
-                },
-                labelLine: {
-                  show: false,
-                  length: 100,
-                  smooth: 0.5
+                  show: true,
+                  position: "inside",
+                  formatter: function (arg) {
+                    return arg.value;
+                  },
                 },
                 borderWidth: BorderWidth,
                 shadowBlur: 40,
@@ -530,7 +533,11 @@ export default {
             radius: '50%',
             data: this.bmiRange,
             label: {
-              show: false
+              show: true,
+              position: 'inside',
+              formatter: function (arg) {
+                return arg.value
+              }
             },
             labelLine: {
               show: false

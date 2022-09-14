@@ -70,8 +70,7 @@ export default {
     queryHospitalOfficeSales() {
         let params = JSON.parse(this.$route.query.hospital);
         this.hospitalInfo = params
-        console.log(this.hospitalInfo)
-      queryHospitalOfficeSales({ hospitalId: params.hospitalId }).then(res => {
+      queryHospitalOfficeSales({ hospitalId: params.hospitalId, queryType: params.queryType }).then(res => {
         if (res.code == 0) {
           this.hospitalOfficeSales = res.data.hospitalOfficeSales
         }

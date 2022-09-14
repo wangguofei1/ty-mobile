@@ -119,12 +119,16 @@ export default {
     }
   },
   created() {
-    this.queryDot()
     this.querySalesPrice()
     this.querySalesNum()
-    this.querySalesInfo()
     this.queryMonthSalesPrice()
     this.queryShopSale()
+    setTimeout(() => {
+      this.queryDot()
+    }, 2000)
+    setTimeout(() => {
+      this.querySalesInfo()
+    }, 3000)
   },
   computed: {},
 
@@ -144,10 +148,16 @@ export default {
     },
     // 切换年季月日
     handleClick(name, title) {
-      this.queryDot()
+      // this.queryDot()
       this.querySalesPrice()
       this.querySalesNum()
-      this.querySalesInfo()
+      // this.querySalesInfo()
+      setTimeout(() => {
+        this.queryDot()
+      }, 2000)
+      setTimeout(() => {
+        this.querySalesInfo()
+      }, 3000)
     },
     showPopup() {
       Dialog.alert({

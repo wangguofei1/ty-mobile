@@ -94,6 +94,7 @@ export default {
     },
     // 跳到详情页
     xsGoDetail(item) {
+      item.queryType = this.queryType
       this.$router.push({
         name: 'HospitalDataFlow',
         query: { hospital: JSON.stringify(item) }
