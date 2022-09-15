@@ -26,7 +26,7 @@ service.interceptors.request.use(
     //     forbidClick: true
     //   })
     // }
-    if (localStorage.getItem('id')) {
+    if (localStorage.getItem('id') && config.url.indexOf('queryShopInfo') === -1) {
       if(config.params) {
         config.params.lander = localStorage.getItem('id')
       }

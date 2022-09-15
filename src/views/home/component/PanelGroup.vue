@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(42, 130, 228, 1);">
-              {{ salesNumInfo.ringSaleNum }}
+              {{ salesNumInfo.currSaleNum }}
             </div>
             <div class="ratioRow">
               <div v-if="salesNumInfo.yearGrowthRate">
