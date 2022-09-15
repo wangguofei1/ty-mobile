@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="headBox" style="margin-top:10px">
-            <div style="background-color:#fff;border-radius: 8px;">
+        <div class="headBox" style="margin-top:10px;background-color:#fff;">
+            <div style="border-radius: 8px;">
                 <div style="padding-top:10px">
                     <h2 style="text-align:center">各区域销售占比</h2>
                 </div>
@@ -234,6 +234,7 @@ export default {
 
 .headBox {
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     padding: 0 15px;
 }

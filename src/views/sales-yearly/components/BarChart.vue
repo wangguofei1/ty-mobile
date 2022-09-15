@@ -51,6 +51,9 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, "macarons");
       this.chart.setOption({
+        grid:{
+          left:'12%'
+        },
         title: {
           top: 10,
           text: this.tabIndex=='1'?"销售额（万元）":"销量(盒)",

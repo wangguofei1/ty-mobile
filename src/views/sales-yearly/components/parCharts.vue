@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div style="height: 240px; width: 360px ">
-            <div ref="charts1" style="width:100%;height:100%" />
+        <div >
+            <div ref="charts1" style="height: 240px; width: 360px " />
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@ export default {
         },
         height: {
             type: String,
-            default: "240px",
+            default: "100%",
         },
         chartsData1: {
             type: Array,
