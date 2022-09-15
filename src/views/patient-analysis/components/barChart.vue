@@ -92,37 +92,6 @@ export default {
                         },
                         data: that.chartData.map(ele => ele.stopnum)
                     },
-                    {
-                        name: '脱落率',
-                        type: 'line',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        itemStyle: {
-                            opacity: 0,
-                        },
-                        select: {
-                            scale: 10,
-                            label: {
-                                show: true,
-                            }
-                        },
-                        areaStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgba(80,141,255,0.39)'
-                                }, {
-                                    offset: .34,
-                                    color: 'rgba(56,155,255,0.25)'
-                                }, {
-                                    offset: 1,
-                                    color: 'rgba(185, 219, 140,0.00)'
-                                }
-                            ])
-                        },
-                        data: that.chartData.map(ele => ele.stoprate)
-                    },
                 ]
             })
         }

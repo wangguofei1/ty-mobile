@@ -140,7 +140,7 @@
             <div>
                 <van-popup v-model="isYearShow" round position="bottom">
                     <van-datetime-picker v-model="year" type="year-month" title="选择年份" :formatter="formatter"
-                        @confirm="confirmTime" @cancel="isYearShow=false" />
+                    :min-date="minDate" :max-date="maxDate"  @confirm="confirmTime" @cancel="isYearShow=false"  />
                 </van-popup>
             </div>
             <div>
@@ -224,6 +224,8 @@ export default {
             sectionName: "",
             provinceName: "",
             shopName: "",
+            minDate:new Date(2018,1,1),
+            maxDate:new Date()
         };
     },
     props: {
@@ -304,6 +306,14 @@ export default {
                 return options.filter((option) => option > this.ruleForm.startMonth);
             }
             if (type === 'day') {
+                return options;
+            }
+        },
+        filter3(type, options){
+            if (type === 'year') {
+                return options.filter((option)=>{'2018'<=option<='2022'} );
+            }
+            if (type === 'month') {
                 return options;
             }
         },
