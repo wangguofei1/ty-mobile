@@ -46,7 +46,7 @@
             <li class="pbBox">
               <div class="firstPb">排行</div>
               <div class="secondPb">药房</div>
-              <div class="thirdPb">本月销售额</div>
+              <div class="thirdPb">本月销售额（万元）</div>
             </li>
             <li v-for="(item, index) in shopSaleList" :key="index" class="pbBox bgfff">
               <div class="firstPb">

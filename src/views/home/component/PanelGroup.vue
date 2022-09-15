@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="salesBox">
-              {{ salesPriceInfo.currSalePrice }}
+              {{ salesPriceInfo.currSalePrice }}万元
             </div>
             <div class="ratioRow">
               <div v-if="salesPriceInfo.yearGrowthRate">
@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(42, 130, 228, 1);">
-              {{ salesNumInfo.currSaleNum }}
+              {{ salesNumInfo.currSaleNum }}盒
             </div>
             <div class="ratioRow">
               <div v-if="salesNumInfo.yearGrowthRate">
@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(0, 186, 173, 1);">
-              {{ dotInfo.currDotRate }}
+              {{ dotInfo.currDotRate }}月
             </div>
             <div class="ratioRow">
               <div v-if="dotInfo.yearGrowthRate">
@@ -134,7 +134,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(240, 96, 96, 1);">
-              {{ salesInfo.currCustomerNum }}
+              {{ salesInfo.currCustomerNum }}人
             </div>
             <div class="ratioRow">
               <div v-if="salesInfo.yearGrowthRate">
