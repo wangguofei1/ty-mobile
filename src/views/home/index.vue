@@ -46,7 +46,7 @@
             <li class="pbBox">
               <div class="firstPb">排行</div>
               <div class="secondPb">药房</div>
-              <div class="thirdPb">本月销售额</div>
+              <div class="thirdPb">本月销售额（万元）</div>
             </li>
             <li v-for="(item, index) in shopSaleList" :key="index" class="pbBox bgfff">
               <div class="firstPb">
@@ -60,6 +60,7 @@
               </div>
               <div class="thirdPb">￥{{ item.salePrice }}</div>
             </li>
+            <li class="noData">暂无数据</li>
           </ul>
         </div>
       </div>
@@ -158,6 +159,7 @@ export default {
       setTimeout(() => {
         this.querySalesInfo()
       }, 3000)
+      this.queryShopSale()
     },
     showPopup() {
       Dialog.alert({
@@ -229,7 +231,8 @@ export default {
     // 每月销售柱状图
     queryMonthSalesPrice() {
       queryMonthSalesPrice({
-        queryType: this.queryType
+        queryType: this.queryType,
+        type: 2
       }).then(res => {
         if (res.code == 0) {
           let arr1 = []
@@ -250,6 +253,7 @@ export default {
       queryShopSale({
         queryType: this.queryType
       }).then(res => {
+        this.shopSaleList = []
         if (res.code == 0) {
           this.shopSaleList = res.data
         }
@@ -264,6 +268,13 @@ export default {
   box-sizing: border-box;
   padding: 15px;
   background: linear-gradient(180deg, rgba(56, 154, 252, 1) 22.92%, rgba(243, 246, 253, 1) 100%);
+}
+.noData {
+  height: 50px;
+  color: #666;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
 }
 .chartBox {
   width: 100%;

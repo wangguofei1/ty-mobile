@@ -27,10 +27,10 @@ service.interceptors.request.use(
     //   })
     // }
     if (localStorage.getItem('id')) {
-      if(config.params) {
+      if(config.params && config.url.indexOf('queryShopInfo') === -1) {
         config.params.lander = localStorage.getItem('id')
       }
-      if (config.data) {
+      if (config.data && config.url.indexOf('queryShopInfo') === -1) {
         config.data.lander = localStorage.getItem('id')
       }
       // config.headers['token'] = localStorage.getItem('id')
