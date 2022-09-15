@@ -116,7 +116,7 @@ export default {
       charts1.setOption({
         color: ['#6382e7'],
         grid: {
-          left: 80
+          left: 55
         },
         xAxis: {
           type: 'category',
