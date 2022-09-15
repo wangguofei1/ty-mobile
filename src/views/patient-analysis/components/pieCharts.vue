@@ -53,7 +53,6 @@ export default {
                             show: true,
                             position: 'center',
                             formatter: function (params) {
-                                debugger;
                                 if (params.dataIndex == 0) {
                                     console.log(params.percent);
                                     return `${(params.percent).toFixed(2)}%`
