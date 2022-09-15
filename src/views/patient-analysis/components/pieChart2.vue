@@ -39,6 +39,7 @@ export default {
                                 params.marker + '原因'+'：' + params.name  + "<br />"+params.marker + '占比'+'：' + params.percent+ "%";
                         return str;
                     },
+                    color:"#fff"
                 },
                 legend: [{
                   bottom:"0%"
