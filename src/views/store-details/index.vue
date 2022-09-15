@@ -102,10 +102,10 @@ export default {
           this.hospitalOfficeSales = res.data
           this.yyList[0].yybfb = res.data.infoRate
           this.yyList[1].yybfb = res.data.returnRatio
-          this.yyList[2].yybfb = res.data.timeDiffAvg
+          this.yyList[2].yybfb = res.data.timeDiffAvg + '小时'
           this.yyList[3].yybfb = res.data.satisfaction
-          this.yyList[4].yybfb = res.data.usageNumAvg
-          this.yyList[5].yybfb = res.data.eduTimesAvg
+          this.yyList[4].yybfb = res.data.usageNumAvg + '盒'
+          this.yyList[5].yybfb = res.data.eduTimesAvg + '次'
           this.monthSales = res.data.monthSales
         }
       })
@@ -154,9 +154,6 @@ export default {
                 '<br />'
             })
             return str
-          },
-          textStyle: {
-            color: "white" //设置文字颜色
           },
         },
         yAxis: {
