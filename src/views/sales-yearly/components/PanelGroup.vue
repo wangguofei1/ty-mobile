@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="salesBox">
-              {{ salesPriceInfo.currSalePrice||0 }} 元
+              {{ salesPriceInfo.currSalePrice||0 }} 万元
             </div>
             <div class="ratioRow">
               <div v-if="salesPriceInfo.yearGrowthRate">

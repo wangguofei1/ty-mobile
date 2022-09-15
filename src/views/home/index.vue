@@ -36,12 +36,12 @@
       <div class="phTable">
         <div class="indexRow">
           <img class="indexMg" src="@/assets/images/xsImg.png" />
-          <div class="headTitle">门店销售排行榜</div>
-          <div class="showAll" @click="height = height == '244px' ? 'auto' : '244px'">
+          <div class="headTitle">门店销售排行榜（TOP10）</div>
+          <!-- <div class="showAll" @click="height = height == '244px' ? 'auto' : '244px'">
             {{ height == '244px' ? '查看全部' : '收起' }}
-          </div>
+          </div> -->
         </div>
-        <div :style="{ height: height }" style="padding: 10px; overflow: hidden">
+        <div :style="{ height: 'auto' }" style="padding: 10px; overflow: hidden">
           <ul>
             <li class="pbBox">
               <div class="firstPb">排行</div>

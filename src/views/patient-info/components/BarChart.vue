@@ -98,7 +98,7 @@ export default {
                         type: 'value',
                         min: 0,
                         max: 10,
-                        name: '销售额（百万元）',
+                        name: '销售额（万元）',
                         axisLine: {
                             show: true
                         },
@@ -178,7 +178,7 @@ export default {
     //   this.chart.setOption({
     //     title: {
     //       top: 10,
-    //       text: "销售额（百万元）",
+    //       text: "销售额（万元）",
     //       textStyle: {
     //         fontSize: 13,
     //         color: "rgba(166, 166, 166, 1)",

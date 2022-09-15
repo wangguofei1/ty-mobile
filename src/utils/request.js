@@ -20,12 +20,12 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // 不传递默认开启loading
-    if (!config.hideloading) {
-      // loading
-      Toast.loading({
-        forbidClick: true
-      })
-    }
+    // if (!config.hideloading) {
+    //   // loading
+    //   Toast.loading({
+    //     forbidClick: true
+    //   })
+    // }
     if (localStorage.getItem('id')) {
       if(config.params) {
         config.params.lander = localStorage.getItem('id')
