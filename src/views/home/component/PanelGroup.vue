@@ -1,6 +1,6 @@
 <template>
   <div class="swipeBox">
-    <van-swipe class="my-swipe" style="height: 155px;" :autoplay="30000" indicator-color="#000">
+    <van-swipe class="my-swipe" style="height: 155px;" :autoplay="10000" indicator-color="#000">
       <van-swipe-item>
         <div class="swipeItem">
           <div class="card-panel">
