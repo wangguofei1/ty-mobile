@@ -229,7 +229,8 @@ export default {
     // 每月销售柱状图
     queryMonthSalesPrice() {
       queryMonthSalesPrice({
-        queryType: this.queryType
+        queryType: this.queryType,
+        type: 2
       }).then(res => {
         if (res.code == 0) {
           let arr1 = []
