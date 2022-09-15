@@ -10,7 +10,7 @@
                 <div class="indexRow flex1" style="justify-content:space-between">
                     <div class="flex1">
                         <img class="indexMg" src="@/assets/images/xsImg.png" />
-                        <div class="headTitle">销售统计</div>
+                        <div class="headTitle">年度销售统计</div>
                     </div>
                     <div>
                         <!-- <van-tabs type="card" color="#afafaf" background="#f0f1f5" v-model="tabIndex5"

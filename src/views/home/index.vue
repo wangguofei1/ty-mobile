@@ -25,7 +25,7 @@
       <div class="barChart">
         <div class="indexRow">
           <img class="indexMg" src="@/assets/images/xsImg.png" />
-          <div class="headTitle">销售统计</div>
+          <div class="headTitle">年度销售统计</div>
         </div>
         <div style="padding: 5px">
           <bar-chart v-if="medicine1Data.length > 0" :medicine1Data="medicine1Data" :medicine2Data="medicine2Data" />

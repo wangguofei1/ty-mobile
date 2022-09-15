@@ -43,7 +43,7 @@ export default {
                 xAxis: [
                     {
                         type: 'category',
-                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug'],
+                        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月'],
                         axisLine: {
                             show: false,
                         },
