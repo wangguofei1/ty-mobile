@@ -4,21 +4,25 @@
       <div class="xsItem1">
         <div class="xsTitle1">
           <img class="xsImg1" src="@/assets/images/hospitalImg.png" />
-          <div class="xsText1">{{hospitalInfo.hosptailName}}</div>
+          <div class="xsText1">{{ hospitalInfo.hosptailName }}</div>
         </div>
         <div class="xsContent1">
           <div class="xsNumBox1">
             <div>销售数量（盒）</div>
-            <div class="yeFont1">{{hospitalInfo.currSaleNum}}</div>
+            <div class="yeFont1">{{ hospitalInfo.currSaleNum }}</div>
           </div>
           <div class="xsNumBox11">
             <div>销售金额（万元）</div>
-            <div class="yeFont1">{{hospitalInfo.currSalePrice}}</div>
+            <div class="yeFont1">{{ hospitalInfo.currSalePrice }}</div>
           </div>
         </div>
         <div class="xsFoot1">
-          <div class="xsFootBox1"><span>同比： </span><span>{{ hospitalInfo.yearGrowthRate }}</span></div>
-          <div class="xsFootBox11"><span>环比： </span><span>{{ hospitalInfo.monthGrowthRate }}</span></div>
+          <div class="xsFootBox1">
+            <span>同比： </span><span>{{ hospitalInfo.yearGrowthRate }}</span>
+          </div>
+          <div class="xsFootBox11">
+            <span>环比： </span><span>{{ hospitalInfo.monthGrowthRate }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -28,21 +32,25 @@
         <div class="xsItem" v-for="(item, index) in hospitalOfficeSales" :key="index">
           <div class="xsTitle">
             <img class="xsImg" src="@/assets/images/hospitalImg.png" />
-            <div class="xsText">{{item.officeName}}</div>
+            <div class="xsText">{{ item.officeName }}</div>
           </div>
           <div class="xsContent">
             <div class="xsNumBox">
               <div>销售数量（盒）</div>
-              <div class="yeFont">{{item.currSaleNum}}</div>
+              <div class="yeFont">{{ item.currSaleNum }}</div>
             </div>
             <div class="xsNumBox1">
               <div>销售金额（万元）</div>
-              <div class="yeFont">{{item.currSalePrice}}</div>
+              <div class="yeFont">{{ item.currSalePrice }}</div>
             </div>
           </div>
           <div class="xsFoot">
-            <div class="xsFootBox"><span>同比： </span><span class="blkFont">{{item.yearGrowthRate}}</span></div>
-            <div class="xsFootBox1"><span>环比： </span><span class="blkFont">{{item.monthGrowthRate}}</span></div>
+            <div class="xsFootBox">
+              <span>同比： </span><span class="blkFont">{{ item.yearGrowthRate }}</span>
+            </div>
+            <div class="xsFootBox1">
+              <span>环比： </span><span class="blkFont">{{ item.monthGrowthRate }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -58,8 +66,8 @@ export default {
   components: { saleForm },
   data() {
     return {
-        hospitalOfficeSales: [],
-        hospitalInfo: ''
+      hospitalOfficeSales: [],
+      hospitalInfo: ''
     }
   },
   created() {
@@ -68,9 +76,12 @@ export default {
   methods: {
     // 医院流向数据
     queryHospitalOfficeSales() {
-        let params = JSON.parse(this.$route.query.hospital);
-        this.hospitalInfo = params
-      queryHospitalOfficeSales({ hospitalId: params.hospitalId, queryType: params.queryType }).then(res => {
+      console.log(this.$route.query)
+      let params = JSON.parse(this.$route.query.hospital)
+      let tempQuery = JSON.parse(this.$route.query.tempQuery)
+      this.hospitalInfo = params
+      console.log(tempQuery)
+      queryHospitalOfficeSales({ ...tempQuery, hospitalId: params.hospitalId }).then(res => {
         if (res.code == 0) {
           this.hospitalOfficeSales = res.data.hospitalOfficeSales
         }

@@ -66,7 +66,8 @@ export default {
       finished: false,
       hosImg: hosImg,
       isLoad: false,
-      refreshing: false
+      refreshing: false,
+      tempQuery: { queryType: 1 }
     }
   },
   created() {
@@ -93,13 +94,14 @@ export default {
     },
     // 跳到详情页
     xsGoDetail(item) {
-      item.queryType = this.queryType
       this.$router.push({
         name: 'HospitalDataFlow',
-        query: { hospital: JSON.stringify(item) }
+        query: { hospital: JSON.stringify(item), tempQuery: JSON.stringify(this.tempQuery) }
       })
     },
     getQueryType(form) {
+      this.tempQuery = {}
+      this.tempQuery.queryType = form
       this.queryType = form
       this.saleList = []
       this.ruleForm.page = 1
@@ -107,6 +109,7 @@ export default {
       this.queryHospitalSales({ queryType: this.queryType, page: this.ruleForm.page, pageNum: this.ruleForm.pageNum })
     },
     changeForm(form) {
+      this.tempQuery = form
       this.saleList = []
       console.log(form)
       for (let keys in this.ruleForm) {
