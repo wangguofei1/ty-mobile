@@ -181,9 +181,8 @@ export default {
         tooltip: {
           trigger: 'axis',
           textStyle: {
-                        color: "white" //设置文字颜色
-                    },
-         
+            color: 'white' //设置文字颜色
+          }
         },
         legend: {
           top: 10,
@@ -204,6 +203,9 @@ export default {
             data: this.nameList
           }
         ],
+        grid: {
+          x: 55
+        },
         yAxis: [
           {
             type: 'value'
@@ -235,8 +237,8 @@ export default {
         tooltip: {
           trigger: 'axis',
           textStyle: {
-                        color: "white" //设置文字颜色
-                    },
+            color: 'white' //设置文字颜色
+          }
         },
         legend: {
           top: 10,
@@ -257,6 +259,9 @@ export default {
             data: this.nameList
           }
         ],
+        grid: {
+          x: 55
+        },
         yAxis: [
           {
             type: 'value'
@@ -288,8 +293,8 @@ export default {
         tooltip: {
           trigger: 'axis',
           textStyle: {
-                        color: "white" //设置文字颜色
-                    },
+            color: 'white' //设置文字颜色
+          }
         },
         legend: {
           top: 10,
@@ -310,6 +315,9 @@ export default {
             data: this.nameList
           }
         ],
+        grid: {
+          x: 55
+        },
         yAxis: [
           {
             type: 'value'
@@ -341,8 +349,8 @@ export default {
         tooltip: {
           trigger: 'axis',
           textStyle: {
-                        color: "white" //设置文字颜色
-                    },
+            color: 'white' //设置文字颜色
+          }
         },
         legend: {
           top: 10,
@@ -368,6 +376,9 @@ export default {
             type: 'value'
           }
         ],
+        grid: {
+          x: 55
+        },
         series: [
           {
             name: '患者脱落数量',
