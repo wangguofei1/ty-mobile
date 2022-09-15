@@ -4,7 +4,7 @@ export function queryProvinceSalePriceRate(data) {
     return request({
         url: '/api/yearSales/queryProvinceSalePriceRate',
         method: 'post',
-        data,
+        params: data,
     })
 }
 
@@ -12,14 +12,14 @@ export function queryRegionSale(data) {
     return request({
         url: `/api/yearSales/queryRegionSalePriceRate`,
         method: 'post',
-        data,
+        params: data,
     })
 }
 export function querySectionSale(data) {
     return request({
         url: `/api/yearSales/querySectionSalePriceRate`,
         method: 'post',
-        data,
+        params: data,
     })
 }
 export function queryArea(pId) {
