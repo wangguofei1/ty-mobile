@@ -38,12 +38,12 @@ export default {
             const that = this;
             const option = {
                 color: that.color,
-                tooltip: {
-                    trigger: 'item',
-                    textStyle: {
-                        color: "white" //设置文字颜色
-                    },
-                },
+                // tooltip: {
+                //     trigger: 'item',
+                //     // textStyle: {
+                //     //     color: "white" //设置文字颜色
+                //     // },
+                // },
                 series: [
                     {
                         type: 'pie',
@@ -53,11 +53,12 @@ export default {
                             show: true,
                             position: 'center',
                             formatter: function (params) {
-                                console.log(params);
+                                debugger;
                                 if (params.dataIndex == 0) {
-                                    return `${params.percent}%`
+                                    console.log(params.percent);
+                                    return `${(params.percent).toFixed(2)}%`
                                 } else {
-                                    return `${100 - params.percent}%`
+                                    return `${(100 - params.percent).toFixed(2)}%`
                                 }
                             },
                             color: this.color[0]

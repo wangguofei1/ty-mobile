@@ -54,11 +54,11 @@ export default {
             chart3: null,
         };
     },
-    mounted() {
-        this.$nextTick(() => {
-            this.initChart();
-        })
-    },
+    // mounted() {
+    //     this.$nextTick(() => {
+    //         this.initChart2();
+    //     })
+    // },
     beforeDestroy() {
         if (!this.chart) {
             return;
