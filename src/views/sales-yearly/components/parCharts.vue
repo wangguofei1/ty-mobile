@@ -54,11 +54,9 @@ export default {
             chart3: null,
         };
     },
-    // mounted() {
-    //     this.$nextTick(() => {
-    //         this.initChart2();
-    //     })
-    // },
+    mounted() {
+            this.initChart2();
+    },
     beforeDestroy() {
         if (!this.chart) {
             return;
@@ -184,12 +182,20 @@ export default {
                                 show: false
                             },
                             label: {
-                                show: false
+                                show: true,
+                                position: 'inside',
+                                // color: '#fff',
+                                fontSize: 14,
+                                formatter: '{b}\n{d}%'
                             },
                             itemStyle: {
                                 normal: {
                                     label: {
-                                        show: false,
+                                        show: true,
+                                        position: 'inside',
+                                        // color: '#fff',
+                                        fontSize: 12,
+                                        formatter: '{b}\n{d}%'
                                     },
                                     labelLine: {
                                         show: false,
@@ -261,7 +267,11 @@ export default {
                                 show: false
                             },
                             label: {
-                                show: false
+                                show: true,
+                                position: 'inside',
+                                // color: '#fff',
+                                fontSize: 12,
+                                formatter: '{b}\n{d}%'
                             },
                             minAngle: 5,
                             minShowLabelAngle: 10,
