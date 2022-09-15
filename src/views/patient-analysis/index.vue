@@ -13,7 +13,7 @@
                         </span>
                     </div>
                     <div>
-                        新发现购买行为的患者
+                        新发生购买行为的患者
                     </div>
                 </div>
                 <div class="bigBox">

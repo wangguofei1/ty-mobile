@@ -68,7 +68,7 @@
             <div class="flex1"></div>
           </div>
           <div style="padding: 5px">
-            <div id="chart4" style="width: 338px; height: 240px"></div>
+            <div id="chart3" style="width: 338px; height: 240px"></div>
           </div>
         </div>
         <div class="barChart" v-show="activeChart == 3">
@@ -76,7 +76,7 @@
             <div class="flex1"></div>
           </div>
           <div style="padding: 5px">
-            <div id="chart3" style="width: 338px; height: 240px"></div>
+            <div id="chart4" style="width: 338px; height: 240px"></div>
           </div>
         </div>
       </div>
