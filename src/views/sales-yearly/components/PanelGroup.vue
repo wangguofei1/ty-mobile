@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(42, 130, 228, 1);">
-              {{ salesNumInfo.ringSaleNum||0 }} 盒
+              {{ salesNumInfo.currSaleNum||0 }} 盒
             </div>
             <div class="ratioRow">
               <div v-if="salesNumInfo.yearGrowthRate">
@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(0, 186, 173, 1);">
-              {{ dotInfo.currSalePrice||0 }} 盒
+              {{ dotInfo.currSaleNum||0 }} 盒
             </div>
             <div class="ratioRow">
               <div v-if="dotInfo.yearGrowthRate">
@@ -134,7 +134,7 @@
               </div>
             </div>
             <div class="salesBox" style="color: rgba(240, 96, 96, 1);">
-              {{ salesInfo.currSalePrice||0 }} 盒
+              {{ salesInfo.currSaleNum||0 }} 盒
             </div>
             <div class="ratioRow">
               <div v-if="salesInfo.yearGrowthRate">

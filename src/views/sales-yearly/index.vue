@@ -19,13 +19,13 @@
                             <van-tab title="金额" name="2"></van-tab>
                         </van-tabs> -->
                         <div class="tab1">
-                            <div  :class="tabIndex5==1?'active':''" @click="changeTab(1)">数量</div>
-                            <div :class="tabIndex5==2?'active':''" @click="changeTab(2)">金额</div>
+                            <div  :class="tabIndex5==2?'active':''" @click="changeTab(2)">数量</div>
+                            <div :class="tabIndex5==1?'active':''" @click="changeTab(1)">金额</div>
                         </div>
                     </div>
                 </div>
                 <div style="padding: 5px">
-                    <bar-chart v-if="medicine1Data.length > 0||medicine3Data.length > 0"
+                    <bar-chart :tabIndex="tabIndex5" v-if="medicine1Data.length > 0||medicine3Data.length > 0"
                         :medicine1Data="tabIndex5=='2'?medicine1Data:medicine3Data"
                         :medicine2Data="tabIndex5=='2'?medicine2Data:medicine4Data" />
                 </div>

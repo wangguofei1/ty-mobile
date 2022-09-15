@@ -28,6 +28,9 @@ export default {
       type: Array,
       default: [],
     },
+    tabIndex:{
+      type: String,
+    }
   },
   data() {
     return {
@@ -50,7 +53,7 @@ export default {
       this.chart.setOption({
         title: {
           top: 10,
-          text: "销售额（万元）",
+          text: this.tabIndex=='1'?"销售额（万元）":"销量(盒)",
           textStyle: {
             fontSize: 13,
             color: "rgba(166, 166, 166, 1)",

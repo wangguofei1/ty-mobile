@@ -157,22 +157,23 @@ export default {
                                 }
                             }
                         },
-                        top: '10px',
-                        left: '3px',
+                        bottom: '0px',
+                        left: '20%',
                         orient: 'vertical',
-                        itemHeight: 10,
                         padding: [20, 30],
                         textStyle: {
-                            fontSize: '13px'
+                            fontSize: '16px'
                         },
-                        itemWidth: 10,
+                        x: 'left',
+                        itemHeight: 12,
+                        itemWidth: 12,
                     },
                     series: [
                         {
                             // name: 'Access From',
                             type: 'pie',
-                            radius: ['50%', '30%'],
-                            center: ['70%', '36%'],
+                            radius: ['55%', '25%'],
+                            center: ['50%', '30%'],
                             avoidLabelOverlap: false,
                             emphasis: {
                                 scale: true,
@@ -243,21 +244,23 @@ export default {
                                 }
                             }
                         },
-                        left: '3px',
+                        bottom: '0px',
+                        left: '20%',
                         orient: 'vertical',
-                        itemHeight: 10,
                         padding: [20, 30],
                         textStyle: {
-                            fontSize: '13px'
+                            fontSize: '16px'
                         },
-                        itemWidth: 10,
+                        x: 'left',
+                        itemHeight: 12,
+                        itemWidth: 12,
                     },
                     series: [
                         {
                             name: 'Access From',
                             type: 'pie',
-                            radius: ['50%', '30%'],
-                            center: ['70%', '36%'],
+                            radius: ['55%', '25%'],
+                            center: ['50%', '30%'],
                             avoidLabelOverlap: false,
                             emphasis: {
                                 scale: true,
