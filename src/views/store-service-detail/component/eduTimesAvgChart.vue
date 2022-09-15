@@ -55,6 +55,9 @@ export default {
                 yAxis: {
                     type: "value"
                 },
+        grid: {
+          x: 55,
+        },
                 series: [{
                     data: this.chartData.map(v => v.value),
                     type: "bar"

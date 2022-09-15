@@ -1,6 +1,6 @@
 <template>
   <div class="swipeBox">
-    <van-swipe class="my-swipe" style="height: 155px;" :autoplay="300000" indicator-color="#000">
+    <van-swipe class="my-swipe" style="height: 155px;" :autoplay="10000" indicator-color="#000">
       <van-swipe-item>
         <div class="swipeItem">
           <div class="card-panel">
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="salesBox">
-              {{ salesPriceInfo.currSalePrice||0 }} 元
+              {{ salesPriceInfo.currSalePrice||0 }} 万元
             </div>
             <div class="ratioRow">
               <div v-if="salesPriceInfo.yearGrowthRate">

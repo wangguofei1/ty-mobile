@@ -52,6 +52,9 @@ export default {
                         rotate: 30
                     }
                 },
+        grid: {
+          x: 55,
+        },
                 yAxis: {
                     type: "value"
                 },

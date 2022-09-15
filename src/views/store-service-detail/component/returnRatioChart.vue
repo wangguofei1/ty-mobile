@@ -99,11 +99,6 @@ export default {
                             show: false,
                             position: "outside"
                         },
-                        labelLine: {
-                            show: false,
-                            length: 100,
-                            smooth: 0.5
-                        },
                         borderWidth: BorderWidth,
                         shadowBlur: 40,
                         borderColor: "#3AA0FF",

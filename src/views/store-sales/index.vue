@@ -31,7 +31,7 @@
             <div class="yeFont">{{ item.num }}</div>
           </div>
           <div class="xsNumBox1">
-            <div>销售金额（元）</div>
+            <div>销售金额（万元）</div>
             <div class="yeFont">{{ item.total }}</div>
           </div>
         </div>

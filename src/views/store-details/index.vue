@@ -149,8 +149,8 @@ export default {
                 item.name +
                 '销售额' +
                 ' : ' +
-                item.data +s
-                '元' +
+                item.data +
+                '万元' +
                 '<br />'
             })
             return str
@@ -161,7 +161,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          value: '元',
+          value: '万元',
           axisLine: {
             show: true,
             lineStyle: {

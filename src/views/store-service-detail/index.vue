@@ -114,7 +114,6 @@ export default {
       this.shopList = shopList
     },
     async getQueryType(form) {
-      this.queryType = form
       this.saleList = []
       const res = await shopServiceCharts({queryType: this.queryType, page: 1, pageSize: 5})
       const result = await shopServiceList({queryType: this.queryType, page: 1, pageSize: 5})
