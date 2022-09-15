@@ -60,7 +60,7 @@
               </div>
               <div class="thirdPb">￥{{ item.salePrice }}</div>
             </li>
-            <li class="noData">暂无数据</li>
+            <li v-if="shopSaleList.length == 0" class="noData">暂无数据</li>
           </ul>
         </div>
       </div>
