@@ -28,6 +28,9 @@ export default {
             chart.setOption({
                 tooltip: {
                     trigger: 'axis',
+                    textStyle: {
+                        color: "white" //设置文字颜色
+                    },
                 },
                 color: ['#2a82e4', '#00baad', '#a5d63f', '#3e84e6'],
                 legend: {
@@ -40,7 +43,7 @@ export default {
                 xAxis: [
                     {
                         type: 'category',
-                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','July','Aug'],
+                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug'],
                         axisLine: {
                             show: false,
                         },
@@ -67,7 +70,7 @@ export default {
                         emphasis: {
                             focus: 'series'
                         },
-                        data: that.chartData.map(ele=>ele.totalnum)
+                        data: that.chartData.map(ele => ele.totalnum)
                     },
                     {
                         name: '本月患者新增数',
@@ -77,7 +80,7 @@ export default {
                         emphasis: {
                             focus: 'series'
                         },
-                        data: that.chartData.map(ele=>ele.newnum)
+                        data: that.chartData.map(ele => ele.newnum)
                     },
                     {
                         name: '脱落人数',
@@ -87,7 +90,7 @@ export default {
                         emphasis: {
                             focus: 'series'
                         },
-                        data: that.chartData.map(ele=>ele.stopnum)
+                        data: that.chartData.map(ele => ele.stopnum)
                     },
                     {
                         name: '脱落率',
@@ -118,18 +121,18 @@ export default {
                                 }
                             ])
                         },
-                        data: that.chartData.map(ele=>ele.stoprate)
+                        data: that.chartData.map(ele => ele.stoprate)
                     },
                 ]
             })
         }
     },
     mounted() {
-        const that= this;
+        const that = this;
         this.initChart();
     },
-    watch:{
-        chartData(){
+    watch: {
+        chartData() {
             this.initChart();
         }
     }

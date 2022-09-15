@@ -42,7 +42,10 @@ export default {
             let arr2 = this.chartData.slice(halfIndex, this.chartData.length)
             charts1.setOption({
                 tooltip: {
-                    trigger: 'item'
+                    trigger: 'item',
+                    textStyle: {
+                    color: "white" //设置文字颜色
+                },
                 },
                 legend: [{
                     orient: 'vertical',

@@ -88,7 +88,10 @@ export default {
                     trigger: "item",
                     formatter: function (params) {
                         return `${params.name}：${params.value} %`
-                    }
+                    },
+                    textStyle: {
+                    color: "white" //设置文字颜色
+                },
                 },
                 itemStyle: {
                     normal: {

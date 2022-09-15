@@ -39,7 +39,10 @@ export default {
             charts3.clear();
             const option = {
                 tooltip: {
-                    trigger: "item"
+                    trigger: "item",
+                    textStyle: {
+                    color: "white" //设置文字颜色
+                },
                 },
                 xAxis: {
                     type: "category",

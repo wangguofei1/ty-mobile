@@ -58,7 +58,10 @@ export default {
         },
         tooltip: {
           trigger: "axis",
-        },legend: {
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
+        }, legend: {
           top: 10,
           icon: 'rect',
           itemWidth: 14,

@@ -65,6 +65,9 @@ export default {
                         });
                         return str;
                     },
+                    textStyle: {
+                            color: "white" //设置文字颜色
+                    },
                 },
                 legend: {
                     data: ['选定年', '前一年'],

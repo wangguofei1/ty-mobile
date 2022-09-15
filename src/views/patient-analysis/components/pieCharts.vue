@@ -39,7 +39,10 @@ export default {
             const option = {
                 color: that.color,
                 tooltip: {
-                    trigger: 'item'
+                    trigger: 'item',
+                    textStyle: {
+                        color: "white" //设置文字颜色
+                    },
                 },
                 series: [
                     {
@@ -53,8 +56,8 @@ export default {
                                 console.log(params);
                                 if (params.dataIndex == 0) {
                                     return `${params.percent}%`
-                                }else{
-                                    return `${100-params.percent}%`
+                                } else {
+                                    return `${100 - params.percent}%`
                                 }
                             },
                             color: this.color[0]
@@ -69,14 +72,14 @@ export default {
             if (this.id1 == 1) {
                 const chart = echarts.init(this.$refs[`chartBox`], 'macarons')
                 chart.setOption(option)
-            } else if(this.id1 == 2) {
+            } else if (this.id1 == 2) {
                 const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
                 chart.setOption(option)
-            }else if(this.id1 == 3) {
+            } else if (this.id1 == 3) {
                 const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
                 chart.setOption(option)
             }
-                else if(this.id1 == 4) {
+            else if (this.id1 == 4) {
                 const chart = echarts.init(this.$refs[`chartBox${this.id1}`], 'macarons')
                 chart.setOption(option)
             }
@@ -91,10 +94,10 @@ export default {
     },
     watch: {
         chartData(value) {
-            if(value.length>0){
+            if (value.length > 0) {
                 this.initChart();
             }
-            
+
         }
     }
 }

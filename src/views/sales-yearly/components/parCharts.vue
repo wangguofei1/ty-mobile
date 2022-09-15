@@ -44,7 +44,7 @@ export default {
         },
         chartsType: {
             type: String,
-            default: '1'
+            default: '3'
         }
     },
     data() {
@@ -68,8 +68,8 @@ export default {
     },
     methods: {
         initChart() {
-            let arr1=this.chartsData1.map((item,index)=>{
-                
+            let arr1 = this.chartsData1.map((item, index) => {
+
             })
             let that = this;
             this.chart = echarts.init(this.$refs['charts1'], "macarons");
@@ -78,7 +78,10 @@ export default {
                 {
                     tooltip: {
                         trigger: 'item',
-                        formatter: '销售金额{c}万<br />销售占比{d}'
+                        formatter: '销售金额：{c}万<br />销售占比：{d}%',
+                        textStyle: {
+                            color: "white" //设置文字颜色
+                        },
                     },
                     color: ['#2A58C7', '#3AA0FF', '#FF8D1A', '#D43030', '#00BAAD', '#FFC300', '#A5D63FFF', '#AC33C1FF'],
                     legend: [{
@@ -87,7 +90,7 @@ export default {
                         formatter: function (name) {
                             for (let index in that.chartsData1) {
                                 if (name == that.chartsData1[index].name) {
-                                    return `${name}   ${that.chartsData1[index].rate?that.chartsData1[index].rate:"0%"}`
+                                    return `${name}   ${that.chartsData1[index].rate ? that.chartsData1[index].rate : "0%"}`
                                 }
                             }
                         },
@@ -142,14 +145,17 @@ export default {
                 {
                     tooltip: {
                         trigger: 'item',
-                        formatter: '销售金额{c}万<br />销售占比{d}'
+                        formatter: '销售金额：{c}万<br />销售占比：{d}%',
+                        textStyle: {
+                            color: "white" //设置文字颜色
+                        },
                     },
                     color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
                     legend: {
                         formatter: function (name) {
                             for (let index in that.chartsData2) {
                                 if (name == that.chartsData2[index].name) {
-                                    return `${name}   ${that.chartsData2[index].rate?that.chartsData2[index].rate:"0%"}`
+                                    return `${name}   ${that.chartsData2[index].rate ? that.chartsData2[index].rate : "0%"}`
                                 }
                             }
                         },
@@ -210,21 +216,24 @@ export default {
             );
         },
         initChart3() {
-            let that=this;
+            let that = this;
             this.chart = echarts.init(this.$refs['charts1'], "macarons");
             this.chart.clear();
             this.chart.setOption(
                 {
                     tooltip: {
                         trigger: 'item',
-                        formatter: '销售金额{c}万<br />销售占比{d}'
+                        formatter: '销售金额：{c}万<br />销售占比：{d}%',
+                        textStyle: {
+                            color: "white" //设置文字颜色
+                        },
                     },
                     color: ['#2A58C7', '#FF8D1A', '#00BAAD', '#A5D63F', '#EE6666'],
                     legend: {
                         formatter: function (name) {
                             for (let index in that.chartsData3) {
                                 if (name == that.chartsData3[index].name) {
-                                    return `${name}   ${that.chartsData3[index].rate?that.chartsData3[index].rate:"0%"}`
+                                    return `${name}   ${that.chartsData3[index].rate ? that.chartsData3[index].rate : "0%"}`
                                 }
                             }
                         },
@@ -273,16 +282,19 @@ export default {
     },
     watch: {
         chartsData1() {
-            this.initChart();
+            this.initChart2();
         },
-        chartsType(value) {
-            if (value == '1') {
-                this.initChart();
-            } else if (value == '2') {
-                this.initChart2();
-            } else {
-                this.initChart3();
-            }
+        chartsType: {
+            handler: function (value) {
+                if (value == '1') {
+                    this.initChart();
+                } else if (value == '2') {
+                    this.initChart2();
+                } else {
+                    this.initChart3();
+                }
+            },
+            // immediate:true,
         }
     }
 };

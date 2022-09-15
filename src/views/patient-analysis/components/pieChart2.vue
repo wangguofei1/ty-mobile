@@ -18,10 +18,10 @@ export default {
         chartData: {
             type: Array,
             default: () => [
-                {name:"原因一",value:"37"},
-                {name:"原因二",value:"13"},
-                {name:"原因三",value:"49"},
-                {name:"原因四",value:"7"},
+                { name: "原因一", value: "37" },
+                { name: "原因二", value: "13" },
+                { name: "原因三", value: "49" },
+                { name: "原因四", value: "7" },
             ]
         },
 
@@ -35,14 +35,16 @@ export default {
                     trigger: 'item',
                     formatter: function (params) {
                         let str = '';
-                            str +=
-                                params.marker + '原因'+'：' + params.name  + "<br />"+params.marker + '占比'+'：' + params.percent+ "%";
+                        str +=
+                            params.marker + '原因' + '：' + params.name + "<br />" + params.marker + '占比' + '：' + params.percent + "%";
                         return str;
                     },
-                    color:"#fff"
+                    textStyle: {
+                        color: "white" //设置文字颜色
+                    },
                 },
                 legend: [{
-                  bottom:"0%"
+                    bottom: "0%"
                 },
                 ],
                 series: [
@@ -57,7 +59,7 @@ export default {
                             show: true,
                             position: 'inside',
                             fontSize: 12,
-                            fontWeight:400,
+                            fontWeight: 400,
                             formatter: '{d}%'
                         },
                         labelLine: {
@@ -82,8 +84,8 @@ export default {
     mounted() {
         this.initChart();
     },
-    watch:{
-        chartData(value){
+    watch: {
+        chartData(value) {
             this.initChart();
         }
     }

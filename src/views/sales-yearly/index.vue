@@ -39,9 +39,9 @@
                 <div>
                     <van-tabs v-model="chartsType" color="#389afc" title-inactive-color="#000"
                         title-active-color="#389afc">
-                        <van-tab title="省区" name="1"></van-tab>
                         <van-tab title="大区" name="2"></van-tab>
                         <van-tab title="片区" name="3"></van-tab>
+                        <van-tab title="省区" name="1"></van-tab>
                     </van-tabs>
                 </div>
                 <div>
@@ -92,7 +92,7 @@ export default {
             medicine3Data: [],
             medicine4Data: [],
             tabIndex5: '1',
-            chartsType: '1',
+            chartsType: '2',
             chartsData1: [],
             chartsData2: [],
             chartsData3: [],

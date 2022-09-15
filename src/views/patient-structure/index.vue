@@ -27,12 +27,8 @@
       <div class="dotBox">
         <div class="fxTitle">
           <div class="fxText">患者分布占比分析</div>
-          <van-tabs
-            v-model="active"
-            color="rgba(56, 154, 252, 1)"
-            title-inactive-color="rgba(56, 154, 252, 1)"
-            title-active-color="rgba(56, 154, 252, 1)"
-          >
+          <van-tabs v-model="active" color="rgba(56, 154, 252, 1)" title-inactive-color="rgba(56, 154, 252, 1)"
+            title-active-color="rgba(56, 154, 252, 1)">
             <van-tab title="省区" name="1"> </van-tab>
             <van-tab title="年龄" name="2"> </van-tab>
             <van-tab title="性别" name="3"> </van-tab>
@@ -50,7 +46,7 @@
   </div>
 </template>
   
-  <script>
+<script>
 import topNav from '../../components/topNav.vue'
 import { getPatientStructure } from '@/api/salesFlow'
 import * as echarts from 'echarts'
@@ -81,7 +77,7 @@ export default {
       bmiRange: []
     }
   },
-  created() {},
+  created() { },
   mounted() {
     this.getPatientStructure({ queryType: this.queryType })
   },
@@ -135,7 +131,10 @@ export default {
       const charts1 = echarts.init(document.getElementById('chartBox1'), 'macarons')
       charts1.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         legend: [
           {
@@ -190,7 +189,10 @@ export default {
       const charts2 = echarts.init(document.getElementById('chartBox2'), 'macarons')
       charts2.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         legend: [
           {
@@ -239,7 +241,10 @@ export default {
       const charts = echarts.init(document.getElementById('smallChartBox1'), 'macarons')
       charts.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         legend: {
           orient: 'horizontal',
@@ -285,7 +290,10 @@ export default {
       const charts = echarts.init(document.getElementById('smallChartBox2'), 'macarons')
       charts.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         legend: {
           orient: 'horizontal',
@@ -369,7 +377,10 @@ export default {
           formatter: function (params) {
             var percent = ((params.value / total) * 100).toFixed(1)
             return `${params.name}${params.value} <br/> 占比${percent}%`
-          }
+          },
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         color: ['#7B79FF', '#FFB0E2', '#59CFFF'],
         legend: [
@@ -502,7 +513,10 @@ export default {
       const charts = echarts.init(document.getElementById('smallChartBox4'), 'macarons')
       charts.setOption({
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         legend: {
           orient: 'horizontal',
@@ -549,7 +563,7 @@ export default {
 }
 </script>
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .flex1 {
   display: flex;
   flex-flow: row nowrap;
@@ -571,10 +585,13 @@ export default {
     }
   }
 }
+
 .chartBox {
   padding: 14px 15px;
+
   .dotBox {
     background: #fff;
+
     .dotTitle {
       display: flex;
       width: calc(100%-30px);
@@ -582,12 +599,14 @@ export default {
       box-sizing: border-box;
       padding: 13px 15px;
       border-bottom: 1px solid rgba(216, 220, 229, 1);
+
       .dotImg {
         width: 26.84px;
         height: 20px;
         position: relative;
         top: 2px;
       }
+
       .dotText {
         margin-left: 10px;
         height: 22px;
@@ -596,6 +615,7 @@ export default {
         color: rgba(25, 28, 47, 1);
       }
     }
+
     .fxTitle {
       width: 100%;
       height: 88px;
@@ -603,6 +623,7 @@ export default {
       text-align: center;
       padding-top: 12px;
       box-sizing: border-box;
+
       .fxText {
         font-size: 16px;
         font-weight: 700;
@@ -611,11 +632,13 @@ export default {
         vertical-align: top;
       }
     }
+
     .mapBox {
       height: 373px;
       width: 100%;
       padding: 15px;
       box-sizing: border-box;
+
       .smallBox {
         width: 325px;
         height: 360px;
@@ -624,7 +647,7 @@ export default {
   }
 }
 </style>
-  <style lang="scss">
+<style lang="scss">
 .title1 {
   .van-tabs--line {
     .van-tabs__wrap {
@@ -632,6 +655,7 @@ export default {
     }
   }
 }
+
 .title1 .van-tabs__line {
   width: 15px;
 }

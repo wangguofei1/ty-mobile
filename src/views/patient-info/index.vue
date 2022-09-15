@@ -179,7 +179,11 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          textStyle: {
+                        color: "white" //设置文字颜色
+                    },
+         
         },
         legend: {
           top: 10,
@@ -229,7 +233,10 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          textStyle: {
+                        color: "white" //设置文字颜色
+                    },
         },
         legend: {
           top: 10,
@@ -279,7 +286,10 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          textStyle: {
+                        color: "white" //设置文字颜色
+                    },
         },
         legend: {
           top: 10,
@@ -329,7 +339,10 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          textStyle: {
+                        color: "white" //设置文字颜色
+                    },
         },
         legend: {
           top: 10,

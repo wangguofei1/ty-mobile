@@ -39,7 +39,10 @@ export default {
             charts4.clear();
             const option = {
                 tooltip: {
-                    trigger: "item"
+                    trigger: "item",
+                    textStyle: {
+                    color: "white" //设置文字颜色
+                },
                 },
                 xAxis: {
                     type: "category",
@@ -55,7 +58,8 @@ export default {
                 series: [{
                     data: this.chartData.map(v => v.value),
                     type: "bar"
-                }]
+                }],
+               
             }
             charts4.setOption(option)
         }

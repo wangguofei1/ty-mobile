@@ -46,7 +46,7 @@
   </div>
 </template>
     
-    <script>
+<script>
 import { queryShopInfo } from '@/api/salesFlow'
 import * as echarts from 'echarts'
 import _ from 'lodash'
@@ -149,12 +149,15 @@ export default {
                 item.name +
                 '销售额' +
                 ' : ' +
-                item.data +
+                item.data +s
                 '元' +
                 '<br />'
             })
             return str
-          }
+          },
+          textStyle: {
+            color: "white" //设置文字颜色
+          },
         },
         yAxis: {
           type: 'value',
@@ -198,17 +201,19 @@ export default {
 }
 </script>
     
-    <style lang="scss" scoped>
+<style lang="scss" scoped>
 .xsBg {
   width: 375px;
   height: 171px;
   background: linear-gradient(180deg, rgba(56, 154, 252, 1) 22.92%, rgba(243, 246, 253, 1) 100%);
 }
+
 .xsBox1 {
   position: relative;
   top: -161px;
   padding: 15px;
   box-sizing: border-box;
+
   .xsItem1 {
     width: 100%;
     background: #fff;
@@ -217,23 +222,28 @@ export default {
     box-sizing: border-box;
     border-radius: 6px;
     overflow: hidden;
+
     .xsTitle1 {
       display: flex;
       width: calc(100%-30px);
       margin: 0 15px;
+
       .xsImg1 {
         width: 82px;
         height: 106px;
         margin-left: auto;
       }
+
       .xsText1 {
         line-height: 44px;
         font-size: 15px;
         font-weight: 700;
       }
+
       .tagBox {
         display: flex;
         margin-bottom: 6px;
+
         .tag1,
         .tag2 {
           height: 17px;
@@ -244,47 +254,56 @@ export default {
           border: 1px solid rgba(0, 186, 173, 1);
           border-radius: 10px;
         }
+
         .tag2 {
           margin-left: 10px;
           color: rgba(56, 154, 252, 1);
           border: 1px solid rgba(56, 154, 252, 1);
         }
       }
+
       .sqMedicine {
         font-size: 12px;
         line-height: 20px;
         color: rgba(128, 128, 128, 1);
         margin-top: 3px;
       }
+
       .xsGoDetail {
         margin-left: auto;
         line-height: 30px;
         font-size: 14px;
       }
     }
+
     .xsContent1 {
       width: calc(100%-30px);
       margin: 10px 15px 5px 15px;
       display: flex;
+
       .xsNumBox1,
       .xsNumBox11 {
         padding-left: 5px;
         width: calc(50% - 3px);
         font-size: 14px;
+
         .yeFont1 {
           margin-top: 6px;
         }
       }
+
       .xsNumBox11 {
         padding-left: 28px;
       }
     }
+
     .xsFoot1 {
       width: 100%;
       height: 37px;
       padding: 0 15px;
       line-height: 37px;
       display: flex;
+
       .xsFootBox1,
       .xsFootBox11 {
         padding-left: 5px;
@@ -293,18 +312,21 @@ export default {
       }
     }
   }
+
   .yyBox {
     margin: 12px 0 12px 0;
     width: 100%;
     box-sizing: border-box;
     font-size: 16px;
     color: rgba(25, 28, 47, 1);
+
     .title {
       font-weight: 700;
       position: relative;
       padding-left: 15px;
       margin-bottom: 10px;
     }
+
     .title::after {
       content: '';
       width: 4px;
@@ -315,10 +337,12 @@ export default {
       left: 0px;
       top: 4px;
     }
+
     .mdBox {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+
       .yyLevel {
         display: flex;
         width: 165px;
@@ -329,39 +353,49 @@ export default {
         padding: 0 15px;
         box-sizing: border-box;
         box-shadow: 2px 2px 6px 2px rgba(237, 242, 250, 1);
+
         .yyImg {
           width: 40px;
           height: 40px;
           position: relative;
           top: calc(50% - 20px);
         }
+
         .yyInfo {
           text-align: right;
           margin-left: auto;
+
           .yybfb {
             margin-top: 14px;
             font-size: 18px;
             font-weight: 700;
             color: rgba(58, 160, 255, 1);
           }
+
           .yybfb1 {
             color: rgba(58, 160, 255, 1);
           }
+
           .yybfb2 {
             color: #ff8d1a;
           }
+
           .yybfb3 {
             color: #00baad;
           }
+
           .yybfb4 {
             color: #ff5733;
           }
+
           .yybfb5 {
             color: rgba(126, 46, 240, 1);
           }
+
           .yybfb6 {
             color: #43cf7c;
           }
+
           .yyText {
             line-height: 20px;
             font-size: 13px;
@@ -371,10 +405,12 @@ export default {
       }
     }
   }
+
   .chartBox {
     .dotBox {
       background: #fff;
       border-radius: 6px;
+
       .dotTitle {
         display: flex;
         width: calc(100%-30px);
@@ -382,12 +418,14 @@ export default {
         box-sizing: border-box;
         padding: 13px 15px;
         border-bottom: 1px solid rgba(216, 220, 229, 1);
+
         .dotImg {
           width: 26.84px;
           height: 20px;
           position: relative;
           top: 2px;
         }
+
         .dotText {
           margin-left: 10px;
           height: 22px;
@@ -396,6 +434,7 @@ export default {
           color: rgba(25, 28, 47, 1);
         }
       }
+
       .fxTitle {
         width: 100%;
         height: 88px;
@@ -403,6 +442,7 @@ export default {
         text-align: center;
         padding-top: 12px;
         box-sizing: border-box;
+
         .fxText {
           font-size: 16px;
           font-weight: 700;
@@ -411,10 +451,12 @@ export default {
           vertical-align: top;
         }
       }
+
       .mapBox {
         height: 373px;
         width: 100%;
         box-sizing: border-box;
+
         .smallBox {
           width: 325px;
           height: 360px;
