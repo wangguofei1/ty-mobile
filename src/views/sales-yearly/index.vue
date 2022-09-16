@@ -97,6 +97,7 @@ export default {
             chartsData2: [],
             chartsData3: [],
             index1: "",
+            form2:{},
         }
     },
     methods: {
@@ -108,17 +109,19 @@ export default {
             this.queryTop(this.index1);
             this.queryMonthSalesPrice({
                 queryType:this.queryType,
-                type: this.tabIndex5
+                type: this.tabIndex5,
             });
         },
         changeTab(lab) {
             this.tabIndex5=lab;
             this.queryMonthSalesPrice({
                 queryType:this.queryType,
-                type: this.tabIndex5
+                type: this.tabIndex5,
+                ...this.form2,
             });
         },
         changeForm(form) {
+            this.form2=form;
             this.queryProvinceSalePrice(form);
             this.query1(form);
             this.query2(form);
@@ -136,7 +139,7 @@ export default {
             if(id instanceof Object==true){
                 data={ ...id, medicineId: this.index1 };
             }else{
-                data={ queryType:this.queryType, medicineId: id }
+                data={ queryType:this.queryType, medicineId: id,...this.form2 }
                 this.index1 = id;
             }
             let res = await submitTop(data);
