@@ -26,7 +26,7 @@
     </div>
     <div class="xstitle">门店列表</div>
     <div class="xsBox" v-if="shopList.length>0">
-      <div class="xsItem" v-for="(item, index) in shopList" :key="index">
+      <div class="xsItem" v-for="(item, index) in shopList" :key="index" @click="goDetail(item)">
         <div class="xsTitle">
           <div>
             <div class="shopName">{{ item.name }} <span class="sectionName">{{item.sectionName}}</span>
@@ -101,6 +101,12 @@ export default {
     this.getQueryType(1)
   },
   methods: {
+    goDetail(item) {
+      this.$router.push({
+        name: 'StoreDetails',
+        query: { hospital: JSON.stringify(item) }
+      })
+    },
     async getData() {
       this.ruleForm.pageSize = 5
       const res = await shopServiceCharts(this.ruleForm)
