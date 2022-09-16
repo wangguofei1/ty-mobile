@@ -26,7 +26,7 @@
     </div>
     <div class="xstitle">门店列表</div>
     <div class="xsBox" v-if="shopList.length>0">
-      <div class="xsItem" v-for="(item, index) in shopList" :key="index" @click="goDetail(item)">
+      <div class="xsItem" v-for="(item, index) in shopList" :key="index" @click="">
         <div class="xsTitle">
           <div>
             <div class="shopName">{{ item.name }} <span class="sectionName">{{item.sectionName}}</span>
@@ -98,11 +98,12 @@ export default {
     }
   },
   created() {
+    console.log(1111111111);
     this.getQueryType(1)
   },
   methods: {
     goDetail(item) {
-      this.$router.push({
+      this.$router.replace({
         name: 'StoreDetails',
         query: { hospital: JSON.stringify(item) }
       })
