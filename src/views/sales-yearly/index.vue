@@ -97,21 +97,23 @@ export default {
             chartsData2: [],
             chartsData3: [],
             index1: "",
-            form2:"",
+            form2: "",
         }
     },
     methods: {
         changeTab1(type) {
-            this.form2="";
+            this.form2 = "";
             this.queryType = type;
             this.queryProvinceSalePrice({ queryType: this.queryType });
             this.query1({ queryType: this.queryType });
             this.query2({ queryType: this.queryType });
             this.queryTop(this.index1);
-            this.queryMonthSalesPrice({
-                queryType: this.queryType,
-                type: this.tabIndex5,
-            });
+            if (this.queryType == 1) {
+                this.queryMonthSalesPrice({
+                    queryType: this.queryType,
+                    type: this.tabIndex5,
+                });
+            }
         },
         changeTab(lab) {
             this.tabIndex5 = lab;
@@ -122,8 +124,8 @@ export default {
                 });
             } else {
                 this.queryMonthSalesPrice({
-                    queryType: this.queryType,
-                    type: this.tabIndex5,
+                        queryType: 1,
+                        type: this.tabIndex5,
                 });
             }
 
@@ -150,8 +152,8 @@ export default {
                 if (this.form2) {
                     data = { medicineId: id, ...this.form2 }
                     this.index1 = id;
-                }else{
-                    data = { queryType: this.queryType, medicineId: id}
+                } else {
+                    data = { queryType: this.queryType, medicineId: id }
                     this.index1 = id;
                 }
 
