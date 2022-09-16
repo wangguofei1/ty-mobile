@@ -46,6 +46,10 @@ export default {
           textStyle: {
                     color: "white" //设置文字颜色
                 },
+                formatter:function(params){
+                  console.log(params);
+                  return `${params.marker} ${params.name} ${params.value}%`
+                }
         },
         legend: [
           {
@@ -67,7 +71,7 @@ export default {
               show: true,
               position: 'inside',
               formatter: function (arg) {
-                return arg.value
+                return arg.value+'%'
               }
             },
             emphasis: {
