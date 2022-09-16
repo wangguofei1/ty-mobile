@@ -1,6 +1,6 @@
 <template>
     <div>
-        <topNav :ruleForm="ruleForm"  @changeForm="changeForm" @changeTab="changeTab1"></topNav>
+        <topNav :ruleForm="ruleForm" @changeForm="changeForm" @changeTab="changeTab1"></topNav>
         <div class="headBox">
             <panel-group :dotInfo="dotInfo" :salesNumInfo="salesNumInfo" :salesPriceInfo="salesPriceInfo"
                 :salesInfo="salesInfo" @handleClick1="queryTop1" />
@@ -19,7 +19,7 @@
                             <van-tab title="金额" name="2"></van-tab>
                         </van-tabs> -->
                         <div class="tab1">
-                            <div  :class="tabIndex5==2?'active':''" @click="changeTab(2)">数量</div>
+                            <div :class="tabIndex5==2?'active':''" @click="changeTab(2)">数量</div>
                             <div :class="tabIndex5==1?'active':''" @click="changeTab(1)">金额</div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ import {
 } from '@/api/home'
 export default {
     name: "",
-    components: { saleForm, PanelGroup, barChart, parCharts,topNav },
+    components: { saleForm, PanelGroup, barChart, parCharts, topNav },
     data() {
         return {
             queryType: '1',
@@ -97,31 +97,39 @@ export default {
             chartsData2: [],
             chartsData3: [],
             index1: "",
-            form2:{},
+            form2:"",
         }
     },
     methods: {
         changeTab1(type) {
-            this.queryType=type;
-            this.queryProvinceSalePrice({queryType:this.queryType});
-            this.query1({queryType:this.queryType});
-            this.query2({queryType:this.queryType});
+            this.form2="";
+            this.queryType = type;
+            this.queryProvinceSalePrice({ queryType: this.queryType });
+            this.query1({ queryType: this.queryType });
+            this.query2({ queryType: this.queryType });
             this.queryTop(this.index1);
             this.queryMonthSalesPrice({
-                queryType:this.queryType,
+                queryType: this.queryType,
                 type: this.tabIndex5,
             });
         },
         changeTab(lab) {
-            this.tabIndex5=lab;
-            this.queryMonthSalesPrice({
-                queryType:this.queryType,
-                type: this.tabIndex5,
-                ...this.form2,
-            });
+            this.tabIndex5 = lab;
+            if (this.form2) {
+                this.queryMonthSalesPrice({
+                    type: this.tabIndex5,
+                    ...this.form2,
+                });
+            } else {
+                this.queryMonthSalesPrice({
+                    queryType: this.queryType,
+                    type: this.tabIndex5,
+                });
+            }
+
         },
         changeForm(form) {
-            this.form2=form;
+            this.form2 = form;
             this.queryProvinceSalePrice(form);
             this.query1(form);
             this.query2(form);
@@ -135,12 +143,18 @@ export default {
             this.queryTop(id);
         },
         async queryTop(id) {
-            let data=null;
-            if(id instanceof Object==true){
-                data={ ...id, medicineId: this.index1 };
-            }else{
-                data={ queryType:this.queryType, medicineId: id,...this.form2 }
-                this.index1 = id;
+            let data = null;
+            if (id instanceof Object == true) {
+                data = { ...id, medicineId: this.index1 };
+            } else {
+                if (this.form2) {
+                    data = { medicineId: id, ...this.form2 }
+                    this.index1 = id;
+                }else{
+                    data = { queryType: this.queryType, medicineId: id}
+                    this.index1 = id;
+                }
+
             }
             let res = await submitTop(data);
             if (res.code == 0) {
@@ -201,9 +215,9 @@ export default {
     },
     mounted() {
         this.queryTop('');
-        this.queryMonthSalesPrice({queryType:this.queryType,type:this.tabIndex5});
+        this.queryMonthSalesPrice({ queryType: this.queryType, type: this.tabIndex5 });
         this.queryProvinceSalePrice({
-            queryType: this.queryType ,
+            queryType: this.queryType,
         });
         this.query1({
             queryType: this.queryType,
@@ -285,8 +299,9 @@ export default {
         }
     }
 }
-.tab1{
-    margin:7px 10px  0 0;
+
+.tab1 {
+    margin: 7px 10px 0 0;
     background-color: #f0f1f5;
     color: #a6a6a6;
     width: 78px;
@@ -294,17 +309,19 @@ export default {
     // font-size: 12px;
     border-radius: 4px;
     display: flex;
-    >div{
-        margin-left:3px ;
+
+    >div {
+        margin-left: 3px;
         margin-top: 3px;
-        font-size:12px;
+        font-size: 12px;
         line-height: 20px;
         text-align: center;
         width: 36px;
         height: 20px;
         // padding:-2px  0  0px 5px;
     }
-    .active{
+
+    .active {
         background-color: #fff;
         border-radius: 3px;
         color: #2a82e4;
