@@ -31,7 +31,7 @@ export default {
       xsItemList1: [
         {
           xsImg: require('@/assets/images/xsImg1.png'),
-          xsText: '年度销售',
+          xsText: '销售汇总',
           url: 'salesYearly'
         },
         {

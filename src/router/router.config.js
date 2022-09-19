@@ -40,7 +40,7 @@ export const constantRouterMap = [{
   name: 'salesYearly',
   component: () => import('@/views/sales-yearly/index'),
   meta: {
-    title: '年度销售',
+    title: '销售汇总',
     keepAlive: false
   }
 }, {
