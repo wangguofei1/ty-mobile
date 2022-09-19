@@ -8,6 +8,7 @@
           <div>
             <div class="xsText1">{{ hospitalOfficeSales.name }}</div>
             <div class="tagBox">
+              <div class="tag3">{{hospitalOfficeSales.provinceName}}</div>
               <div class="tag1">特药定点</div>
               <div class="tag2">医保定点</div>
             </div>
@@ -242,7 +243,7 @@ export default {
         margin-bottom: 6px;
 
         .tag1,
-        .tag2 {
+        .tag2, .tag3 {
           height: 17px;
           line-height: 18px;
           font-size: 12px;
@@ -251,7 +252,11 @@ export default {
           border: 1px solid rgba(0, 186, 173, 1);
           border-radius: 10px;
         }
-
+        .tag3 {
+          margin-right: 10px;
+          color: rgba(56, 154, 252, 1);
+          border: 1px solid rgba(56, 154, 252, 1);
+        }
         .tag2 {
           margin-left: 10px;
           color: rgba(56, 154, 252, 1);

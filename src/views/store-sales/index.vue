@@ -7,7 +7,7 @@
         <div class="xsTitle">
           <div>
             <div class="xsText">{{ item.name }}</div>
-            <div class="areaBox">{{ item.provinceName }}/{{ item.regionName }}/{{ item.sectionName }}</div>
+            <div class="areaBox">{{ item.regionName }}/{{ item.sectionName }}/{{ item.provinceName }}</div>
           </div>
           <div class="xsGoDetail">
             <img
