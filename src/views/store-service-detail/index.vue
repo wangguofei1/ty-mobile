@@ -26,7 +26,7 @@
     </div>
     <div class="xstitle">门店列表</div>
     <div class="xsBox" v-if="shopList.length>0">
-      <div class="xsItem" v-for="(item, index) in shopList" :key="index" @click="">
+      <div class="xsItem" v-for="(item, index) in shopList" :key="index">
         <div class="xsTitle">
           <div>
             <div class="shopName">{{ item.name }} <span class="sectionName">{{item.sectionName}}</span>
