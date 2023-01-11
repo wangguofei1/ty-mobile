@@ -192,7 +192,7 @@ export default {
     //       itemWidth: 14,
     //       itemHeight: 5,
     //       itemGap: 13,
-    //       data: ["20mg", "80mg"],
+    //       data: ["240mg", "80mg"],
     //       right: '4%',
     //       textStyle: {
     //         fontSize: 12,
@@ -226,7 +226,7 @@ export default {
     //     ],
     //     series: [
     //       {
-    //         name: "20mg",
+    //         name: "240mg",
     //         type: "bar",
     //         data: this.medicine1Data,
     //         itemStyle: {
