@@ -32,7 +32,8 @@ import {
   SwipeItem,
   Col,
   Row,
-  Cascader
+  Cascader,
+  Checkbox
 } from 'vant'
 Vue.use(Button)
 Vue.use(Overlay)
@@ -62,3 +63,4 @@ Vue.use(Col)
 Vue.use(Row)
 Vue.use(DatetimePicker).use(Dialog).use(Calendar).use(Picker).use(PullRefresh).use(Icon)
 Vue.use(Cascader)
+Vue.use(Checkbox)

@@ -57,3 +57,18 @@ export function failedReason(value) {
   if (value.failedReason == 2) return '无法联系客户'
   if (value.failedReason == 3) return '预约下次配送'
 }
+
+export function formatDateHM(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  const y = date.getFullYear()
+  let MM = date.getMonth() + 1
+  MM = MM < 10 ? '0' + MM : MM
+  let d = date.getDate()
+  d = d < 10 ? '0' + d : d
+  let h = date.getHours()
+  h = h < 10 ? '0' + h : h
+  let m = date.getMinutes()
+  m = m < 10 ? '0' + m : m
+  return y + '-' + MM + '-' + d + ' ' + h + ':' + m
+}

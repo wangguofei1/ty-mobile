@@ -14,6 +14,13 @@
         <div class="xsText">{{ item.xsText }}</div>
       </div>
     </div>
+    <div class="title">商务管理</div>
+    <div class="xsBox">
+      <div class="xsItem" v-for="item in xsItemList3" @click="goDetail(item.url)" :key="item.xsText">
+        <img class="xsImg" :src="item.xsImg" />
+        <div class="xsText">{{ item.xsText }}</div>
+      </div>
+    </div>
     <foot-bar @goUrl="toUrl" :active="tabActive"></foot-bar>
   </div>
 </template>
@@ -76,7 +83,14 @@ export default {
           xsText: '门店服务情况',
           url: 'StoreServiceDetail'
         }
-      ]
+      ],
+      xsItemList3: [
+        {
+          xsImg: require('@/assets/images/xsImg6.png'),
+          xsText: '签到',
+          url: 'BusinessManagement'
+        }
+      ],
     }
   },
   created() {},
