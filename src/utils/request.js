@@ -27,7 +27,7 @@ service.interceptors.request.use(
     //   })
     // }
     if (localStorage.getItem('id')) {
-      if(config.params && config.url.indexOf('queryShopInfo') === -1) {
+      if (config.params && config.url.indexOf('queryShopInfo') === -1) {
         config.params.lander = localStorage.getItem('id')
       }
       if (config.data && config.url.indexOf('queryShopInfo') === -1) {

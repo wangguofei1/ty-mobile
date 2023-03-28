@@ -46,9 +46,9 @@
     </div>
   </div>
 </template>
-    
+
 <script>
-import { queryShopInfo } from '@/api/salesFlow'
+import { queryTaskList } from '@/api/salesFlow'
 import * as echarts from 'echarts'
 import _ from 'lodash'
 export default {
@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     queryShopInfo() {
-      let params = JSON.parse(this.$route.query.hospital)
+      const params = JSON.parse(this.$route.query.hospital)
       queryShopInfo({ shopId: params.id, queryType: 1 }).then(res => {
         if (res.code == 0) {
           this.hospitalOfficeSales = res.data
@@ -121,7 +121,7 @@ export default {
         },
         xAxis: {
           type: 'category',
-          data: _.map(this.monthSales, function (v) {
+          data: _.map(this.monthSales, function(v) {
             return v.name
           }),
           axisTick: {
@@ -140,7 +140,7 @@ export default {
         },
         tooltip: {
           trigger: 'axis',
-          formatter: function (params) {
+          formatter: function(params) {
             let str = ''
             params.forEach((item, index) => {
               str +=
@@ -155,7 +155,7 @@ export default {
                 '<br />'
             })
             return str
-          },
+          }
         },
         yAxis: {
           type: 'value',
@@ -178,7 +178,7 @@ export default {
         },
         series: [
           {
-            data: _.map(this.monthSales, function (v) {
+            data: _.map(this.monthSales, function(v) {
               return v.value
             }),
             type: 'line',
@@ -198,7 +198,7 @@ export default {
   }
 }
 </script>
-    
+
 <style lang="scss" scoped>
 .xsBg {
   width: 375px;

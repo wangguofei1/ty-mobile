@@ -16,7 +16,7 @@
           <div class="flex1 content1">
             <div>盘查时间</div>
             <div>
-              <span style="color: #000">{{ checkDate | formatDateHM }}</span>
+              <span style="color: #000">{{ checkDate | for++-matDateHM }}</span>
             </div>
           </div>
         </van-col>

@@ -1,48 +1,90 @@
 <template>
-  <div>
-    <div class="businessManagementTitleTitle">商务管理</div>
+  <div class="container">
     <!-- <div class="xstitle">门店列表</div> -->
-    <div class="xsBox">
-      <div class="xsItem">
-        <div class="xsTitle" @click="goDetail()">
-          <div class="shopName"><span class="sectionName">拜访药房：</span>南京德众堂大药房</div>
-          <div class="shopName"><span class="sectionName">拜访时间：</span>2022.07.09 12:00</div>
-          <div class="shopName"><span class="sectionName">拜访内容：</span>我怎么知道</div>
-        </div>
-      </div>
-      <div class="xsItem">
-        <div class="xsTitle" @click="goDetail()">
-          <div class="shopName"><span class="sectionName">拜访药房：</span>南京德众堂大药房</div>
-          <div class="shopName"><span class="sectionName">拜访时间：</span>2022.07.09 12:00</div>
-          <div class="shopName"><span class="sectionName">拜访内容：</span>我怎么知道</div>
-        </div>
-      </div>
-      <div class="xsItem">
-        <div class="xsTitle" @click="goDetail()">
-          <div class="shopName"><span class="sectionName">拜访药房：</span>南京德众堂大药房</div>
-          <div class="shopName"><span class="sectionName">拜访时间：</span>2022.07.09 12:00</div>
-          <div class="shopName"><span class="sectionName">拜访内容：</span>我怎么知道</div>
-        </div>
-      </div>
-    </div>
+    <van-pull-refresh
+      v-model="isLoading"
+      :success-duration="1500"
+      :success-text="refreshSuccessText"
+      @refresh="onRefresh"
+    >
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :error.sync="error"
+        error-text="请求失败,重新加载"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <van-cell-group
+          class="cell-group-top"
+          inset
+          v-for="(item, index) in dataList"
+          :key="index"
+          style="margin-top: 20px;"
+          @click="goDetail(item.id)"
+        >
+            <van-cell :title="item.name"></van-cell>
+            <van-cell :title="'开始日期：'+item.startDate"> </van-cell>
+            <van-cell :title="'截至日期：'+item.endDate"> </van-cell>
+            <van-cell :title="item.state"></van-cell>
+        </van-cell-group>
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 
 <script>
+import { queryTaskList } from '@/api/task'
 export default {
   name: 'BusinessManagement',
   components: {},
   data() {
-    return {}
+    return {
+      page: 1,
+      pageSize: 5,
+      dataList: [],
+      isLoading: false,
+      refreshSuccessText: '',
+      loading: false,
+      finished: false,
+      id: localStorage.getItem('id'),
+      error: false
+    }
   },
-  created() {},
+  created() {
+    // this.getDataList()
+  },
   computed: {},
   mounted() {},
   methods: {
-    goDetail(url) {
+    onRefresh() {
+      this.dataList = []
+      this.page = 1
+      this.getDataList()
+      this.isLoading = false
+    },
+    onLoad() {
+      console.log(this.page)
+      this.getDataList()
+    },
+    async getDataList() {
+      const { page, pageSize, id, dataList } = this
+      const parmas = { page, pageSize, id }
+      this.loading = true
+      const res = await queryTaskList(parmas)
+      if (res.data.data.length > 0) {
+        this.loading = false
+        this.page++
+        this.dataList = dataList.concat(res.data.data)
+      } else {
+        this.finished = true
+      }
+    },
+    goDetail(id) {
+      console.log(id)
       this.$router.push({
         name: 'ClockIn',
-        query: { shopName: '南京德众堂大药房' }
+        query: { shopName: '南京德众堂大药房', id }
       })
     }
   }
