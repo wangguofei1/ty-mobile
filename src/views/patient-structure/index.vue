@@ -594,7 +594,7 @@ export default {
 
     .dotTitle {
       display: flex;
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       height: 50px;
       box-sizing: border-box;
       padding: 13px 15px;

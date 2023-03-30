@@ -86,6 +86,7 @@
           color="#4873EE"
           style="border-radius: 6px; margin-top: 30px"
           @click="goDetail()"
+          :disabled="buttonCheck"
           >确定</van-button
         >
       </div>
@@ -105,11 +106,18 @@ export default {
       checkbox1: false,
       checkbox2: false,
       checkbox3: false,
-      checkbox4: false
+      checkbox4: false,
     }
   },
   created() {},
-  computed: {},
+  computed: {
+    buttonCheck(){
+      if(this.checkbox1&&this.checkbox2&&this.checkbox3&&this.checkbox4){
+        return false;
+      }
+        return true;
+    },
+  },
   mounted() {},
   methods: {
     goDetail(url) {

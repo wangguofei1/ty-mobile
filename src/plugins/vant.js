@@ -33,7 +33,9 @@ import {
   Col,
   Row,
   Cascader,
-  Checkbox
+  Checkbox,
+  RadioGroup,
+   Radio
 } from 'vant'
 Vue.use(Button)
 Vue.use(Overlay)
@@ -41,6 +43,8 @@ Vue.use(Cell)
 Vue.use(ImagePreview)
 Vue.use(CellGroup)
 Vue.use(List)
+Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Divider)
 Vue.use(NavBar)

@@ -284,7 +284,7 @@ export default {
     box-sizing: border-box;
     background: rgba(255, 255, 255, 1);
     height: 268px;
-    width: calc(100%-30px);
+    width: calc(100% - 30px);
     border-radius: 8px;
   }
   .phTable {
@@ -293,7 +293,7 @@ export default {
     background: rgba(255, 255, 255, 1);
     height: auto;
     padding-bottom: 12px;
-    width: calc(100%-30px);
+    width: calc(100% - 30px);
     border-radius: 8px;
     .pbBox {
       display: flex;

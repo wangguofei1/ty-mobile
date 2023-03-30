@@ -145,7 +145,7 @@ export default {
     margin-bottom: 15px;
     .xsTitle {
       display: flex;
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 0 10px;
       .xsImg {
         width: 36px;
@@ -181,7 +181,7 @@ export default {
       }
     }
     .xsContent {
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 10px 15px 13px 15px;
       display: flex;
       .xsNumBox,

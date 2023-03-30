@@ -397,7 +397,7 @@ export default {
     margin-bottom: 15px;
     .xsTitle {
       display: flex;
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 0 15px;
       .xsImg {
         width: 36px;
@@ -420,7 +420,7 @@ export default {
       }
     }
     .xsContent {
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 10px 15px 23px 15px;
       display: flex;
       .xsNumBox,
@@ -549,7 +549,7 @@ export default {
     box-sizing: border-box;
     background: rgba(255, 255, 255, 1);
     height: 268px;
-    width: calc(100%-30px);
+    width: calc(100% - 30px);
     border-radius: 8px;
   }
 

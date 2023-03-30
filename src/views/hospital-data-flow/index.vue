@@ -106,7 +106,7 @@ export default {
     overflow: hidden;
     .xsTitle1 {
       display: flex;
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 0 15px;
       .xsImg1 {
         width: 45px;
@@ -125,7 +125,7 @@ export default {
       }
     }
     .xsContent1 {
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 10px 15px 5px 15px;
       display: flex;
       .xsNumBox1,
@@ -179,7 +179,7 @@ export default {
       overflow: hidden;
       .xsTitle {
         display: flex;
-        width: calc(100%-30px);
+        width: calc(100% - 30px);
         .xsImg {
           width: 36px;
           height: 36px;
@@ -199,7 +199,7 @@ export default {
         }
       }
       .xsContent {
-        width: calc(100%-30px);
+        width: calc(100% - 30px);
         margin: 10px 0 23px 0;
         display: flex;
         .xsNumBox,

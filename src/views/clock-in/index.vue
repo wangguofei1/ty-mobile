@@ -107,13 +107,13 @@ export default {
       this.initMap()
     },
     async goDetail() {
-      // this.$router.push({
-      //   name: 'VisitTask',
-      //   query: { shopName: '南京德众堂大药房' }
-      // })
-      const { id, remark, signPics, signAxis } = this
-      const signTime = new Date()
-      await save({ id, remark, signPics, signTime, signAxis })
+      this.$router.push({
+        name: 'VisitTask',
+        query: { shopName: '南京德众堂大药房',id:this.$route.query.id }
+      })
+      // const { id, remark, signPics, signAxis } = this
+      // const signTime = new Date()
+      // await save({ id, remark, signPics, signTime, signAxis })
     }
   }
 }

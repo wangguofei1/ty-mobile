@@ -223,7 +223,7 @@ export default {
 
     .xsTitle1 {
       display: flex;
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 0 15px;
 
       .xsImg1 {
@@ -279,7 +279,7 @@ export default {
     }
 
     .xsContent1 {
-      width: calc(100%-30px);
+      width: calc(100% - 30px);
       margin: 10px 15px 5px 15px;
       display: flex;
 
@@ -415,7 +415,7 @@ export default {
 
       .dotTitle {
         display: flex;
-        width: calc(100%-30px);
+        width: calc(100% - 30px);
         height: 50px;
         box-sizing: border-box;
         padding: 13px 15px;

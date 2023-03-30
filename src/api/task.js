@@ -32,3 +32,19 @@ export function save(data) {
     data
   })
 }
+
+export function queryTaskDeatil(data){
+  return request({
+    url: 'api/demo/task/check/detail/query',
+    method: 'get',
+    params:{taskCheckId:data}
+  })
+}
+
+export function submitTaskDeatil(data){
+  return request({
+    url: 'api/demo/task/execute',
+    method: 'POST',
+    data
+  })
+}
