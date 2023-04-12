@@ -44,6 +44,8 @@
 
 <script>
 import { queryTaskDetail, uploadFile, save } from '@/api/task'
+import { getWXsignature, translateLng } from '@/api/system'
+import wx from'weixin-js-sdk'
 
 export default {
   name: 'ClockIn',
@@ -52,46 +54,23 @@ export default {
     return {
       detail: {},
       currentDate: new Date(),
-      shopName: '南京德众堂大药房',
       remark: '',
       shopAxis: [],
       signPics: [],
       signTime: '',
-      signAxis: ''
+      signAxis: '',
+      sitePic: [],
+      id: ''
     }
   },
   created() {
     this.id = this.$route.query.id
     this.getDetail(this.id)
   },
+  mounted() {
+    this.config()
+  },
   methods: {
-    initMap() {
-      const that = this
-      var geolocation = new BMap.Geolocation()
-      // var geolocation = new BMap.Geolocation()
-      // 开启SDK辅助定位
-      geolocation.enableSDKLocation()
-      geolocation.getCurrentPosition(function(r) {
-        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-          const map = new BMap.Map('map')
-          const mPoint = new BMap.Point(r.point.lng, r.point.lat)
-          that.signAxis = r.point.lng + ',' + r.point.lat
-          map.centerAndZoom(mPoint, 18) // 中心点和地图级别
-          var center_dot = new BMap.Icon(require('@/assets/images/myPoint.png'), new BMap.Size(25, 25)) // 自定义标注图标
-          const marker = new BMap.Marker(mPoint, { icon: center_dot })
-          map.addOverlay(marker) // 标注自己的位置
-          const circle = new BMap.Circle(mPoint, 50, {
-            fillColor: '#BDDAF2',
-            strokeWeight: 1,
-            fillOpacity: 0.3,
-            strokeOpacity: 0.3
-          })
-          map.addOverlay(circle)
-        } else {
-          console.log('failed' + this.getStatus())
-        }
-      })
-    },
     async afterRead(file) {
       // 此时可以自行将文件上传至服务器90+
       console.log(file)
@@ -100,20 +79,83 @@ export default {
     },
     async getDetail(id) {
       const res = await queryTaskDetail({ id })
-      // this.
       const { shopAxis } = res.data
       this.shopAxis = shopAxis.split(',')
       this.detail = res.data
-      this.initMap()
     },
     async goDetail() {
       this.$router.push({
         name: 'VisitTask',
-        query: { shopName: '南京德众堂大药房',id:this.$route.query.id }
+        query: { shopName: this.detail.shopName,id: this.id }
       })
       // const { id, remark, signPics, signAxis } = this
       // const signTime = new Date()
       // await save({ id, remark, signPics, signTime, signAxis })
+    },
+    async config() {
+      const that = this
+      const res = await getWXsignature({ url: window.location.href })
+      const {appId,nonceStr,timestamp,signature} = res.data
+      wx.config({
+        appId: appId,
+        nonceStr: nonceStr,
+        signature: signature,
+        timestamp: timestamp,
+        debug: false,
+        jsApiList: ['getLocation']
+      })
+      wx.ready((res) => {
+        that.getLocationByWx()
+      })
+      
+      wx.error((res) => {
+      })
+    },
+    getLocationByWx(){
+      const that = this
+      const ua = window.navigator.userAgent.toLowerCase()
+      if(ua.match(/micromessenger/i) != null){
+        wx.getLocation({
+          type: 'gcj02',
+          success: (res) => {
+            var lat = res.latitude
+            var lng = res.longitude
+            translateLng({
+              ak: 'fttekDTqWAsVp1Y6m0b8K6BhITGvEdxz',
+              location: lat + ',' + lng,
+              output: 'json',
+              pois: '1'
+            })
+            .then((res) => {
+              console.log(res)
+              const map = new BMap.Map('map')
+              const mPoint = new BMap.Point(res.result.location.lng, res.result.location.lat)
+              const tPoint = new BMap.Point(that.shopAxis[0], that.shopAxis[1])
+              // that.signAxis = res.result.location.lng + ',' + res.result.location.lat
+              map.centerAndZoom(mPoint, 18) // 中心点和地图级别
+              var target_dot = new BMap.Icon(require('@/assets/images/myPoint.png'), new BMap.Size(25, 25))
+              var my_dot = new BMap.Icon(require('@/assets/images/point.png'), new BMap.Size(25, 25))
+              const marker = new BMap.Marker(mPoint, { icon: my_dot })
+              map.addOverlay(marker) // 标注自己的位置
+              map.addOverlay(new BMap.Marker(tPoint, { icon: target_dot }))
+              // const circle = new BMap.Circle(mPoint, 50, {
+              //   fillColor: '#BDDAF2',
+              //   strokeWeight: 1,
+              //   fillOpacity: 0.3,
+              //   strokeOpacity: 0.3
+              // })
+              // map.addOverlay(circle)
+            })
+            
+          },
+          fail: (error) => {
+            console.log(error)
+          },
+          cancel: (error) => {
+            console.log(error)
+          }
+        })
+      }
     }
   }
 }

@@ -141,3 +141,15 @@ export function queryPatientAnalysis(data) {
     params: data
   })
 }
+
+export function getWXsignature(data) {
+  return request({
+    url: '/api/openapi/wx/webapp/signature',
+    method: 'get',
+    params: data
+  })
+}
+
+export function translateLng(data) {
+  return request.jsonp('http://api.map.baidu.com/geocoder/v2/',data)
+}

@@ -2,8 +2,8 @@
 <template>
   <div class="loginBox">
     <div class="topBox">
-      <img style="margin: 80px 0 0 30px; width: 140px" src="@/assets/images/icon.png" />
-      <div style="font-size: 18px; color: #354c57; margin: 30px 0 0 30px">欢迎登陆拓益管理系统</div>
+      <img style="margin: 80px 0 0 30px; width: 150px" src="@/assets/images/logo2.png" />
+      <div style="font-size: 18px; color: #354c57; margin: 30px 0 0 30px">欢迎登陆零售监管分析系统</div>
     </div>
     <div>
       <van-form @submit="onSubmit" class="submitBox">

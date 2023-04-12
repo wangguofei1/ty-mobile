@@ -6,7 +6,7 @@
           <div class="flex1 content1 item-bt">
             <div>盘查药房</div>
             <div>
-              <span style="color: #000">{{ checkShopName }}</span>
+              <span style="color: #000">{{ shopName }}</span>
             </div>
           </div>
         </van-col>
@@ -130,7 +130,6 @@ export default {
     return {
       value: '',
       isMedicineShow: false,
-      checkShopName: '南京德众堂大药房',
       checkDate: '2022-07-09 12:00',
       medicineName: '恩莱瑞',
       purchaseThisMonth: 1,
@@ -146,6 +145,7 @@ export default {
       taskList: [],
       index: null,
       isCheckList: [],
+      shopName: this.$route.query.shopName
     }
   },
   components: {

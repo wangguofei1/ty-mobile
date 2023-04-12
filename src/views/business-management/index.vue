@@ -84,7 +84,7 @@ export default {
       console.log(id)
       this.$router.push({
         name: 'ClockIn',
-        query: { shopName: '南京德众堂大药房', id }
+        query: { id }
       })
     }
   }

@@ -118,16 +118,8 @@ export default {
       })
     },
     initCharts1() {
-      var arr1 = this.dotRange.map((item, index) => {
-        if (index < 4) {
-          return item.name
-        }
-      })
-      var arr2 = this.dotRange.map((item, index) => {
-        if (index > 3) {
-          return item.name
-        }
-      })
+      let arr1 = _.take(this.dotRange, 4)
+      let arr2 = _.takeRight(this.dotRange, 3)
       const charts1 = echarts.init(document.getElementById('chartBox1'), 'macarons')
       charts1.setOption({
         tooltip: {
@@ -176,16 +168,8 @@ export default {
       })
     },
     initCharts2() {
-      var arr1 = this.diseaseRange.map((item, index) => {
-        if (index < 3) {
-          return item.name
-        }
-      })
-      var arr2 = this.diseaseRange.map((item, index) => {
-        if (index > 2) {
-          return item.name
-        }
-      })
+      let arr1 = _.take(this.diseaseRange, 3)
+      let arr2 = _.takeRight(this.diseaseRange, 2)
       const charts2 = echarts.init(document.getElementById('chartBox2'), 'macarons')
       charts2.setOption({
         tooltip: {

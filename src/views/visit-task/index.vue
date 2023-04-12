@@ -38,6 +38,7 @@ export default {
       inventoryCheck: false,
       coldChainInspection: false,
       taskList: [],
+      shopName: ''
     }
   },
   created() {
@@ -49,9 +50,10 @@ export default {
   mounted() { },
   methods: {
     async getDetail(id) {
-      const res = await queryTaskDetail({ id });
+      const res = await queryTaskDetail({ id })
       if (res.code == 0) {
-        this.taskList = res.data.checkList;
+        this.shopName = res.data.shopName
+        this.taskList = res.data.checkList
       }
     },
     goDetail(id) {
@@ -68,7 +70,7 @@ export default {
       // }
       this.$router.push({
         name: 'InventoryCheck',
-        query: { shopName: '南京德众堂大药房', id: id }
+        query: { shopName: this.shopName, id: id }
       })
     }
   }
