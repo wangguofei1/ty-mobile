@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <!-- <div class="xstitle">门店列表</div> -->
+    <van-tabs v-model="isComplete" sticky @click="onClick">
+      <van-tab title="未完成"></van-tab>
+      <van-tab title="已完成"></van-tab>
+    </van-tabs>
     <van-pull-refresh
       v-model="isLoading"
       :success-duration="1500"
@@ -21,12 +25,12 @@
           v-for="(item, index) in dataList"
           :key="index"
           style="margin-top: 20px;"
-          @click="goDetail(item.id)"
+          @click="goDetail(item.id, item.state)"
         >
-            <van-cell :title="item.name"></van-cell>
-            <van-cell :title="'开始日期：'+item.startDate"> </van-cell>
-            <van-cell :title="'截至日期：'+item.endDate"> </van-cell>
-            <van-cell :title="item.state"></van-cell>
+            <van-cell :title="item.name" style="font-weight: bold;" />
+            <van-cell :title="item.description" />
+            <van-cell :title="item.startDate + ' ~ ' + item.endDate" />
+            <van-cell :title="item.state | stateFilter" />
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
@@ -48,7 +52,8 @@ export default {
       loading: false,
       finished: false,
       id: localStorage.getItem('id'),
-      error: false
+      error: false,
+      isComplete: 0
     }
   },
   created() {
@@ -59,17 +64,17 @@ export default {
   methods: {
     onRefresh() {
       this.dataList = []
+      this.active = 0
       this.page = 1
       this.getDataList()
       this.isLoading = false
     },
     onLoad() {
-      console.log(this.page)
       this.getDataList()
     },
     async getDataList() {
-      const { page, pageSize, id, dataList } = this
-      const parmas = { page, pageSize, id }
+      const { page, pageSize, id, dataList, isComplete } = this
+      const parmas = { page, pageSize, id, isComplete }
       this.loading = true
       const res = await queryTaskList(parmas)
       if (res.data.data.length > 0) {
@@ -80,12 +85,45 @@ export default {
         this.finished = true
       }
     },
-    goDetail(id) {
-      console.log(id)
-      this.$router.push({
-        name: 'ClockIn',
-        query: { id }
-      })
+    goDetail(id, state) {
+      if(state === 0) {
+        this.$router.push({
+          name: 'ClockIn',
+          query: { id }
+        })
+      } else {
+        this.$router.push({
+          name: 'VisitTask',
+          query: { id: id }
+        })
+      }
+    },
+    onClick(index) {
+      if(index !== this.active) {
+        this.dataList = []
+        this.page = 1
+        this.getDataList()
+      }
+    }
+  },
+  filters: {
+    stateFilter(state) {
+      let re = ''
+      switch(state){
+        case 0:
+          re = '待执行'
+          break
+        case 1:
+          re = '已签到'
+          break
+        case 2:
+          re = '已执行'
+          break
+        case 9:
+          re = '已取消'
+          break
+      }
+      return re
     }
   }
 }

@@ -60,7 +60,12 @@ export function failedReason(value) {
 
 export function formatDateHM(value) {
   if (!value) return ''
-  const date = new Date(value)
+  let date = ''
+  if(isNaN(Date.parse(value))){
+    date = new Date(Date.parse(value.replace(/-/g, '/').replace(/T/, ' ')))
+  } else {
+    date = new Date(value)
+  }
   const y = date.getFullYear()
   let MM = date.getMonth() + 1
   MM = MM < 10 ? '0' + MM : MM

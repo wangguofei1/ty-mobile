@@ -11,7 +11,7 @@ export function queryTaskList(data) {
 
 export function queryTaskDetail(data) {
   return request({
-    url: 'api/demo/task//find',
+    url: 'api/demo/task/find',
     method: 'get',
     params: data
   })
@@ -27,7 +27,7 @@ export function uploadFile(data) {
 
 export function save(data) {
   return request({
-    url: 'api/demo/task//save',
+    url: 'api/demo/task/save',
     method: 'post',
     data
   })
@@ -45,6 +45,14 @@ export function submitTaskDeatil(data){
   return request({
     url: 'api/demo/task/execute',
     method: 'POST',
+    data
+  })
+}
+
+export function sign(data) {
+  return request({
+    url: 'api/demo/task/sign',
+    method: 'post',
     data
   })
 }

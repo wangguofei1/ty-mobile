@@ -16,9 +16,9 @@
             </div>
             <div class="vtGoDetail">
               <van-button round size="mini" color="#4E87F6" style="padding: 0px 8px" @click="goDetail(item.id)"
-                v-if="!inventoryCheck">去完成</van-button>
+                v-if="item.isCompleted === 0">去完成</van-button>
               <van-button round size="mini" color="#ccc" style="padding: 0px 8px" disabled
-                v-if="inventoryCheck">已完成</van-button>
+                v-else>已完成</van-button>
             </div>
           </div>
           <van-divider :dashed="true" :hairline="false" style="margin: 5px 0px" />
@@ -35,16 +35,12 @@ export default {
   components: {},
   data() {
     return {
-      inventoryCheck: false,
-      coldChainInspection: false,
       taskList: [],
       shopName: ''
     }
   },
   created() {
-    this.inventoryCheck = this.$route.query.inventoryCheck ? this.$route.query.inventoryCheck : false;
-    this.coldChainInspection = this.$route.query.coldChainInspection ? this.$route.query.coldChainInspection : false;
-    this.getDetail(this.$route.query.id);
+    this.getDetail(this.$route.query.id)
   },
   computed: {},
   mounted() { },

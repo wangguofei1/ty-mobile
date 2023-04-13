@@ -34,7 +34,7 @@
                   </template>
                   <template slot="button">盒</template>
                 </van-field> -->
-                <van-field name="radio" :label="item.title" :label-width=120>
+                <van-field name="radio" :label="item.title" :label-width=260 style="display: block;">
                   <template #input>
                     <van-radio-group v-model="item.value" direction="horizontal">
                       <van-radio v-for="(item1, index1) in JSON.parse(item.options)" :name="item1.value">{{ item1.label
@@ -48,14 +48,6 @@
           </van-row>
           <van-row v-if="item.type == 'select'" type="flex" justify="center">
             <van-col :span="24">
-              <!-- <div class="flex1 content1 item-bt">
-            <div class="left">盘查品种</div>
-            <div class="right" @click="isMedicineShow = isMedicineShow ? false : true">
-              <span style="color: #323233" v-if="medicineName">{{ medicineName }}</span>
-              <span style="color: #c8c9cc" v-if="!medicineName">请选择药品</span>
-              <van-icon color="rgba(128, 128, 128, 1)" size="14px" name="arrow" />
-            </div>
-          </div> -->
               <van-field readonly clickable name="pinzhong" :value="item.value | change11(index, taskList)"
                 placeholder="请选择" @click="changeTask(index)" input-align="right" :label-width=120>
                 <template #label>
@@ -81,42 +73,10 @@
             </van-col>
           </van-row>
         </div>
-        <!-- <van-row type="flex" justify="center">
-          <van-col :span="24">
-            <div class="flex1 content2 item-bt">
-              <van-field name="pinzhong2" v-model="salesVolumeThisMonth" placeholder="请输入本月销量/" input-align="right"
-                type="digit">
-                <template #label>
-                  <div class="left">本月销量</div>
-                </template>
-                <template slot="button">盒</template>
-              </van-field>
-            </div>
-          </van-col>
-        </van-row>
-        <van-row type="flex" justify="center">
-          <van-col :span="24">
-            <div class="flex1 content2 item-bt">
-              <van-field name="pinzhong3" v-model="currentInventory" placeholder="请输入当前库存/" input-align="right"
-                type="digit">
-                <template #label>
-                  <div class="left">当前库存</div>
-                </template>
-                <template slot="button">盒</template>
-              </van-field>
-            </div>
-          </van-col>
-        </van-row> -->
         <van-button type="primary" size="large" color="#4873EE" style="border-radius: 6px; margin-top: 60px"
           @click="goDetail()" native-type="submit">确定</van-button>
       </van-form>
     </div>
-    <!-- <div>
-      <van-popup v-model="isMedicineShow" round position="bottom">
-        <van-picker show-toolbar :columns="medicineList" value-key="name" @confirm="confirmMedicine"
-          @cancel="isMedicineShow = false" />
-      </van-popup>
-    </div> -->
   </div>
 </template>
 

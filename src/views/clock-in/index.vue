@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { queryTaskDetail, uploadFile, save } from '@/api/task'
+import { queryTaskDetail, uploadFile, save, sign } from '@/api/task'
 import { getWXsignature, translateLng } from '@/api/system'
 import wx from'weixin-js-sdk'
 
@@ -72,10 +72,8 @@ export default {
   },
   methods: {
     async afterRead(file) {
-      // 此时可以自行将文件上传至服务器90+
-      console.log(file)
       const res = await uploadFile(file.file)
-      this.signPics.push(res.data.src)
+      this.signPics.push(res.data.data.src)
     },
     async getDetail(id) {
       const res = await queryTaskDetail({ id })
@@ -84,13 +82,24 @@ export default {
       this.detail = res.data
     },
     async goDetail() {
-      this.$router.push({
-        name: 'VisitTask',
-        query: { shopName: this.detail.shopName,id: this.id }
-      })
-      // const { id, remark, signPics, signAxis } = this
-      // const signTime = new Date()
-      // await save({ id, remark, signPics, signTime, signAxis })
+      
+      const { id, remark, signPics, signAxis } = this
+      if(signPics.length === 0){
+        this.$toast('请上传现场照片')
+        return false
+      }
+      const data = {
+        signAxis: signAxis,
+        signPics: signPics.join(','),
+        taskId: id
+      }
+      const res = await sign(data)
+      if(res.code === 0) {
+        this.$router.push({
+          name: 'VisitTask',
+          query: { id: this.id }
+        })
+      }
     },
     async config() {
       const that = this
@@ -204,5 +213,8 @@ export default {
     margin-top: 10px;
     margin-bottom: 20px;
   }
+}
+.van-cell__value {
+  flex: auto;
 }
 </style>
