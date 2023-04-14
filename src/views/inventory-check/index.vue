@@ -164,7 +164,7 @@ export default {
                 message: '提交成功', onClose: () => {
                   this.$router.push({
                     name: 'VisitTask',
-                    query: { inventoryCheck: true }
+                    query: { id: that.$route.query.rid }
                   })
                 }
               });
@@ -292,7 +292,6 @@ export default {
 }
 
 ::v-deep .van-field__button {
-  padding-left: 0px;
   padding-right: 0.21333rem;
   color: #323233;
 }

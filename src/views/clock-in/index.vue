@@ -140,7 +140,7 @@ export default {
               const map = new BMap.Map('map')
               const mPoint = new BMap.Point(res.result.location.lng, res.result.location.lat)
               const tPoint = new BMap.Point(that.shopAxis[0], that.shopAxis[1])
-              // that.signAxis = res.result.location.lng + ',' + res.result.location.lat
+              that.signAxis = res.result.location.lng + ',' + res.result.location.lat
               map.centerAndZoom(mPoint, 18) // 中心点和地图级别
               var target_dot = new BMap.Icon(require('@/assets/images/myPoint.png'), new BMap.Size(25, 25))
               var my_dot = new BMap.Icon(require('@/assets/images/point.png'), new BMap.Size(25, 25))

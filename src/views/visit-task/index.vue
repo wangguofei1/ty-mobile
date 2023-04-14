@@ -66,7 +66,7 @@ export default {
       // }
       this.$router.push({
         name: 'InventoryCheck',
-        query: { shopName: this.shopName, id: id }
+        query: { shopName: this.shopName, id: id, rid: this.$route.query.id }
       })
     }
   }
