@@ -35,7 +35,8 @@ import {
   Cascader,
   Checkbox,
   RadioGroup,
-   Radio
+  Radio,
+  CheckboxGroup
 } from 'vant'
 Vue.use(Button)
 Vue.use(Overlay)
@@ -68,3 +69,4 @@ Vue.use(Row)
 Vue.use(DatetimePicker).use(Dialog).use(Calendar).use(Picker).use(PullRefresh).use(Icon)
 Vue.use(Cascader)
 Vue.use(Checkbox)
+Vue.use(CheckboxGroup)

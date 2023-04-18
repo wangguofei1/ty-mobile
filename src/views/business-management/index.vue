@@ -34,6 +34,7 @@
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
+    <van-icon name="add" class="add" @click="toAdd" />
   </div>
 </template>
 
@@ -104,6 +105,11 @@ export default {
         this.page = 1
         this.getDataList()
       }
+    },
+    toAdd() {
+      this.$router.push({
+        name: 'AddTask'
+      })
     }
   },
   filters: {
@@ -129,6 +135,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.add {
+  font-size: 30px;
+  position: fixed;
+  bottom: 20px;
+  right: 2px;
+  z-index: 999;
+}
+
 .businessManagementTitleTitle {
   text-align: center;
   font-size: 16px;

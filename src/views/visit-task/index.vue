@@ -53,17 +53,6 @@ export default {
       }
     },
     goDetail(id) {
-      // if (type == 1) {
-      //   this.$router.push({
-      //     name: 'InventoryCheck',
-      //     query: { shopName: '南京德众堂大药房',id:this.$route.query.id }
-      //   })
-      // } else if (type == 2) {
-      //   this.$router.push({
-      //     name: 'ColdChainInspection',
-      //     query: { shopName: '南京德众堂大药房',id:this.$route.query.id }
-      //   })
-      // }
       this.$router.push({
         name: 'InventoryCheck',
         query: { shopName: this.shopName, id: id, rid: this.$route.query.id }
@@ -83,7 +72,6 @@ export default {
 
   .vt-body {
     background-color: white;
-    height: 320px;
     padding: 0px 15px;
     border-radius: 0 0 3px 3px;
 

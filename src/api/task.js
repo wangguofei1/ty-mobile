@@ -56,3 +56,24 @@ export function sign(data) {
     data
   })
 }
+
+export function queryCheckList(){
+  return request({
+    url: 'api/demo/check/grid',
+    method: 'get',
+    params:{
+      page:1,
+      pageSize: 100000
+    }
+  })
+}
+
+export function queryShopList(id){
+  return request({
+    url: 'api/demo/salesman/shop/authorized',
+    method: 'get',
+    params:{
+      salesmanId: id
+    }
+  })
+}

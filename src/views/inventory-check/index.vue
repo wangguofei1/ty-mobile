@@ -28,18 +28,11 @@
           <van-row type="flex" justify="center" v-if="item.type == 'radio'">
             <van-col :span="24">
               <div class="flex1 content2 item-bt">
-                <!-- <van-field name="pinzhong1" v-model="item.value" placeholder="请输入" input-align="right" type="digit">
-                  <template #label>
-                    <div class="left">{{ item.title }}</div>
-                  </template>
-                  <template slot="button">盒</template>
-                </van-field> -->
                 <van-field name="radio" :label="item.title" :label-width=260 style="display: block;">
                   <template #input>
                     <van-radio-group v-model="item.value" direction="horizontal">
                       <van-radio v-for="(item1, index1) in JSON.parse(item.options)" :name="item1.value">{{ item1.label
                       }}</van-radio>
-                      <!-- <van-radio name="2">单选框 2</van-radio> -->
                     </van-radio-group>
                   </template>
                 </van-field>
@@ -63,11 +56,42 @@
           <van-row type="flex" justify="center" v-if="item.type == 'input'">
             <van-col :span="24">
               <div class="flex1 content2 item-bt">
-                <van-field name="pinzhong1" v-model="item.value" placeholder="请输入" input-align="right" type="digit">
+                <van-field name="pinzhong1" v-model="item.value" placeholder="请输入" input-align="left">
                   <template #label>
                     <div class="left">{{ item.title }}</div>
                   </template>
-                  <template slot="button">盒</template>
+                </van-field>
+              </div>
+            </van-col>
+          </van-row>
+          <van-row v-if="item.type === 'textarea'">
+            <van-field
+              v-model="item.value"
+              :label="item.title"
+              type="textarea"
+              placeholder="请输入"
+              rows="3"
+              autosize
+            />
+          </van-row>
+          <van-row v-if="item.type === 'file'">
+            <van-col :span="24">
+              <div class="flex1 content1">
+                <div>上传文件</div>
+              </div>
+            </van-col>
+            <van-uploader v-model="sitePic" :after-read="afterRead" capture="camera" />
+          </van-row>
+          <van-row type="flex" justify="center" v-if="item.type == 'checkbox'">
+            <van-col :span="24">
+              <div class="flex1 content2 item-bt">
+                <van-field name="checkbox" :label="item.title" :label-width=260 style="display: block;">
+                  <template #input>
+                    <van-checkbox-group v-model="item.value" direction="horizontal">
+                      <van-checkbox v-for="(item1, index1) in JSON.parse(item.options)" :name="item1.value">{{ item1.label
+                      }}</van-checkbox>
+                    </van-checkbox-group>
+                  </template>
                 </van-field>
               </div>
             </van-col>
@@ -81,16 +105,16 @@
 </template>
 
 <script>
-import { Dialog, RadioGroup, Radio,Toast } from 'vant'
-import { queryTaskDeatil, submitTaskDeatil } from "@/api/task.js"
-let that11;
+import { Dialog, RadioGroup, CheckboxGroup, Radio, Checkbox, Toast } from 'vant'
+import { queryTaskDeatil, submitTaskDeatil, uploadFile } from "@/api/task"
+import _ from 'lodash'
 export default {
   name: 'InventoryCheck',
   data() {
     return {
       value: '',
       isMedicineShow: false,
-      checkDate: '2022-07-09 12:00',
+      checkDate: new Date(),
       medicineName: '恩莱瑞',
       purchaseThisMonth: 1,
       salesVolumeThisMonth: 78,
@@ -105,19 +129,24 @@ export default {
       taskList: [],
       index: null,
       isCheckList: [],
-      shopName: this.$route.query.shopName
+      shopName: this.$route.query.shopName,
+      sitePic: [],
+      signPics: []
     }
   },
   components: {
-    RadioGroup, Radio
+    RadioGroup,
+    Radio,
+    CheckboxGroup,
+    Checkbox
   },
   filters: {
     change11(item, index, taskList) {
       if (item) {
         for (let index1 in JSON.parse(taskList[index].options)) {
           if (JSON.parse(taskList[index].options)[index1].value == item ? item : null) {
-            console.log(JSON.parse(taskList[index].options)[index1].label);
-            return JSON.parse(taskList[index].options)[index1].label;
+            console.log(JSON.parse(taskList[index].options)[index1].label)
+            return JSON.parse(taskList[index].options)[index1].label
           }
         }
       }
@@ -125,18 +154,25 @@ export default {
     }
   },
   created() {
-    this.queryTaskDeatil1();
-    that11 = this;
+    this.queryTaskDeatil1()
   },
   computed: {
   },
   mounted() { },
   methods: {
+    toArr(a) {
+      if(a) return a
+      return []
+    },
+    async afterRead(file) {
+      const res = await uploadFile(file.file)
+      this.signPics.push(res.data.data.src)
+    },
     cancelTask(index) {
-      this.$set(this.isCheckList, index, false);
+      this.$set(this.isCheckList, index, false)
     },
     changeTask(index) {
-      this.$set(this.isCheckList, index, true);
+      this.$set(this.isCheckList, index, true)
     },
     changeMedicine(index) {
       this.index = index;
@@ -145,7 +181,7 @@ export default {
       console.log(data);
     },
     confirmMedicine(item, index) {
-      this.taskList[index].value = item.value;
+      this.taskList[index].value = item.value
       console.log(item);
       this.$set(this.isCheckList, index, false)
     },
@@ -158,6 +194,14 @@ export default {
         message: '请确认是否完成？'
       })
         .then(() => {
+          _.each(that.taskList,function(v) {
+            if(v.type === 'file' && that.signPics.length) {
+              v.value = that.signPics.join()
+            }
+            if(v.type === 'checkbox' && v.value.length) {
+              v.value = v.value.join()
+            }
+          })
           submitTaskDeatil({ details: that.taskList, taskCheckId: that.$route.query.id }).then((res) => {
             if (res.code == 0) {
               Toast({
@@ -179,9 +223,12 @@ export default {
       const that = this;
       let res = await queryTaskDeatil(this.$route.query.id);
       if (res.code == 0) {
-        this.taskList = res.data;
+        this.taskList = res.data
         this.taskList.forEach((item, index) => {
           that.$set(this.isCheckList, index, false)
+          if(item.type === 'checkbox') {
+            item.value = []
+          }
         })
       }
     }
@@ -206,7 +253,7 @@ export default {
     >div:nth-child(1) {
       font-size: 14px;
       font-weight: 500;
-      color: #939393;
+      color: #646566;
     }
 
     >div:nth-child(2) {
@@ -273,7 +320,7 @@ export default {
 
     .left {
       font-size: 14px;
-      color: #939393;
+      color: #646566;
     }
 
     .right {

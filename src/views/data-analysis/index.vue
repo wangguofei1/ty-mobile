@@ -87,7 +87,7 @@ export default {
       xsItemList3: [
         {
           xsImg: require('@/assets/images/xsImg6.png'),
-          xsText: '签到',
+          xsText: '拜访任务',
           url: 'BusinessManagement'
         }
       ],

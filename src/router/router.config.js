@@ -159,6 +159,15 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/addTask',
+    name: 'AddTask',
+    component: () => import('@/views/add-task/index'),
+    meta: {
+      title: '新建拜访任务',
+      keepAlive: false
+    }
+  },
+  {
     path: '/visitTask',
     name: 'VisitTask',
     component: () => import('@/views/visit-task/index'),
