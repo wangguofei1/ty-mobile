@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { queryTaskList } from '@/api/salesFlow'
+import { queryShopInfo } from '@/api/salesFlow'
 import * as echarts from 'echarts'
 import _ from 'lodash'
 export default {

@@ -1,15 +1,18 @@
 <template>
   <div class="clockIn">
-    <div id="map"></div>
+    <baidu-map class="map" id="map" :center="center" :zoom="15" @ready="handler">
+      <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
+      <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"></bm-geolocation>
+    </baidu-map>
     <div class="qdBox">
       <van-row type="flex" justify="center">
-          <van-col :span="24">
-            <van-cell :title="detail.name" />
-            <van-cell title="拜访药房" :value="detail.shopName" />
-            <van-cell title="拜访内容" :value="detail.description" />
-            <van-cell title="拜访截至日期" :value="detail.endDate" />
-          </van-col>
-        </van-row>
+        <van-col :span="24">
+          <van-cell :title="detail.name" />
+          <van-cell title="拜访药房" :value="detail.shopName" />
+          <van-cell title="拜访内容" :value="detail.description" />
+          <van-cell title="拜访截至日期" :value="detail.endDate" />
+        </van-col>
+      </van-row>
       <div>
         <van-row type="flex" justify="center">
           <van-col :span="24">
@@ -30,12 +33,7 @@
           placeholder="描述此次的拜访目的......"
         />
       </div>
-      <van-button
-            type="primary"
-            size="large"
-            color="#4873EE"
-            style="border-radius: 6px"
-            @click="goDetail()"
+      <van-button type="primary" size="large" color="#4873EE" style="border-radius: 6px" @click="goDetail()"
         >签到</van-button
       >
     </div>
@@ -45,7 +43,7 @@
 <script>
 import { queryTaskDetail, uploadFile, save, sign } from '@/api/task'
 import { getWXsignature, translateLng } from '@/api/system'
-import wx from'weixin-js-sdk'
+import wx from 'weixin-js-sdk'
 
 export default {
   name: 'ClockIn',
@@ -60,7 +58,13 @@ export default {
       signTime: '',
       signAxis: '',
       sitePic: [],
-      id: ''
+      id: '',
+      center: {},
+      zoom: 13,
+      BMap: null,
+      map: null,
+      longitude: '',
+      latitude: ''
     }
   },
   created() {
@@ -68,9 +72,25 @@ export default {
     this.getDetail(this.id)
   },
   mounted() {
-    this.config()
+    this.getCurrentPosition()
+    // this.config()
   },
   methods: {
+    async getCurrentPosition() {
+      var that = this
+      const geolocation = new BMap.Geolocation()
+      geolocation.getCurrentPosition(
+        r => {
+          if (r.point) {
+            that.center = { lng: r.point.lng, lat: r.point.lat }
+          }
+        },
+        { enableHighAccuracy: true }
+      )
+    },
+    handler({ BMap, map }) {
+      this.map = map
+    },
     async afterRead(file) {
       const res = await uploadFile(file.file)
       this.signPics.push(res.data.data.src)
@@ -82,9 +102,8 @@ export default {
       this.detail = res.data
     },
     async goDetail() {
-      
       const { id, remark, signPics, signAxis } = this
-      if(signPics.length === 0){
+      if (signPics.length === 0) {
         this.$toast('请上传现场照片')
         return false
       }
@@ -94,7 +113,7 @@ export default {
         taskId: id
       }
       const res = await sign(data)
-      if(res.code === 0) {
+      if (res.code === 0) {
         this.$router.push({
           name: 'VisitTask',
           query: { id: this.id }
@@ -104,7 +123,7 @@ export default {
     async config() {
       const that = this
       const res = await getWXsignature({ url: window.location.href })
-      const {appId,nonceStr,timestamp,signature} = res.data
+      const { appId, nonceStr, timestamp, signature } = res.data
       wx.config({
         appId: appId,
         nonceStr: nonceStr,
@@ -113,20 +132,19 @@ export default {
         debug: false,
         jsApiList: ['getLocation']
       })
-      wx.ready((res) => {
+      wx.ready(res => {
         that.getLocationByWx()
       })
-      
-      wx.error((res) => {
-      })
+
+      wx.error(res => {})
     },
-    getLocationByWx(){
+    getLocationByWx() {
       const that = this
       const ua = window.navigator.userAgent.toLowerCase()
-      if(ua.match(/micromessenger/i) != null){
+      if (ua.match(/micromessenger/i) != null) {
         wx.getLocation({
           type: 'gcj02',
-          success: (res) => {
+          success: res => {
             var lat = res.latitude
             var lng = res.longitude
             translateLng({
@@ -134,9 +152,7 @@ export default {
               location: lat + ',' + lng,
               output: 'json',
               pois: '1'
-            })
-            .then((res) => {
-              console.log(res)
+            }).then(res => {
               const map = new BMap.Map('map')
               const mPoint = new BMap.Point(res.result.location.lng, res.result.location.lat)
               const tPoint = new BMap.Point(that.shopAxis[0], that.shopAxis[1])
@@ -155,12 +171,11 @@ export default {
               // })
               // map.addOverlay(circle)
             })
-            
           },
-          fail: (error) => {
+          fail: error => {
             console.log(error)
           },
-          cancel: (error) => {
+          cancel: error => {
             console.log(error)
           }
         })

@@ -7,7 +7,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import BaiDuMap from "vue-baidu-map"
 // import vConsole from './utils/vconsole'
+Vue.use(BaiDuMap, {
+  ak: '0s1HSNlk1xijdVjMFe2IDVbHggDtsel9'//你所申请的百度地图密钥
+})
 
 // 设置 js中可以访问 $cdn
 import {
